@@ -1,0 +1,96 @@
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Textarea } from "@/components/ui/textarea"
+import { useCVBuilder } from "../cv-builder-context"
+import { CVSkillsField } from "../(fields)/skills-field"
+import { CVEducationField } from "../(fields)/education-field"
+import { CVWorkExperienceField } from "../(fields)/work-experience-field"
+
+
+export function CVInformationForm() {
+	const { data, setData } = useCVBuilder()
+
+	const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setData(prev => ({ ...prev, photo: reader.result as string }))
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setData(prev => ({ ...prev, [name]: value }))
+  }
+
+  return (
+    <ScrollArea className="h-[calc(100vh-100px)] p-6">
+			<div className="space-y-6">
+				<fieldset className="space-y-2 border border-neutral-200 p-4 rounded-md bg-white">
+					<Label htmlFor="photo">BASIC INFORMATION</Label>
+					<div>
+						<Input
+							id="photo"
+							type="file"
+							accept="image/*"
+							onChange={handlePhotoUpload}
+							placeholder="Upload a photo"
+						/>
+					</div>
+					<div>
+						<Label htmlFor="name">Full Name</Label>
+						<Input
+							id="name"
+							name="name"
+							value={data.name}
+							onChange={handleInputChange}
+							placeholder="John Doe"
+						/>
+					</div>
+					<div className="flex gap-5">
+						<div className="flex-1">
+							<Label htmlFor="email">Email</Label>
+							<Input
+								id="email"
+								name="email"
+								type="email"
+								value={data.email}
+								onChange={handleInputChange}
+								placeholder="johndoe@example.com"
+							/>
+						</div>
+						<div className="flex-1">
+							<Label htmlFor="phone">Phone</Label>
+							<Input
+								id="phone"
+								name="phone"
+								value={data.phone}
+								onChange={handleInputChange}
+								placeholder="+1 234 567 8900"
+							/>
+						</div>
+					</div>
+					<div>
+						<Label htmlFor="summary">Professional Summary</Label>
+						<Textarea
+							id="summary"
+							name="summary"
+							value={data.summary}
+							onChange={handleInputChange}
+							placeholder="Brief overview of your professional background and goals"
+							rows={4}
+						/>
+					</div>
+				</fieldset>
+				<CVSkillsField />
+				<CVEducationField />
+				<CVWorkExperienceField />
+			</div>
+    </ScrollArea>
+  )
+}
