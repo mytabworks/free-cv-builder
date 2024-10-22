@@ -58,8 +58,8 @@ export function CVEducationField() {
   };
 
   return (
-    <fieldset className="space-y-2 border border-neutral-200 p-4 rounded-md bg-white">
-			<Label>EDUCATION</Label>
+    <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
+			<h2 className="text-xl">EDUCATION</h2>
 			<form 
 				className="flex items-center mb-2" 
 				onSubmit={(e) => {
@@ -71,14 +71,10 @@ export function CVEducationField() {
 					value={newEducation}
 					onChange={(e) => setNewEducation(e.target.value)}
 					placeholder="Add education (e.g., BS in Computer Science, XYZ University)"
+					className="mr-2"
+					required
 				/>
-				<Button
-					type="submit"
-					onClick={addEducation}
-					className="ml-2"
-				>
-					Add
-				</Button>
+				<Button type="submit">Add</Button>
 			</form>
 			<DndContext 
 				sensors={sensors} 

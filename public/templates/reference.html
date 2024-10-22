@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>A4 CV Layout</title>
+	<style>
+		:root {
+			--main-color: #02081b;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			background-color: transparent;
+			font-size: 13px;
+			color: #5f5f62;
+			/* -webkit-font-smoothing: antialiased; */
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-bottom: 10px;
+			color: var(--main-color);
+		}
+
+		p {
+			margin-bottom: 2mm;
+			line-height: 1.5;
+			text-align: justify;
+		}
+
+		ul {
+			padding-left: 4mm;
+		}
+
+		li {
+			margin-bottom: 1mm;
+			line-height: 1.5;
+			text-align: justify;
+		}
+
+		.page {
+			width: 210mm;
+			height: 297mm;
+			margin: 0 auto;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			position: relative;
+			page-break-after: always;
+			display: flex;
+			isolation: isolate;
+
+			&:not(:last-child) {
+				margin-bottom: 5mm;
+			}
+		}
+
+		.allow-page {
+			.page {
+				&::after {
+					content: attr(data-page);
+					position: absolute;
+					bottom: 3mm;
+					right: 10mm;
+					font-size: 2.5mm;
+					color: #5f5f62;
+				}
+			}
+		}
+
+		.allow-watermark {
+			.page {
+				&::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-blend-mode: multiply;
+					background-repeat: no-repeat;
+					background-size: 80%;
+					background-position: 50% 50%;
+					/* background-image: should be added on dom manipulation; */
+					pointer-events: none;
+					opacity: 0.03;
+					z-index: -1;
+				}
+			}
+		}
+
+		.side {
+			overflow: hidden;
+			width: 80mm;
+			height: 100%;
+			padding: 10mm 5mm;
+			background-color: #f0f0f0;
+			/* background-color: #aeaeae2e; */
+
+			.logo {
+				height: 77.77px;
+				width: 100%;
+				margin: 5mm 0 10mm;
+			}
+
+			.list-section {
+
+				.list-section-title {
+					font-size: 1.2em;
+					font-weight: bold;
+					text-transform: uppercase;
+					background-color: var(--main-color);
+					color: #fff;
+					text-align: center;
+					padding: 2mm 0;
+					border-radius: 30px;
+				}
+
+				.list-section-content {
+					display: flex;
+					justify-content: center;
+					padding: 3mm 0;
+					gap: 5mm;
+
+					>ul {
+						flex: 1;
+					}
+				}
+			}
+		}
+
+		.main {
+			overflow: hidden;
+			width: 130mm;
+			height: 100%;
+			padding: 10mm;
+			padding-top: 10mm;
+
+			.main-content-intro {
+				font-size: 10mm;
+			}
+
+			.main-content-title {
+				font-size: 14mm;
+				font-weight: 500;
+			}
+
+			.main-content-subtitle {
+				font-size: 5mm;
+				font-weight: 400;
+				letter-spacing: 1mm;
+				color: #5f5f62;
+				margin-bottom: 5mm;
+			}
+
+			.main-content-summary {
+				font-size: 4mm;
+			}
+
+			.main-content-summary-content {
+				margin-bottom: 5mm;
+			}
+		}
+
+		.segment-breaker {
+			text-transform: uppercase;
+			font-size: 5mm;
+			font-weight: 700;
+			color: var(--main-color);
+			margin: 0 0 5mm;
+			display: flex;
+			align-items: center;
+
+			>span {
+				position: relative;
+				padding-right: 5mm;
+				white-space: pre;
+			}
+
+			&::after {
+				content: '';
+				transform: translateY(-50%);
+				width: 100%;
+				height: 2px;
+				background-color: var(--main-color);
+			}
+		}
+
+		.work-experience-section {
+			.work-experience {
+				margin-bottom: 8mm;
+
+				.work-experience-position {
+					display: flex;
+					justify-content: space-between;
+					gap: 10mm;
+					font-size: 3.7mm;
+					font-weight: 500;
+					color: #2f2f32;
+					margin-bottom: 2mm;
+
+					.work-experience-position-year {
+						white-space: pre;
+						font-weight: 600;
+					}
+				}
+
+				.work-experience-company {
+					font-size: 3.7mm;
+				}
+			}
+		}
+
+		@media print {
+			@page {
+				size: A4;
+				margin: 0;
+				/* You can adjust this based on your desired margins */
+			}
+
+			body {
+				-webkit-print-color-adjust: exact;
+				/* For Chrome/Safari */
+				print-color-adjust: exact;
+				/* For Firefox */
+
+				&.safari-print {
+					width: 210mm;
+					/* A4 width */
+					height: auto;
+					/* Let the height be auto for flow */
+					margin: 0;
+					/* Reset margins if needed */
+
+					.page {
+						width: 210mm;
+					}
+				}
+
+				/* Hide everything on non-Safari prints */
+				&:not(.safari-print) * {
+					visibility: hidden;
+					/* Hide everything */
+				}
+			}
+
+			.page {
+				margin: 0;
+				box-shadow: none;
+
+				&::after,
+				&::before {
+					visibility: visible;
+				}
+
+				* {
+					visibility: visible !important;
+					/* Show only the specific area */
+				}
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<!-- Page 1 -->
+	</div>
+	<noscript>
+		<h1>JavaScript is required to render the pages</h1>
+	</noscript>
+
+	<script>
+		const logo = ''
+		const data = {
+			name: 'John Doe',
+			title: 'Senior .Net',
+			subtitle: '22 Years of Experience',
+			summary: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus mollitia commodi pariatur, incidunt vel quae tenetur autem? Totam necessitatibus tenetur enim! Alias repellat quam, sapiente adipisci obcaecati culpa ratione odit.',
+			workExperiences: [
+				{
+					position: 'Senior Software Engineer / Senior Software Developer',
+					year: 'Apr 2023 - Mar Present',
+					company: 'Whitecobalt',
+					points: [
+						'Lorem ipsum dolor, sit amet conbo ab commodi a saepe est esse consequatur dolorem voluptates minima aut eveniet veniam dolor molestiae asperiores qui!',
+						'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias reiciendis, at non explicabo ab commodi a saepe est essstiae asperiores qui!',
+						'Lorem ipsum dolor, sit amet plicabo ab commodi a saepe est esse consequatur dolorem voluptates minima aut eveniet veniam dolor molestiae asperiores qui!'
+					]
+				},
+				{
+					position: 'Senior Software Engineer / Senior Software Developer',
+					year: 'Apr 2023 - Mar Present',
+					company: 'Whitecobalt',
+					points: [
+						'Lorem ipsum dolor, sit amet conbo ab commodi a saepe est esse consequatur dolorem voluptates minima aut eveniet veniam dolor molestiae asperiores qui!',
+						'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias reiciendis, at non explicabo ab commodi a saepe est essstiae asperiores qui!',
+						'Lorem ipsum dolor, sit amet plicabo ab commodi a saepe est esse consequatur dolorem voluptates minima aut eveniet veniam dolor molestiae asperiores qui!'
+					]
+				},
+				{
+					position: 'Senior Software Engineer / Senior Software Developer',
+					year: 'Apr 2023 - Mar Present',
+					company: 'Whitecobalt',
+					points: [
+						'Lorem ipsum dolor, sit amet conbo ab commodi a saepe est esse consequatur dolorem voluptates minima aut eveniet veniam dolor molestiae asperiores qui!',
+						'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias reiciendis, at non explicabo ab commodi a saepe est essstiae asperiores qui!',
+						'Lorem ipsum dolor, sit amet plicabo ab commodi a saepe est esse consequatur dolorem voluptates minima aut eveniet veniam dolor molestiae asperiores qui!'
+					]
+				},
+				{
+					position: 'Senior Software Engineer',
+					year: '2022 - 2023',
+					company: 'Whitecobalt',
+					points: [
+						'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias reiciendis, at non explicabo ab commodi a saepe esi!',
+						'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias reiciendis, at non explicabo ab commodi a saepe e',
+					]
+				},
+			],
+			knowledge: [
+				{
+					"title": "Skills",
+					"points": [
+						"HTML",
+						"CSS",
+						"JavaScript",
+						"Bootstrap",
+						"React",
+						"Angular",
+						"Vue.js",
+						"Node.js",
+						"Express.js",
+						"MongoDB",
+						"SQL",
+						"RESTful APIs",
+						"GraphQL",
+						"Git",
+						"Webpack",
+						"Babel",
+						"TypeScript",
+						"Sass",
+						"jQuery",
+						"Material UI",
+						"Tailwind CSS",
+						"Next.js",
+						"Gatsby",
+						"D3.js",
+						"Mocha",
+						"UX/UI Design",
+						"PWA",
+						"Docker",
+						"AWS",
+						"Agile",
+						"Git",
+					]
+				},
+				{
+					"title": "Education",
+					"points": [
+						"Bachelor of Science in Computer Science - University XYZ (2020)",
+						"Full Stack Development Bootcamp - Coding Academy (2021)",
+					]
+				},
+				{
+					"title": "Key Achievements",
+					"points": [
+						"<b>Developed</b> - a high-traffic e-commerce website using React and Node.js.",
+						"<b>Contributed</b> - to an open-source project that improved performance by 30%.",
+						"<b>Received</b> - 'Employee of the Month' award for outstanding team collaboration.",
+					]
+				},
+				{
+					"title": "Certifications",
+					"points": [
+						"Certified JavaScript Developer - Issued by XYZ Certification Body (2023)",
+						"React Certification - Online Learning Platform (2022)",
+					]
+				}
+			]
+		}
+
+		const maxHeight = 1040
+
+		const checkSectionOverflow = (element) => () => {
+			const height = element.clientHeight
+
+			return height > maxHeight
+		}
+
+		function createElement(tagName, className, innerHTML, appendTo) {
+			const element = document.createElement(tagName)
+			if (className) {
+				element.className = className || ''
+			}
+
+			if (innerHTML) {
+				element.innerHTML = innerHTML || ''
+			}
+
+			if (appendTo) {
+				appendTo?.appendChild(element)
+			}
+
+			return element
+		}
+
+		function createA4Page(data, pageNum) {
+			const checkPageExist = document.querySelector(`.page[data-page="${pageNum}"]`)
+
+			if (checkPageExist) {
+				return checkPageExist
+			}
+
+			const pageElement = createElement('div', 'page')
+
+			pageElement.setAttribute('data-page', pageNum.toString())
+
+			const sideElement = createElement('div', 'side', null, pageElement)
+
+			const sideContainer = createElement('div', 'side-content', null, sideElement)
+
+			const logoElement = createElement('img', 'logo', null, sideContainer)
+			logoElement.src = logo
+
+			const mainElement = createElement('div', 'main', null, pageElement)
+
+			const mainContainer = createElement('div', 'main-content', null, mainElement)
+
+			document.getElementById('container').appendChild(pageElement)
+
+			return pageElement
+		}
+
+
+		function renderSkill(pageElement, data, pageNum) {
+
+			if (!Array.isArray(data.knowledge)) return
+
+			const sideContent = pageElement.querySelector('.side-content')
+			const checkSideOverflow = checkSectionOverflow(sideContent)
+
+			data.knowledge.forEach((skill, index, array) => {
+				const listSection = createElement('div', 'list-section', null, sideContent)
+
+				if (skill.title) {
+					createElement('h3', 'list-section-title', skill.title, listSection)
+				}
+
+				if (checkSideOverflow()) {
+					renderPages({
+						knowledge: array.slice(index, array.length)
+					}, pageNum + 1)
+
+					listSection.remove()
+					return array.splice(0)
+				}
+
+				const contentElement = createElement('div', 'list-section-content', null, listSection)
+
+				if (skill.title === 'Skills' && skill.points.length > 20) {
+					const half = Math.ceil(skill.points.length / 2)
+
+					Array.from({ length: 2 }, (_, i) => i).forEach(i => {
+						const list = createElement('ul', null, null, contentElement)
+
+						skill.points.slice(i * half, (i + 1) * half).forEach(point => {
+							createElement('li', null, point, list)
+						})
+					})
+				} else {
+					const list = createElement('ul', null, null, contentElement)
+
+					skill.points.forEach((point, pointIndex, pointArray) => {
+						const item = createElement('li', null, point, list)
+
+						if (checkSideOverflow()) {
+							if (index === 0) {
+								renderPages({
+									knowledge: array.slice(index, array.length)
+								}, pageNum + 1)
+
+								listSection.remove()
+								return array.splice(0)
+							}
+
+							renderPages({
+								knowledge: [
+									{
+										points: pointArray.slice(pointIndex, pointArray.length)
+									},
+									...array.slice(index + 1, array.length)
+								]
+							}, pageNum + 1)
+
+							item.remove()
+							array.splice(0)
+							pointArray.splice(0)
+						}
+					})
+				}
+			})
+		}
+
+		function renderWorkExperience(pageElement, data, pageNum) {
+
+			if (!Array.isArray(data.workExperiences)) return
+
+			const mainContent = pageElement.querySelector('.main-content')
+
+			const checkMainOverflow = checkSectionOverflow(mainContent)
+
+			const summaryElement = createElement('div', 'segment-breaker', '<span>WORK EXPERIENCE</span>', mainContent)
+
+			const workExperienceSection = createElement('div', 'work-experience-section', null, mainContent)
+
+			data.workExperiences.forEach((experience, index, array) => {
+				const workExperience = createElement('div', 'work-experience', null, workExperienceSection)
+
+				if (experience.position) {
+					const positionElement = createElement('h3', 'work-experience-position', null, workExperience)
+
+					createElement('span', 'work-experience-position-name', experience.position, positionElement)
+
+					createElement('span', 'work-experience-position-year', experience.year, positionElement)
+				}
+
+				if (experience.company) {
+					createElement('h4', 'work-experience-company', experience.company, workExperience)
+				}
+
+				if (checkMainOverflow()) {
+					renderPages({
+						workExperiences: array.slice(index, array.length)
+					}, pageNum + 1)
+
+					workExperience.remove()
+					return array.splice(0)
+				}
+
+				if (Array.isArray(experience.points)) {
+					const contentElement = createElement('ul', 'work-experience-content', null, workExperience)
+
+					experience.points.forEach((point, pointIndex, pointArray) => {
+						const item = createElement('li', null, point, contentElement)
+
+						if (checkMainOverflow()) {
+
+							if (pointIndex === 0) {
+								renderPages({
+									workExperiences: array.slice(index, array.length)
+								}, pageNum + 1)
+
+								workExperience.remove()
+								return array.splice(0)
+							}
+
+							renderPages({
+								workExperiences: [
+									{
+										points: pointArray.slice(pointIndex, pointArray.length)
+									},
+									...array.slice(index + 1, array.length)
+								]
+							}, pageNum + 1)
+
+							item.remove()
+							array.splice(0)
+							pointArray.splice(0)
+						}
+					})
+				}
+			})
+
+			return workExperienceSection
+		}
+
+		function renderIntro(pageElement, data) {
+			const mainContent = pageElement.querySelector('.main-content')
+
+			if (data.name) {
+				createElement('h2', 'main-content-intro', data.name, mainContent)
+			}
+
+			if (data.title) {
+				createElement('h2', 'main-content-title', data.title, mainContent)
+			}
+
+			if (data.subtitle) {
+				createElement('h4', 'main-content-subtitle', data.subtitle, mainContent)
+			}
+
+			if (data.summary) {
+				createElement('h5', 'main-content-summary', 'SUMMARY', mainContent)
+
+				createElement('p', 'main-content-summary-content', data.summary, mainContent)
+			}
+		}
+
+		function renderPages(data, pageNum) {
+			// Create the page container
+			const pageElement = createA4Page(data, pageNum)
+
+			document.getElementById('container').appendChild(pageElement)
+
+			renderSkill(pageElement, data, pageNum)
+
+			renderIntro(pageElement, data)
+
+			renderWorkExperience(pageElement, data, pageNum)
+			// Append the page to the container
+		}
+
+		renderPages(data, 1)
+
+		if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome')) {
+			// Apply special print styles for Safari
+			document.body.classList.add('safari-print');
+		}
+	</script>
+</body>
+
+</html>

@@ -138,9 +138,11 @@ export function CVWorkExperienceField() {
 
 	const [remove, setRemove] = useState<string | null>(null);
 
+	const preventDragConflict = (e: any) => e.stopPropagation()
+
   return (
-    <fieldset className="space-y-2 border border-neutral-200 p-4 rounded-md bg-white">
-			<Label>WORK EXPERIENCE</Label>
+    <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
+			<h2 className="text-xl mb-3">WORK EXPERIENCE</h2>
 			<ModalConfirm
 				show={remove !== null}
 				title={(<div className="flex"><Trash2 className="mr-1" /> Remove Work Experience?</div>)}
@@ -156,15 +158,16 @@ export function CVWorkExperienceField() {
 					setRemove(null)
 				}}
 			/>
+			<div className="group">
 			<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleWEDragEnd}>
 				<SortableContext items={workExperiences.map(exp => exp.id)} strategy={verticalListSortingStrategy}>
 					{workExperiences.map((exp, index) => (
 						<SortableItem 
 							key={exp.id} 
 							id={exp.id} 
-							className="flex items-center mt-2"
+							className="flex items-center"
 						>
-							<Card className="mt-4 w-full bg-zinc-50">
+							<Card className="group-[:hover]:opacity-30 group-[:focus-within]:opacity-30 hover:!opacity-100 focus-within:!opacity-100 focus-within:border-neutral-500 hover:border-neutral-500 mb-4 w-full">
 								<CardContent className="pt-6">
 									<div className="flex items-center mb-4">
 										<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />
@@ -173,26 +176,28 @@ export function CVWorkExperienceField() {
 												<h3 className="text-lg font-semibold flex-grow mb-0">{exp.jobTitle || `Work Experience ${index + 1}`}</h3>
 												<span className="text-sm text-neutral-500 dark:text-neutral-400">{exp.companyName}</span>
 											</div>
-											<div className="flex items-center space-x-2">
-												<span className="text-sm text-neutral-500 dark:text-neutral-400">
-													{exp.startDate ? new Date(exp.startDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}
-													{" - "}
-													{exp.currentRole ? "Present" : exp.endDate ? new Date(exp.endDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}
-												</span>
-											</div>
+											{exp.startDate && (exp.endDate || exp.currentRole) && (
+												<div className="flex items-center space-x-2">
+													<span className="text-sm text-neutral-500 dark:text-neutral-400">
+														{exp.startDate ? new Date(exp.startDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}
+														{" - "}
+														{exp.currentRole ? "Present" : exp.endDate ? new Date(exp.endDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}
+													</span>
+												</div>
+											)}
 										</div>
 										<Button
 											type="button"
 											variant="danger"
 											size="sm"
 											className="ml-2"
-											onPointerDown={(e) => e.stopPropagation()}
+											onPointerDown={preventDragConflict}
 											onClick={() => setRemove(exp.id)}
 										>
-											Remove
+											<Trash2/>
 										</Button>
 									</div>
-									<div onPointerDown={(e) => e.stopPropagation()}>
+									<div onPointerDown={preventDragConflict} onKeyDown={preventDragConflict}>
 										<div className="grid grid-cols-2 gap-4">
 											<div className="flex items-center space-x-2 mb-3">
 												<Switch
@@ -263,7 +268,7 @@ export function CVWorkExperienceField() {
 															className="flex items-center mt-2"
 															gripIcon={<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />}
 														>
-															<div className="flex items-center w-full" onPointerDown={(e) => e.stopPropagation()}>
+															<div className="flex items-center w-full" onPointerDown={preventDragConflict} onKeyDown={preventDragConflict}>
 																<Textarea
 																	value={point.text}
 																	onChange={(e) => updateKeyPoint(exp.id, point.id, e.target.value)}
@@ -302,7 +307,7 @@ export function CVWorkExperienceField() {
 					))}
 				</SortableContext>
 			</DndContext>
-			<div />
+			</div>
 			<Button
 				type="button"
 				onClick={addWorkExperience}

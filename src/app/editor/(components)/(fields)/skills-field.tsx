@@ -79,9 +79,9 @@ export function CVSkillsField() {
   };
 
   return (
-    <fieldset className="space-y-2 border border-neutral-200 p-4 rounded-md bg-white">
+    <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
 			<div className="flex justify-between items-center mb-2">
-				<Label htmlFor="skills">SKILLS</Label>
+				<h2 className="text-xl">SKILLS</h2>
 				<div className="flex items-center space-x-2">
 					<Switch
 						id="show-ratings"
@@ -99,10 +99,9 @@ export function CVSkillsField() {
 				}}
 			>
 				<Input
-					id="skills"
 					value={skillInput}
 					onChange={handleSkillInputChange}
-					placeholder="Add a skill"
+					placeholder="Add a skill (e.g. MS Excel)"
 					className="mr-2"
 					required
 				/>

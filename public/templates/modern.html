@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CV</title>
+	<style>
+		:root {
+			--main-color: #02081b;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			background-color: transparent;
+			font-size: 13px;
+			color: #5f5f62;
+			/* -webkit-font-smoothing: antialiased; */
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-bottom: 10px;
+			color: var(--main-color);
+		}
+
+		p {
+			margin-bottom: 2mm;
+			line-height: 1.5;
+			text-align: justify;
+		}
+
+		ul {
+			padding-left: 4mm;
+		}
+
+		li {
+			margin-bottom: 1mm;
+			line-height: 1.5;
+			text-align: justify;
+		}
+
+		.page {
+			width: 210mm;
+			height: 297mm;
+			margin: 0 auto;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			position: relative;
+			page-break-after: always;
+			display: flex;
+			isolation: isolate;
+
+			&:not(:last-child) {
+				margin-bottom: 5mm;
+			}
+		}
+
+		.allow-page {
+			.page {
+				&::after {
+					content: attr(data-page);
+					position: absolute;
+					bottom: 3mm;
+					right: 10mm;
+					font-size: 2.5mm;
+					color: #5f5f62;
+				}
+			}
+		}
+
+		.allow-watermark {
+			.page {
+				&::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-blend-mode: multiply;
+					background-repeat: no-repeat;
+					background-size: 80%;
+					background-position: 50% 50%;
+					/* background-image: should be added on dom manipulation; */
+					pointer-events: none;
+					opacity: 0.03;
+					z-index: -1;
+				}
+			}
+		}
+
+		.side {
+			overflow: hidden;
+			width: 80mm;
+			height: 100%;
+			padding: 10mm 5mm;
+			background-color: #f0f0f0;
+			/* background-color: #aeaeae2e; */
+
+			.photo {
+				height: 77.77px;
+				width: 100%;
+				margin: 5mm 0 10mm;
+			}
+
+			.list-section {
+
+				.list-section-title {
+					font-size: 1.2em;
+					font-weight: bold;
+					text-transform: uppercase;
+					background-color: var(--main-color);
+					color: #fff;
+					text-align: center;
+					padding: 2mm 0;
+					border-radius: 30px;
+				}
+
+				.list-section-content {
+					display: flex;
+					justify-content: center;
+					padding: 3mm 0;
+					gap: 5mm;
+
+					>ul {
+						flex: 1;
+					}
+				}
+			}
+		}
+
+		.main {
+			overflow: hidden;
+			width: 130mm;
+			height: 100%;
+			padding: 10mm;
+			padding-top: 10mm;
+
+			.main-content-intro {
+				font-size: 10mm;
+			}
+
+			.main-content-title {
+				font-size: 14mm;
+				font-weight: 500;
+			}
+
+			.main-content-subtitle {
+				font-size: 5mm;
+				font-weight: 400;
+				letter-spacing: 1mm;
+				color: #5f5f62;
+				margin-bottom: 5mm;
+			}
+
+			.main-content-summary {
+				font-size: 4mm;
+			}
+
+			.main-content-summary-content {
+				margin-bottom: 5mm;
+			}
+		}
+
+		.segment-breaker {
+			text-transform: uppercase;
+			font-size: 5mm;
+			font-weight: 700;
+			color: var(--main-color);
+			margin: 0 0 5mm;
+			display: flex;
+			align-items: center;
+
+			> span {
+				position: relative;
+				padding-right: 5mm;
+				white-space: pre;
+			}
+
+			&::after {
+				content: '';
+				transform: translateY(-50%);
+				width: 100%;
+				height: 2px;
+				background-color: var(--main-color);
+			}
+		}
+
+		.work-experience-section {
+			.work-experience {
+				margin-bottom: 8mm;
+
+				.work-experience-position {
+					display: flex;
+					justify-content: space-between;
+					gap: 10mm;
+					font-size: 3.7mm;
+					font-weight: 500;
+					color: #2f2f32;
+					margin-bottom: 2mm;
+
+					.work-experience-position-year {
+						white-space: pre;
+						font-weight: 600;
+					}
+				}
+
+				.work-experience-company {
+					font-size: 3.7mm;
+				}
+			}
+		}
+
+		@media print {
+			@page {
+				size: A4;
+				margin: 0;
+				/* You can adjust this based on your desired margins */
+			}
+
+			body {
+				-webkit-print-color-adjust: exact;
+				/* For Chrome/Safari */
+				print-color-adjust: exact;
+				/* For Firefox */
+
+				&.safari-print {
+					width: 210mm;
+					/* A4 width */
+					height: auto;
+					/* Let the height be auto for flow */
+					margin: 0;
+					/* Reset margins if needed */
+
+					.page {
+						width: 210mm;
+					}
+				}
+
+				/* Hide everything on non-Safari prints */
+				&:not(.safari-print) * {
+					visibility: hidden;
+					/* Hide everything */
+				}
+			}
+
+			.page {
+				margin: 0;
+				box-shadow: none;
+
+				&::after,
+				&::before {
+					visibility: visible;
+				}
+
+				* {
+					visibility: visible !important;
+					/* Show only the specific area */
+				}
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<!-- Page 1 -->
+	</div>
+	<noscript>
+		<h1>JavaScript is required to render the pages</h1>
+	</noscript>
+</body>
+
+</html>

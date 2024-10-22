@@ -29,10 +29,10 @@ export function CVInformationForm() {
   }
 
   return (
-    <ScrollArea className="h-[calc(100vh-100px)] p-6">
+    <ScrollArea className="h-full w-full">
 			<div className="space-y-6">
-				<fieldset className="space-y-2 border border-neutral-200 p-4 rounded-md bg-white">
-					<Label htmlFor="photo">BASIC INFORMATION</Label>
+				<fieldset className="space-y-2 bg-white border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
+					<h2 className="text-xl">BASIC INFORMATION</h2>
 					<div>
 						<Input
 							id="photo"
