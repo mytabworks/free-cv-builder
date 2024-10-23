@@ -24,8 +24,12 @@ export type TEducation = {
 
 export type TCVData = {
 	name: string;
+	currentTitle: string;
 	email: string;
 	phone: string;
+	address: string;
+	website: string;
+	linkedin: string;
 	summary: string;
 	skills: TSkill[];
 	workExperiences: TWorkExperience[];
@@ -36,6 +40,15 @@ export type TCVData = {
 	themeColor: string;
 	template: string;
 	showRatings: boolean;
+	photoRadius: number;
+	photoSize: number;
+	primaryBGColor: string;
+	secondaryBGColor: string;
+	primaryTextColor: string;
+	secondaryTextColor: string;
+	textColor: string;
+	textSize: number;
+	reverse: boolean;
 };
 
 type TCVBuilderContext = {

@@ -8,9 +8,8 @@ import { SortableItem } from "@/components/sortable-item"
 import { GripVertical } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-
-const fonts = ['Arial', 'Helvetica', 'Times New Roman', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'];
-const templates = ['Classic', 'Modern', 'Minimalist', 'Creative', 'Professional'];
+import { googleFonts } from "@/lib/page-renderer"
+import { Switch } from "@/components/ui/switch"
 
 export function CVSettingsForm() {
 	const { data, setData } = useCVBuilder()
@@ -18,6 +17,11 @@ export function CVSettingsForm() {
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setData(prev => ({ ...prev, [name]: value }))
+  }
+
+	const handleGeneralTextColor = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setData(prev => ({ ...prev, [name]: value, primaryTextColor: value, secondaryTextColor: value }))
   }
 
 	const handleSelectChange = (name: string) => (value: string) => {
@@ -76,7 +80,7 @@ export function CVSettingsForm() {
 							<Button type="submit">Import Data</Button>
 						</form>
 					</div>
-					<div>
+					{/* <div>
 						<Label>Section Order</Label>
 						<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
 							<SortableContext items={data.sectionOrder} strategy={verticalListSortingStrategy}>
@@ -92,32 +96,7 @@ export function CVSettingsForm() {
 								))}
 							</SortableContext>
 						</DndContext>
-					</div>
-					<div>
-						<Label htmlFor="font">Font</Label>
-						<Select
-							value={data.font}
-							onValueChange={handleSelectChange('font')}
-						>
-							<SelectTrigger>
-								<SelectValue placeholder="Select a font" />
-							</SelectTrigger>
-							<SelectContent>
-								{fonts.map((font) => (
-									<SelectItem key={font} value={font}>{font}</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					</div>
-					<div>
-						<Label htmlFor="themeColor">Theme Color</Label>
-						<Input
-							id="themeColor"
-							type="color"
-							value={data.themeColor}
-							onChange={handleInputChange}
-						/>
-					</div>
+					</div> */}
 					<div>
 						<Label htmlFor="template">Template</Label>
 						<Select
@@ -129,12 +108,211 @@ export function CVSettingsForm() {
 							</SelectTrigger>
 							<SelectContent>
 								{templates.map((template) => (
-									<SelectItem key={template} value={template}>{template}</SelectItem>
+									<SelectItem key={template.value} value={template.value}>{template.label}</SelectItem>
 								))}
 							</SelectContent>
 						</Select>
+					</div>
+					<div className="flex gap-5">
+						<div className="flex-1">
+							<Label htmlFor="font">Font</Label>
+							<Select
+								value={data.font}
+								onValueChange={handleSelectChange('font')}
+							>
+								<SelectTrigger>
+									<SelectValue placeholder="Select a font" />
+								</SelectTrigger>
+								<SelectContent>
+									{fonts.map((font) => (
+										<SelectItem key={font} value={font}>{font}</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
+						<div className="flex-1">
+							<Label htmlFor="textSize">General Text Size</Label>
+							<div className="flex gap-2">
+								<Input
+									id="textSize"
+									name="textSize"
+									type="range"
+									min={12}
+									max={30}
+									step={1}
+									className="p-0"
+									value={data.textSize}
+									onChange={handleInputChange}
+								/>
+								<div className="w-[50px] bg-gray-100 rounded-md flex items-center justify-center">
+									{data.textSize}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="flex gap-5">
+						<div className="flex-1">
+							<Label htmlFor="themeColor">Theme Color</Label>
+							<Input
+								id="themeColor"
+								name="themeColor"
+								type="color"
+								className="p-1"
+								value={data.themeColor}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div className="flex-1">
+							<Label htmlFor="textColor">General Text Color</Label>
+							<Input
+								id="textColor"
+								name="textColor"
+								type="color"
+								className="p-1"
+								value={data.textColor}
+								onChange={handleGeneralTextColor}
+							/>
+						</div>
+					</div>
+					<div className="flex gap-5">
+						<div className="flex-1">
+							<Label htmlFor="primaryBGColor">Primary Section BG Color</Label>
+							<Input
+								id="primaryBGColor"
+								name="primaryBGColor"
+								type="color"
+								className="p-1"
+								value={data.primaryBGColor}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div className="flex-1">
+							<Label htmlFor="primaryTextColor">Primary Section Text Color</Label>
+							<Input
+								id="primaryTextColor"
+								name="primaryTextColor"
+								type="color"
+								className="p-1"
+								value={data.primaryTextColor}
+								onChange={handleInputChange}
+							/>
+						</div>
+					</div>
+					<div className="flex gap-5">
+						<div className="flex-1">
+							<Label htmlFor="secondaryBGColor">Secondary Section BG Color</Label>
+							<Input
+								id="secondaryBGColor"
+								name="secondaryBGColor"
+								type="color"
+								className="p-1"
+								value={data.secondaryBGColor}
+								onChange={handleInputChange}
+							/>
+						</div>
+						<div className="flex-1">
+							<Label htmlFor="secondaryTextColor">Secondary Section Text Color</Label>
+							<Input
+								id="secondaryTextColor"
+								name="secondaryTextColor"
+								type="color"
+								className="p-1"
+								value={data.secondaryTextColor}
+								onChange={handleInputChange}
+							/>
+						</div>
+					</div>
+					<div className="flex gap-5">
+						<div className="flex-1">
+							<Label htmlFor="photoSize">Photo Size</Label>
+							<div className="flex gap-2">
+								<Input
+									id="photoSize"
+									name="photoSize"
+									type="range"
+									min={50}
+									max={100}
+									step={5}
+									className="p-0"
+									value={data.photoSize}
+									onChange={handleInputChange}
+								/>
+								<div className="w-[50px] bg-gray-100 rounded-md flex items-center justify-center">
+									{data.photoSize}%
+								</div>
+							</div>
+						</div>
+						<div className="flex-1">
+							<Label htmlFor="photoRadius">Photo Radius</Label>
+							<div className="flex gap-2">
+								<Input
+									id="photoRadius"
+									name="photoRadius"
+									type="range"
+									min={0}
+									max={50}
+									step={5}
+									className="p-0"
+									value={data.photoRadius}
+									onChange={handleInputChange}
+								/>
+								<div className="w-[50px] bg-gray-100 rounded-md flex items-center justify-center">
+									{data.photoRadius}%
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="flex-1">
+						<div className="flex items-center space-x-2 mt-5">
+							<Switch
+								id="reverse-row"
+								checked={data.reverse}
+								onCheckedChange={() => setData(prev => ({...prev, reverse: !prev.reverse}))}
+							/>
+							<Label htmlFor="reverse-row">Reverse Row</Label>
+						</div>
 					</div>
 			</fieldset>
 		</ScrollArea>
   )
 }
+
+const fonts = [...googleFonts, 'Arial', 'Helvetica', 'Times New Roman', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'];
+const templates = [
+	{
+		label: 'Customize',
+		value: 'customize'
+	},
+	{
+		label: 'Cyberpunk',
+		value: 'cyberpunk'
+	},
+	{
+		label: 'Classic',
+		value: 'classic'
+	},
+	{
+		label: 'Creative',
+		value: 'creative'
+	},
+	{
+		label: 'Flat design',
+		value: 'flatdesign'
+	},
+	{
+		label: 'Neumorphism',
+		value: 'neumorphism'
+	},
+	{
+		label: 'Modern',
+		value: 'modern'
+	},
+	{
+		label: 'Minimalist',
+		value: 'minimalist'
+	},
+	{
+		label: 'Professional',
+		value: 'professional'
+	}
+];

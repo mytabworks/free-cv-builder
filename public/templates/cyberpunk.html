@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CV</title>
+	<style>
+		:root {
+			--theme-color: #02081b;
+			--text-color: #5f5f62;
+			--text-font: 'Arial';
+			--text-font-size: 13px;
+			--primary-text-color: #5f5f62;
+			--secondary-text-color: #5f5f62;
+			--secondary-bg-color: #f0f0f0;
+			--primary-bg-color: #f0f0f0;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: var(--text-font);
+			background-color: transparent;
+			font-size: var(--text-font-size);
+			color: var(--text-color);
+			/* -webkit-font-smoothing: antialiased; */
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-bottom: 10px;
+			color: var(--theme-color);
+		}
+
+		p {
+			margin-bottom: 2mm;
+			line-height: 1.5;
+			text-align: justify;
+		}
+
+		ul {
+			padding-left: 4mm;
+		}
+
+		li {
+			margin-bottom: 1mm;
+			line-height: 1.5;
+			text-align: justify;
+		}
+
+		@media print {
+			@page {
+				size: A4;
+				margin: 0;
+				/* You can adjust this based on your desired margins */
+			}
+
+			body {
+				-webkit-print-color-adjust: exact;
+				/* For Chrome/Safari */
+				print-color-adjust: exact;
+				/* For Firefox */
+
+				&.safari-print {
+					width: 210mm;
+					/* A4 width */
+					height: auto;
+					/* Let the height be auto for flow */
+					margin: 0;
+					/* Reset margins if needed */
+
+					.page {
+						width: 210mm;
+					}
+				}
+
+				/* Hide everything on non-Safari prints */
+				&:not(.safari-print) * {
+					visibility: hidden;
+					/* Hide everything */
+				}
+			}
+
+			.page {
+				margin: 0;
+				box-shadow: none;
+
+				&::after,
+				&::before {
+					visibility: visible;
+				}
+
+				* {
+					visibility: visible !important;
+					/* Show only the specific area */
+				}
+			}
+		}
+	</style>
+  <style>
+    .page {
+      width: 210mm;
+      height: 297mm;
+      display: flex;
+      flex-direction: row;
+      background-color: #0d0d0d;
+      color: #e6e6e6;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      box-sizing: border-box;
+      margin: 0 auto 5mm; /* Center the page with a bottom margin */
+		}
+
+		.page:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Secondary (left column) and primary (right column) sections */
+    .secondary {
+      width: 30%;
+      background-color: #111;
+      padding: 25px;
+      box-sizing: border-box;
+      
+      .secondary-content {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .primary {
+      width: 70%;
+      padding: 25px;
+      box-sizing: border-box;
+      background-color: #151515;
+    }
+
+    /* Styling for profile photo */
+    .photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      border: 5px solid #0ff;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    }
+
+    /* Sections (skills, education) */
+    .list-section {
+      margin-bottom: 40px;
+    }
+
+    .list-section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #00ffcc;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 5px;
+      letter-spacing: 1px;
+    }
+
+    .list-section-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .list-section-content li {
+      font-size: 14px;
+      padding: 6px 0;
+      color: #00ffcc;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    /* Primary content (name, contact, summary) */
+    .primary-content-intro {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ff007c;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .primary-content-title {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #ff007c;
+    }
+
+    .primary-content-subtitle {
+      font-size: 16px;
+      color: #999;
+      margin-bottom: 25px;
+    }
+
+    .primary-content-summary {
+      font-size: 18px;
+      font-weight: bold;
+      color: #00ffcc;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .primary-content-summary-content {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    /* Work experience section */
+    .segment-breaker {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff007c;
+      margin: 30px 0 20px;
+      border-bottom: 2px solid #ff007c;
+      padding-bottom: 5px;
+      letter-spacing: 1px;
+    }
+
+    .work-experience-section {
+      margin-top: 10px;
+    }
+
+    .work-experience {
+      margin-bottom: 25px;
+    }
+
+    .work-experience-position {
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      color: #ff007c;
+    }
+
+    .work-experience-company {
+      font-size: 14px;
+      color: #00ffcc;
+      margin-bottom: 10px;
+    }
+
+    .work-experience-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .work-experience-content li {
+      font-size: 14px;
+      color: #e6e6e6;
+      padding: 4px 0;
+      border-bottom: 1px solid #2d2d2d;
+    }
+
+    /* Skill rating progress bar */
+    .skill-name {
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #00ffcc;
+    }
+
+    .skill-progress {
+      position: relative;
+      width: 100%;
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .skill-progress-bar {
+      height: 100%;
+      background-color: #ff007c;
+      border-radius: 5px;
+    }
+
+    /* Buttons or Contact Info */
+    .contact-buttons {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+
+    .contact-buttons a {
+      display: inline-block;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #0ff;
+      background-color: #ff007c;
+      border-radius: 5px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 0, 124, 0.7);
+    }
+
+    .contact-buttons a:hover {
+      background-color: #ff4da6;
+    }
+
+  </style>
+</head>
+
+<body>
+	<div id="container">
+		<!-- Page 1 -->
+	</div>
+	<noscript>
+		<h1>JavaScript is required to render the pages</h1>
+	</noscript>
+</body>
+
+</html>

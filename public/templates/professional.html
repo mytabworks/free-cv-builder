@@ -113,8 +113,7 @@
       width: 210mm; /* A4 Width */
       height: 297mm; /* Height will be determined by content */
       background-color: #ffffff; /* White background for a clean look */
-      font-family: 'Helvetica Neue', Arial, sans-serif; /* Modern font family */
-      color: #333; /* Dark text color for readability */
+      color: var(--text-color); /* Dark text color for readability */
       margin: 0 auto 5mm; /* Center the page with a small bottom margin */
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
       display: flex;
@@ -122,9 +121,10 @@
 
     /* Secondary (left column) and primary (right column) sections */
     .secondary {
-      width: 35%; /* Width for left column */
-      background-color: #f0f4f8; /* Light background for contrast */
-      padding: 10mm 5mm; /* Padding for content */
+      width: 30%; /* Width for left column */
+      background-color: #f7f9fc; /* Light background for contrast */
+      border-right: 2px solid var(--theme-color); /* Divider between columns */
+      padding: 20px; /* Padding for content */
       box-sizing: border-box; /* Include padding in width */
 
       .secondary-content {
@@ -134,15 +134,15 @@
     }
 
     .primary {
-      width: 65%; /* Width for right column */
-      padding: 10mm 10mm; /* Padding for content */
+      width: 70%; /* Width for right column */
+      padding: 20px; /* Padding for content */
       box-sizing: border-box; /* Include padding in width */
     }
 
     /* Styling for profile photo */
     .photo {
-      width: 175px; /* Profile photo size */
-      height: 175px; /* Profile photo size */
+      width: 170px; /* Profile photo size */
+      height: 170px; /* Profile photo size */
       border-radius: 50%; /* Circular profile photo */
       margin: 0 auto 20px; /* Center photo with margin */
       object-fit: cover; /* Cover to maintain aspect ratio */
@@ -151,43 +151,30 @@
 
     /* Section titles */
     .list-section-title {
-      font-size: 18px; /* Section title size */
+      font-size: 20px; /* Section title size */
       font-weight: bold; /* Bold for emphasis */
       color: var(--theme-color); /* Blue color for titles */
-      margin-bottom: 5px; /* Space below titles */
+      margin-bottom: 10px; /* Space below titles */
       text-transform: uppercase; /* Uppercase for style */
-      display: flex;
-      align-items: center;
-      gap: 3mm;
-      white-space: pre;
-
-      &::after {
-				content: '';
-				transform: translateY(-50%);
-				width: 100%;
-				height: 2px;
-				background-color: var(--theme-color);
-			}
+      border-bottom: 2px solid var(--theme-color); /* Underline for title */
     }
 
     /* Content inside sections */
     .list-section-content ul {
       list-style: none; /* Remove default list style */
       padding: 0; /* Remove padding */
-      margin-bottom: 5mm;
     }
 
     .list-section-content li {
       font-size: 14px; /* Item font size */
       color: #555; /* Item text color */
       padding: 5px 0; /* Spacing between items */
-      text-align: left;
     }
 
     /* Primary content (name, contact, summary) */
     .primary-content-intro {
       font-size: 28px; /* Name size */
-      font-weight: 700; /* Bold for prominence */
+      font-weight: bold; /* Bold for prominence */
       margin-bottom: 5px; /* Space below */
     }
 
@@ -198,14 +185,14 @@
 
     .primary-content-subtitle {
       font-size: 14px; /* Subtitle size */
-      color: #777; /* Light grey for subtitles */
       margin-bottom: 20px; /* Space below */
+      color: #777;
     }
 
     .primary-content-summary {
       font-size: 16px; /* Summary title size */
       font-weight: bold; /* Bold for emphasis */
-      color: #333; /* Dark color */
+      color: var(--theme-color); /* Dark color */
       margin-bottom: 10px; /* Space below */
     }
 
@@ -222,18 +209,6 @@
       font-weight: bold; /* Bold for emphasis */
       color: var(--theme-color); /* Blue color for section title */
       margin: 20px 0 10px; /* Margin for spacing */
-      display: flex;
-			align-items: center;
-      white-space: pre;
-      gap: 3mm;
-
-			&::after {
-				content: '';
-				transform: translateY(-50%);
-				width: 100%;
-				height: 2px;
-				background-color: var(--theme-color);
-			}
     }
 
     .work-experience-section {
@@ -246,6 +221,7 @@
 
     .work-experience-position {
       font-size: 15px; /* Position title size */
+      font-weight: 500;
       color: #333; /* Dark color */
       display: flex;
       justify-content: space-between;
@@ -260,7 +236,7 @@
 
     .work-experience-company {
       font-size: 14px; /* Company name size */
-      color: #777; /* Light grey for company name */
+      color: var(--text-color); /* Light grey for company name */
       margin-bottom: 5px; /* Space below */
     }
 
@@ -287,7 +263,7 @@
     .skill-progress {
       position: relative; /* Position for progress bar */
       width: 100%; /* Full width */
-      height: 6px; /* Height of the progress bar */
+      height: 8px; /* Height of the progress bar */
       background-color: #e0e0e0; /* Light grey background */
       border-radius: 5px; /* Rounded corners */
       overflow: hidden; /* Hide overflow */
@@ -324,7 +300,6 @@
       background-color: #45a049; /* Darker shade on hover */
       transform: translateY(-2px); /* Slight lift effect on hover */
     }
-
   </style>
 </head>
 

@@ -7,7 +7,6 @@ import { PageData, PageRenderer } from "@/lib/page-renderer";
 export function CVPreviewPanel() {
 	const { data } = useCVBuilder()
 	const [ready, setReady] = useState(false)
-	const [htmlContent, setHtmlContent] = useState('');
 
 	const ref = useRef<HTMLIFrameElement>(null);
 
@@ -15,27 +14,30 @@ export function CVPreviewPanel() {
 		ref.current?.contentWindow?.print();
 	}
 
-	const onLoad = () => {
-		setReady(true)
-	}
-
 	useEffect(() => {
-    const fetchHtml = async () => {
-      const response = await fetch('/templates/modern.html');
-      const text = await response.text();
-      setHtmlContent(text);
-    };
+		const cleanup = setTimeout(() => {
+			setReady(true)
+		}, 1000)
 
-    fetchHtml();
-  }, []);
+		return () => {
+			clearTimeout(cleanup)
+			setReady(false)
+		}
+	}, [data.template])
 
 	useEffect(() => {
     if(!ready || !ref.current?.contentWindow?.document) return;
 
 		const renderer = new PageRenderer(ref.current?.contentWindow?.document)
 
+		const websiteSection = data.website || data.linkedin ? `${data.website || ''}${data.linkedin ? `${data.website ? ' | ' : ''}${data.linkedin}` : ''}` : ''
 		const collection: PageData = {
 			name: data.name,
+			title: data.currentTitle,
+			contacts: `${data.email || ''}${data.phone ? `${data.email ? ' | ' : ''}${data.phone}` : ''}`,
+			website: websiteSection.length <= 65 ? websiteSection : data.website,
+			linkedin: websiteSection.length <= 65 ? '' : data.linkedin,
+			address: data.address,
 			summary: data.summary,
 			photo: data.photo,
 			skills: data.skills?.map((item) => ({
@@ -53,7 +55,25 @@ export function CVPreviewPanel() {
 			}))
 		}
 
-		renderer.reset()
+		renderer.refresh()
+
+		renderer.importGoogleFonts(data.font)
+
+		renderer.renderStyle(`
+			:root {
+				--theme-color: ${data.themeColor};
+				--text-font: '${data.font}';
+				--text-color: ${data.textColor};
+				--text-font-size: ${data.textSize}px;
+				--primary-text-color: ${data.primaryTextColor};
+				--secondary-text-color: ${data.secondaryTextColor};
+				--secondary-bg-color: ${data.secondaryBGColor};
+				--primary-bg-color: ${data.primaryBGColor};
+				--photo-radius: ${data.photoRadius}%;
+				--photo-size: ${data.photoSize}%;
+				--page-row: ${data.reverse ? 'row-reverse' : 'row'};
+			}
+		`)
 
 		renderer.renderPages(collection, 1)
 
@@ -72,7 +92,7 @@ export function CVPreviewPanel() {
 				</a>
 				<Button onClick={onDownload}><DownloadIcon /> Download PDF</Button>
 			</div>
-			<iframe ref={ref} srcDoc={htmlContent} onLoad={onLoad} className="h-full" />
+			<iframe ref={ref} key={data.template} src={`/templates/${data.template}.html`} className="h-full" />
 		</div>
   )
 }

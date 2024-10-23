@@ -1,4 +1,4 @@
-const A4_HEIGHT = 1000;
+const A4_HEIGHT = 1040;
 
 interface Skill {
   name: string;
@@ -10,22 +10,25 @@ interface Education {
 }
 
 interface WorkExperience {
-  position: string;
-  company: string;
-  year: string;
+  position?: string;
+  company?: string;
+  year?: string;
   points: string[];
 }
 
 export interface PageData {
+  name?: string;
+  title?: string;
+  contacts?: string;
+  website?: string;
+  linkedin?: string;
+  address?: string;
+  summary?: string;
+  photo?: string | null;
   skillRating?: boolean;
   skills?: Skill[];
   education?: string[];
   workExperiences?: WorkExperience[];
-  name?: string;
-  title?: string;
-  subtitle?: string;
-  summary?: string;
-  photo?: string | null;
 }
 
 export class PageRenderer {
@@ -40,7 +43,6 @@ export class PageRenderer {
   }
 
   private checkSectionOverflow(element: HTMLElement): boolean {
-    console.log(element.clientHeight, element)
     return element.clientHeight > this.maxHeight;
   }
 
@@ -64,11 +66,11 @@ export class PageRenderer {
     pageElement = this.createElement('div', 'page');
     pageElement.setAttribute('data-page', pageNum.toString());
 
-    const sideElement = this.createElement('div', 'side', null, pageElement);
-    this.createElement('div', 'side-content', null, sideElement);
+    const secondaryElement = this.createElement('div', 'secondary', null, pageElement);
+    this.createElement('div', 'secondary-content', null, secondaryElement);
 
-    const mainElement = this.createElement('div', 'main', null, pageElement);
-    this.createElement('div', 'main-content', null, mainElement);
+    const primaryElement = this.createElement('div', 'primary', null, pageElement);
+    this.createElement('div', 'primary-content', null, primaryElement);
 
     this.container?.appendChild(pageElement);
 
@@ -76,15 +78,17 @@ export class PageRenderer {
   }
 
   private renderSkill(pageElement: HTMLElement, data: PageData, pageNum: number): void {
-    const sideContent = pageElement.querySelector('.side-content') as HTMLElement;
-    if (!Array.isArray(data.skills) || !sideContent) return;
+    const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
+    if (!Array.isArray(data.skills) || data.skills.length === 0 || !secondaryContent) return;
 
-    let section = pageElement?.querySelector("[list-section-type='skills']")
+    let section = pageElement?.querySelector('[list-section-type="skills"]')
 
     if(!section) {
-      section = this.createElement('div', 'list-section', null, sideContent);
+      section = this.createElement('div', 'list-section', null, secondaryContent);
       section.setAttribute('list-section-type', 'skills')
-      this.createElement('h3', 'list-section-title', "SKILLS", section);
+      if(!this.DOM.querySelector('[list-section-type="skills"] > .list-section-title')) {
+        this.createElement('h3', 'list-section-title', 'SKILLS', section);
+      }
     }
 
     const contentElement = this.createElement('div', 'list-section-content', null, section);
@@ -101,35 +105,32 @@ export class PageRenderer {
       data.skills.forEach((point, index, array) => {
         this.createElement('li', null, point.name, list)
 
-        if (this.checkSectionOverflow(sideContent)) {
-          
+        if (this.checkSectionOverflow(secondaryContent)) {
           if (index === 0) {
-            this.renderPages({
-              skills: array
-            }, pageNum + 1)
             section.remove()
-            return array.splice(0)
           }
 
           this.renderPages({
-            skills: array.slice(index, array.length)
+            skills: index === 0 ? array : array.slice(index, array.length)
           }, pageNum + 1)
+          
+          array.splice(0)
         }
       });
     }
   }
 
   private renderEducation(pageElement: HTMLElement, data: PageData, pageNum: number): void {
-    const sideContent = pageElement.querySelector('.side-content') as HTMLElement;
-    if (!Array.isArray(data.education) || !sideContent) return;
+    const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
+    if (!Array.isArray(data.education) || !secondaryContent) return;
 
-    let section = pageElement?.querySelector("[list-section-type='education']")
+    let section = pageElement?.querySelector('[list-section-type="education"]')
 
     if(!section) {
-      section = this.createElement('div', 'list-section', null, sideContent);
+      section = this.createElement('div', 'list-section', null, secondaryContent);
       section.setAttribute('list-section-type', 'education')
-      if(!this.DOM.querySelector(`[list-section-type='education']`)) {
-        this.createElement('h3', 'list-section-title', "EDUCATION", section);
+      if(!this.DOM.querySelector('[list-section-type="education"] > .list-section-title')) {
+        this.createElement('h3', 'list-section-title', 'EDUCATION', section);
       }
     }
 
@@ -138,32 +139,27 @@ export class PageRenderer {
     data.education.forEach((point, index, array) => {
       this.createElement('li', null, point, list)
 
-      if (this.checkSectionOverflow(sideContent)) {
-        
-        
+      if (this.checkSectionOverflow(secondaryContent)) {
         if (index === 0) {
-          this.renderPages({
-            education: array
-          }, pageNum + 1)
-
           section.remove()
-          return array.splice(0)
         }
 
         this.renderPages({
-          education: array.slice(index, array.length)
+          education: index === 0 ? array : array.slice(index, array.length)
         }, pageNum + 1)
+        
+        array.splice(0)
       }
     });
   }
 
   private renderWorkExperience(pageElement: HTMLElement, data: PageData, pageNum: number): void {
-    const mainContent = pageElement.querySelector('.main-content') as HTMLElement;
-    if (!Array.isArray(data.workExperiences) || !mainContent) return;
+    const primaryContent = pageElement.querySelector('.primary-content') as HTMLElement;
+    if (!Array.isArray(data.workExperiences) || !primaryContent) return;
 
-    this.createElement('div', 'segment-breaker', '<span>WORK EXPERIENCE</span>', mainContent);
+    this.createElement('div', 'segment-breaker', 'WORK EXPERIENCE', primaryContent);
 
-    const workExperienceSection = this.createElement('div', 'work-experience-section', null, mainContent);
+    const workExperienceSection = this.createElement('div', 'work-experience-section', null, primaryContent);
 
     data.workExperiences.forEach((experience, index, array) => {
       const workExperience = this.createElement('div', 'work-experience', null, workExperienceSection);
@@ -177,7 +173,7 @@ export class PageRenderer {
         this.createElement('h4', 'work-experience-company', experience.company, workExperience);
       }
 
-      if (this.checkSectionOverflow(mainContent)) {
+      if (this.checkSectionOverflow(primaryContent)) {
         this.renderPages({ workExperiences: array.slice(index) }, pageNum + 1);
         workExperience.remove();
         array.splice(0);
@@ -186,28 +182,57 @@ export class PageRenderer {
 
       if (Array.isArray(experience.points)) {
         const contentElement = this.createElement('ul', 'work-experience-content', null, workExperience);
-        experience.points.forEach(point => this.createElement('li', null, point, contentElement));
+        experience.points.forEach((point, pointIndex, pointArray) => {
+          const item = this.createElement('li', null, point, contentElement)
+          if (this.checkSectionOverflow(primaryContent)) {
+
+            if (pointIndex === 0) {
+              this.renderPages({
+                workExperiences: array.slice(index, array.length)
+              }, pageNum + 1)
+
+              workExperience.remove()
+              return array.splice(0)
+            }
+
+            this.renderPages({
+              workExperiences: [
+                {
+                  points: pointArray.slice(pointIndex, pointArray.length)
+                },
+                ...array.slice(index + 1, array.length)
+              ]
+            }, pageNum + 1)
+
+            item.remove()
+            array.splice(0)
+            pointArray.splice(0)
+          }
+        });
       }
     });
   }
 
   private renderIntro(pageElement: HTMLElement, data: PageData): void {
-    const mainContent = pageElement.querySelector('.main-content') as HTMLElement;
-    if (!mainContent) return;
+    const primaryContent = pageElement.querySelector('.primary-content') as HTMLElement;
+    if (!primaryContent) return;
 
-    if (data.name) this.createElement('h2', 'main-content-intro', data.name, mainContent);
-    if (data.title) this.createElement('h2', 'main-content-title', data.title, mainContent);
-    if (data.subtitle) this.createElement('h4', 'main-content-subtitle', data.subtitle, mainContent);
+    if (data.name) this.createElement('h2', 'primary-content-intro', data.name, primaryContent);
+    if (data.title) this.createElement('h2', 'primary-content-title', data.title, primaryContent);
+    if (data.contacts) this.createElement('h4', 'primary-content-subtitle', data.contacts, primaryContent);
+    if (data.website) this.createElement('h5', 'primary-content-other', data.website, primaryContent);
+    if (data.linkedin) this.createElement('h5', 'primary-content-other', data.linkedin, primaryContent);
+    if (data.address) this.createElement('h5', 'primary-content-other', data.address, primaryContent);
     if (data.summary) {
-      this.createElement('h5', 'main-content-summary', 'SUMMARY', mainContent);
-      this.createElement('p', 'main-content-summary-content', data.summary, mainContent);
+      this.createElement('h5', 'primary-content-summary', 'SUMMARY', primaryContent);
+      this.createElement('p', 'primary-content-summary-content', data.summary, primaryContent);
     }
 
-    const sideContent = pageElement.querySelector('.side-content') as HTMLElement;
-    if (!sideContent) return;
+    const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
+    if (!secondaryContent) return;
 
     if (data.photo) {
-      const photoElement = this.createElement('img', 'photo', null, sideContent) as HTMLImageElement;
+      const photoElement = this.createElement('img', 'photo', null, secondaryContent) as HTMLImageElement;
       photoElement.src = data.photo;
     }
     
@@ -221,9 +246,38 @@ export class PageRenderer {
     this.renderWorkExperience(pageElement, data, pageNum);
   }
 
-  public reset() {
+  public importGoogleFonts(font: string): void {
+    if(!googleFonts.includes(font)) return;
+
+    const link = this.DOM.head.querySelector('link[data-google-font]') ?? this.createElement('link', null, null, this.DOM.head!);
+    link.setAttribute('data-google-font', font);
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', `https://fonts.googleapis.com/css?family=${font}&display=swap`);
+  }
+
+  public renderStyle(style: string): void {
+
+    this.createElement('style', null, style, this.container!);
+  }
+
+  public refresh() {
     if(this.container) {
       this.container.innerHTML = ""
     }
   }
 }
+
+export const googleFonts = [
+  "Roboto",
+  "Open Sans",
+  "Lato",
+  "Montserrat",
+  "Poppins",
+  "Merriweather",
+  "Playfair Display",
+  "Source Sans Pro",
+  "Raleway",
+  "Nunito",
+  "Oswald",
+  "Ubuntu"
+]
