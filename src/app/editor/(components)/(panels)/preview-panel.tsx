@@ -40,6 +40,9 @@ export function CVPreviewPanel() {
 			address: data.address,
 			summary: data.summary,
 			photo: data.photo,
+			showRatings: data.showRatings,
+			skillRatingBlock: data.skillRatingBlock,
+			skillSplit: data.skillSplit,
 			skills: data.skills?.map((item) => ({
 				name: item.name,
 				rating: item.rating

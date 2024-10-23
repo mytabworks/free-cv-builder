@@ -144,7 +144,7 @@ export function CVSettingsForm() {
 									value={data.textSize}
 									onChange={handleInputChange}
 								/>
-								<div className="w-[50px] bg-gray-100 rounded-md flex items-center justify-center">
+								<div className="w-[50px] bg-slate-100 rounded-md flex items-center justify-center text-sm">
 									{data.textSize}
 								</div>
 							</div>
@@ -237,7 +237,7 @@ export function CVSettingsForm() {
 									value={data.photoSize}
 									onChange={handleInputChange}
 								/>
-								<div className="w-[50px] bg-gray-100 rounded-md flex items-center justify-center">
+								<div className="w-[50px] bg-slate-100 rounded-md flex items-center justify-center text-sm">
 									{data.photoSize}%
 								</div>
 							</div>
@@ -256,7 +256,7 @@ export function CVSettingsForm() {
 									value={data.photoRadius}
 									onChange={handleInputChange}
 								/>
-								<div className="w-[50px] bg-gray-100 rounded-md flex items-center justify-center">
+								<div className="w-[50px] bg-slate-100 rounded-md flex items-center justify-center text-sm">
 									{data.photoRadius}%
 								</div>
 							</div>

@@ -223,6 +223,33 @@
 			}
 		}
 
+		.skill-rate {
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #00ffcc;
+
+			.skill-progress {
+				position: relative;
+				width: 40%;
+				height: 8px;
+				background-color: rgba(255, 255, 255, 0.5);
+				border-radius: 5px;
+				overflow: hidden;
+	
+				.skill-progress-bar {
+					height: 100%;
+					background-color: #ff007c;
+					border-radius: 5px;
+					font-size: 6px;
+					display: flex;
+					justify-content: center;
+				}
+			}
+    }
+
+
 		@media print {
 			@page {
 				size: A4;
@@ -485,6 +512,13 @@
 
 					skill.points.forEach((point, pointIndex, pointArray) => {
 						const item = createElement('li', null, point, list)
+						if(skill.title === 'Skills') {
+							item.innerHTML = ''
+							const rate = createElement('span', 'skill-rate', point, item)
+							const progress = createElement('div', 'skill-progress', null, rate)
+							const bar = createElement('div', 'skill-progress-bar', `${5/10*100}%`, progress)
+							bar.style.width = `${5/10*100}%`
+						}
 
 						if (checkSideOverflow()) {
 							if (index === 0) {

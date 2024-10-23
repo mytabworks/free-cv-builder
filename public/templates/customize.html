@@ -180,14 +180,14 @@
 		.list-section {
 
 			.list-section-title {
-				font-size: 5mm;
+				font-size: 4mm;
 				font-weight: bold;
 				text-transform: uppercase;
 				background-color: var(--theme-color);
 				color: #fff;
 				text-align: center;
 				padding: 1.5mm 0;
-				border-radius: 30px;
+				border-radius: 5px;
 			}
 
 			.list-section-content {
@@ -251,6 +251,35 @@
 				}
 			}
 		}
+
+		.skill-name {
+			&:not(.skill-block) {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.skill-progress {
+					width: 40%;
+				}
+			}
+
+			.skill-progress {
+				position: relative;
+				height: 8px;
+				background-color: rgba(255, 255, 255, 0.5);
+				border-radius: 5px;
+				overflow: hidden;
+	
+				.skill-progress-bar {
+					height: 100%;
+					background-color: var(--theme-color);
+					border-radius: 5px;
+					display: flex;
+					justify-content: center;
+					color: #fff;
+				}
+			}
+    }
 
 		@media print {
 			@page {

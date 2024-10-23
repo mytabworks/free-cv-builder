@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 
 export function CVSkillsField() {
-  const { data: { skills, showRatings }, setData } = useCVBuilder()
+  const { data: { skills, showRatings, skillSplit }, setData } = useCVBuilder()
   const [skillInput, setSkillInput] = useState('')
 	const handleSkillInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSkillInput(e.target.value)
@@ -50,10 +50,11 @@ export function CVSkillsField() {
     }))
   }
 
-  const toggleRatings = () => {
+  const toggleSwitch = (name: 'showRatings' | 'skillSplit') => () => {
     setData(prev => ({
       ...prev,
-      showRatings: !prev.showRatings
+      [name]: !prev[name],
+			skillRatingBlock: name === 'skillSplit' && !prev[name] ? false : prev.skillRatingBlock,
     }))
   }
 
@@ -82,13 +83,23 @@ export function CVSkillsField() {
     <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
 			<div className="flex justify-between items-center mb-2">
 				<h2 className="text-xl">SKILLS</h2>
-				<div className="flex items-center space-x-2">
-					<Switch
-						id="show-ratings"
-						checked={showRatings}
-						onCheckedChange={toggleRatings}
-					/>
-					<Label htmlFor="show-ratings">Show Ratings</Label>
+				<div className="flex gap-5">
+					<div className="flex items-center space-x-2">
+						<Switch
+							id="skill-split"
+							checked={skillSplit}
+							onCheckedChange={toggleSwitch('skillSplit')}
+						/>
+						<Label htmlFor="skill-split">Split in Two</Label>
+					</div>
+					<div className="flex items-center space-x-2">
+						<Switch
+							id="show-ratings"
+							checked={showRatings}
+							onCheckedChange={toggleSwitch('showRatings')}
+						/>
+						<Label htmlFor="show-ratings">Show Ratings</Label>
+					</div>
 				</div>
 			</div>
 			<form 
@@ -113,7 +124,7 @@ export function CVSkillsField() {
 						<SortableItem 
 							key={item.id} 
 							id={item.id} 
-							className="flex items-center bg-slate-100 px-2 py-1 mb-2 rounded-md"
+							className="flex items-center bg-slate-200 px-2 py-1 mb-2 rounded-md"
 							gripIcon={<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />}
 						>
 							<div 

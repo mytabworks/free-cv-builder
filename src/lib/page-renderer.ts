@@ -25,7 +25,9 @@ export interface PageData {
   address?: string;
   summary?: string;
   photo?: string | null;
-  skillRating?: boolean;
+  showRatings?: boolean;
+  skillSplit?: boolean;
+  skillRatingBlock?: boolean;
   skills?: Skill[];
   education?: string[];
   workExperiences?: WorkExperience[];
@@ -92,26 +94,47 @@ export class PageRenderer {
     }
 
     const contentElement = this.createElement('div', 'list-section-content', null, section);
-    if (data.skills.length > 20) {
+    if (data.skillSplit) {
       const half = Math.ceil(data.skills.length / 2);
       Array.from({ length: 2 }).forEach((_, i) => {
         const list = this.createElement('ul', null, null, contentElement);
         data.skills!.slice(i * half, (i + 1) * half).forEach(point => {
-          this.createElement('li', null, point.name, list);
+          const item = this.createElement('li', null, point.name, list)
+
+          if(data.showRatings) {
+            item.innerHTML = ''
+            const rating = `${point.rating/10*100}%`
+            const rate = this.createElement('span', 'skill-name skill-block', point.name, item)
+            const progress = this.createElement('div', 'skill-progress', null, rate)
+            const bar = this.createElement('div', 'skill-progress-bar', null, progress)
+            bar.style.width = rating
+          }
         });
       });
     } else {
       const list = this.createElement('ul', null, null, contentElement);
       data.skills.forEach((point, index, array) => {
-        this.createElement('li', null, point.name, list)
+        const item = this.createElement('li', null, point.name, list)
+
+        if(data.showRatings) {
+          item.innerHTML = ''
+          const rating = `${point.rating/10*100}%`
+          const rate = this.createElement('span', `skill-name${data.skillRatingBlock ? ' skill-block' : ''}`, point.name, item)
+          const progress = this.createElement('div', 'skill-progress', null, rate)
+          const bar = this.createElement('div', 'skill-progress-bar', null, progress)
+          bar.style.width = rating
+        }
 
         if (this.checkSectionOverflow(secondaryContent)) {
           if (index === 0) {
             section.remove()
+          } else {
+            item.remove()
           }
 
           this.renderPages({
-            skills: index === 0 ? array : array.slice(index, array.length)
+            skills: index === 0 ? array : array.slice(index, array.length),
+            showRatings: data.showRatings,
           }, pageNum + 1)
           
           array.splice(0)
@@ -122,7 +145,7 @@ export class PageRenderer {
 
   private renderEducation(pageElement: HTMLElement, data: PageData, pageNum: number): void {
     const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
-    if (!Array.isArray(data.education) || !secondaryContent) return;
+    if (!Array.isArray(data.education) || data.education.length === 0 || !secondaryContent) return;
 
     let section = pageElement?.querySelector('[list-section-type="education"]')
 
@@ -137,11 +160,13 @@ export class PageRenderer {
     const contentElement = this.createElement('div', 'list-section-content', null, section);
     const list = this.createElement('ul', null, null, contentElement);
     data.education.forEach((point, index, array) => {
-      this.createElement('li', null, point, list)
+      const item = this.createElement('li', null, point, list)
 
       if (this.checkSectionOverflow(secondaryContent)) {
         if (index === 0) {
           section.remove()
+        } else {
+          item.remove()
         }
 
         this.renderPages({

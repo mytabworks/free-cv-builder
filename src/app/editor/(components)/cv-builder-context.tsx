@@ -40,6 +40,11 @@ export type TCVData = {
 	themeColor: string;
 	template: string;
 	showRatings: boolean;
+	skillSplit: boolean;
+	skillRatingBlock: boolean;
+	skillRatingHeight: number;
+	skillRatingRadius: number;
+	skillRatingTrackColor: string;
 	photoRadius: number;
 	photoSize: number;
 	primaryBGColor: string;
