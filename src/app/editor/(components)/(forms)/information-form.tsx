@@ -5,8 +5,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Textarea } from "@/components/ui/textarea"
 import { useCVBuilder } from "../cv-builder-context"
 import { CVSkillsField } from "../(fields)/skills-field"
-import { CVEducationField } from "../(fields)/education-field"
 import { CVWorkExperienceField } from "../(fields)/work-experience-field"
+import { CVOtherSectionField } from "../(fields)/other-section-field"
 
 
 export function CVInformationForm() {
@@ -133,8 +133,8 @@ export function CVInformationForm() {
 					</div>
 				</fieldset>
 				<CVSkillsField />
-				<CVEducationField />
 				<CVWorkExperienceField />
+				<CVOtherSectionField />
 			</div>
     </ScrollArea>
   )

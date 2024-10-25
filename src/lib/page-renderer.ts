@@ -5,6 +5,11 @@ interface Skill {
   rating: number;
 }
 
+interface Section {
+  title: string;
+  points: string[];
+}
+
 interface Education {
   points: string[];
 }
@@ -29,7 +34,7 @@ export interface PageData {
   skillSplit?: boolean;
   skillRatingBlock?: boolean;
   skills?: Skill[];
-  education?: string[];
+  sections?: Section[];
   workExperiences?: WorkExperience[];
 }
 
@@ -83,7 +88,7 @@ export class PageRenderer {
     const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
     if (!Array.isArray(data.skills) || data.skills.length === 0 || !secondaryContent) return;
 
-    let section = pageElement?.querySelector('[list-section-type="skills"]')
+    let section = pageElement?.querySelector('[list-section-type="fcv-skills"]')
 
     if(!section) {
       section = this.createElement('div', 'list-section', null, secondaryContent);
@@ -143,37 +148,48 @@ export class PageRenderer {
     }
   }
 
-  private renderEducation(pageElement: HTMLElement, data: PageData, pageNum: number): void {
+  private renderSection(pageElement: HTMLElement, data: PageData, pageNum: number): void {
     const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
-    if (!Array.isArray(data.education) || data.education.length === 0 || !secondaryContent) return;
+    if (!Array.isArray(data.sections) || data.sections.length === 0 || !secondaryContent) return;
 
-    let section = pageElement?.querySelector('[list-section-type="education"]')
-
-    if(!section) {
-      section = this.createElement('div', 'list-section', null, secondaryContent);
-      section.setAttribute('list-section-type', 'education')
-      if(!this.DOM.querySelector('[list-section-type="education"] > .list-section-title')) {
-        this.createElement('h3', 'list-section-title', 'EDUCATION', section);
+    data.sections.forEach((section, index, array) => {
+      const sectionElement = this.createElement('div', 'list-section', null, secondaryContent);
+      sectionElement.setAttribute('list-section-type', section.title)
+      if(!this.DOM.querySelector(`[list-section-type="${section.title}"] > .list-section-title`)) {
+        this.createElement('h3', 'list-section-title', section.title, sectionElement);
       }
-    }
 
-    const contentElement = this.createElement('div', 'list-section-content', null, section);
-    const list = this.createElement('ul', null, null, contentElement);
-    data.education.forEach((point, index, array) => {
-      const item = this.createElement('li', null, point, list)
-
+      const contentElement = this.createElement('div', 'list-section-content', null, sectionElement);
       if (this.checkSectionOverflow(secondaryContent)) {
-        if (index === 0) {
-          section.remove()
-        } else {
-          item.remove()
-        }
+        this.renderPages({ sections: array.slice(index) }, pageNum + 1);
+        sectionElement.remove();
+        array.splice(0);
+        return;
+      }
 
-        this.renderPages({
-          education: index === 0 ? array : array.slice(index, array.length)
-        }, pageNum + 1)
-        
-        array.splice(0)
+      if (Array.isArray(section.points)) {
+        const list = this.createElement('ul', null, null, contentElement);
+        section.points.forEach((point, pointIndex, pointArray) => {
+          const item = this.createElement('li', null, point, list)
+
+          if (this.checkSectionOverflow(secondaryContent)) {
+            if (pointIndex === 0) {
+              this.renderPages({
+                sections: [
+                  {
+                    title: section.title,
+                    points: pointArray.slice(pointIndex, pointArray.length)
+                  },
+                  ...array.slice(index + 1, array.length)
+                ]
+              }, pageNum + 1)
+
+              item.remove()
+              array.splice(0)
+              pointArray.splice(0)
+            }
+          }
+        });
       }
     });
   }
@@ -267,7 +283,7 @@ export class PageRenderer {
     const pageElement = this.createPageElement(pageNum);
     this.renderIntro(pageElement, data);
     this.renderSkill(pageElement, data, pageNum);
-    this.renderEducation(pageElement, data, pageNum);
+    this.renderSection(pageElement, data, pageNum);
     this.renderWorkExperience(pageElement, data, pageNum);
   }
 

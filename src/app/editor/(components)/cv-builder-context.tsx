@@ -6,6 +6,12 @@ export type TSkill = {
 	rating: number;
 }
 
+export type TWOtherSection = {
+	id: string;
+	title: string;
+	keyPoints: { id: string; text: string }[];
+}
+
 export type TWorkExperience = {
 	id: string;
 	startDate: any;
@@ -32,10 +38,10 @@ export type TCVData = {
 	linkedin: string;
 	summary: string;
 	skills: TSkill[];
+	otherSections: TWOtherSection[];
 	workExperiences: TWorkExperience[];
 	education: TEducation[];
 	photo: string | null;
-	sectionOrder: ('skills' | 'workExperiences' | 'education')[];
 	font: string;
 	themeColor: string;
 	template: string;

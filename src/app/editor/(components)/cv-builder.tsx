@@ -21,6 +21,7 @@ export function CVBuilder() {
   //   linkedin: '',
   //   summary: '',
   //   skills: [],
+  //   otherSections: [],
   //   workExperiences: [],
   //   education: [],
   //   photo: null,
@@ -33,7 +34,7 @@ export function CVBuilder() {
   //   skillRatingBlock: false,
   //   skillRatingHeight: 8,
   //   skillRatingRadius: 5,
-  //   skillRatingTrackColor: '#ff007c',
+  //   skillRatingTrackColor: '#f7fafc',
   //   textColor: '#5f5f62',
   //   textSize: 13,
   //   primaryTextColor: '#5f5f62',
@@ -208,6 +209,26 @@ const defaultData = {
       "rating": 3
     }
   ],
+  otherSections: [
+    {
+      "id": "1",
+      "title": "Education",
+      "keyPoints": [
+        { "id": "1", "text": "Bachelor of Science in Computer Science, University of Technology, 2018" },
+        { "id": "2", "text": "Certification in Full Stack Development, Coding Academy, 2019" },
+        { "id": "3", "text": "Advanced JavaScript Training, Online Course, 2021" }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Certifications",
+      "keyPoints": [
+        { "id": "1", "text": "Certified Scrum Master, Scrum Alliance, 2021" },
+        { "id": "2", "text": "Certified Scrum Master, Scrum Alliance, 2021" },
+        { "id": "3", "text": "Certified Scrum Master, Scrum Alliance, 2021" }
+      ]
+    }
+  ],
   "workExperiences": [
     {
       "id": "1",
@@ -287,5 +308,5 @@ const defaultData = {
   "skillRatingBlock": false,
   "skillRatingHeight": 8,
   "skillRatingRadius": 5,
-  "skillRatingTrackColor": '#ff007c',
+  "skillRatingTrackColor": '#f7fafc',
 }

@@ -47,7 +47,10 @@ export function CVPreviewPanel() {
 				name: item.name,
 				rating: item.rating
 			})),
-			education: data.education.map((item) => item.details),
+			sections: data.otherSections?.map((item) => ({
+				title: item.title.toUpperCase(),
+				points: item.keyPoints.map((point) => point.text)
+			})).filter((item) => item.title),
 			workExperiences: data.workExperiences?.map((item) => ({
 				position: item.jobTitle,
 				year: item.startDate && (item.endDate || item.currentRole) ? (
@@ -75,6 +78,9 @@ export function CVPreviewPanel() {
 				--photo-radius: ${data.photoRadius}%;
 				--photo-size: ${data.photoSize}%;
 				--page-row: ${data.reverse ? 'row-reverse' : 'row'};
+				--skill-rating-height: ${data.skillRatingHeight}px;
+				--skill-rating-radius: ${data.skillRatingRadius}px;
+				--skill-rating-track-color: ${data.skillRatingTrackColor};
 			}
 		`)
 

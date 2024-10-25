@@ -67,7 +67,7 @@ export default function LandingPage() {
         <section className="text-center px-4 md:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Build your Professional CV in Minutes</h2>
           <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8">
-            Our Free CV builder helps you create a stunning, job-ready resume in just a few clicks.
+            Our Free CV builder helps you create a stunning, customizable, job-ready resume in just a few clicks.
           </p>
           <Link
             to="/editor"
