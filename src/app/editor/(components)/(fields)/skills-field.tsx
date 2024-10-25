@@ -90,7 +90,7 @@ export function CVSkillsField() {
 							checked={skillSplit}
 							onCheckedChange={toggleSwitch('skillSplit')}
 						/>
-						<Label htmlFor="skill-split">Split in Two</Label>
+						<Label htmlFor="skill-split">Split Column</Label>
 					</div>
 					<div className="flex items-center space-x-2">
 						<Switch

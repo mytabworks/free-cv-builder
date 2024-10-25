@@ -2,14 +2,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useCVBuilder } from "../cv-builder-context"
-import { closestCenter, DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core"
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import { SortableItem } from "@/components/sortable-item"
-import { GripVertical } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { googleFonts } from "@/lib/page-renderer"
 import { Switch } from "@/components/ui/switch"
+import { SkillSettingsForm } from "./skill-settings-form"
 
 export function CVSettingsForm() {
 	const { data, setData } = useCVBuilder()
@@ -28,30 +25,9 @@ export function CVSettingsForm() {
     setData(prev => ({ ...prev, [name]: value }))
   }
 
-	const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
-	const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-
-    if (active.id !== over?.id) {
-
-      const items = data.sectionOrder
-      const oldIndex = items.findIndex((item: any) => item === active.id);
-      const newIndex = items.findIndex((item: any) => item === over?.id);
-
-      const newItems = arrayMove(items, oldIndex, newIndex);
-      setData(prev => ({ ...prev, sectionOrder: newItems }));
-    }
-  };
-
   return (
     <ScrollArea className="h-full">
-			<fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
+			<fieldset className="space-y-2 mb-6 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
 				<h2 className="text-xl">SETTINGS</h2>
 					<div>
 						<form 
@@ -80,23 +56,6 @@ export function CVSettingsForm() {
 							<Button type="submit">Import Data</Button>
 						</form>
 					</div>
-					{/* <div>
-						<Label>Section Order</Label>
-						<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-							<SortableContext items={data.sectionOrder} strategy={verticalListSortingStrategy}>
-								{data.sectionOrder.map((section) => (
-									<SortableItem 
-										key={section} 
-										id={section}
-										className="flex items-center mt-2 bg-white p-2 rounded dark:bg-neutral-950"
-										gripIcon={<GripVertical className="mr-2 cursor-move" />}
-									>
-										<span className="capitalize">{section}</span>
-									</SortableItem>
-								))}
-							</SortableContext>
-						</DndContext>
-					</div> */}
 					<div>
 						<Label htmlFor="template">Template</Label>
 						<Select
@@ -273,6 +232,7 @@ export function CVSettingsForm() {
 						</div>
 					</div>
 			</fieldset>
+			{data.showRatings && <SkillSettingsForm />}
 		</ScrollArea>
   )
 }
