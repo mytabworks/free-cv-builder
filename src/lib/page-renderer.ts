@@ -161,8 +161,8 @@ export class PageRenderer {
 
       const contentElement = this.createElement('div', 'list-section-content', null, sectionElement);
       if (this.checkSectionOverflow(secondaryContent)) {
-        this.renderPages({ sections: array.slice(index) }, pageNum + 1);
         sectionElement.remove();
+        this.renderPages({ sections: array.slice(index) }, pageNum + 1);
         array.splice(0);
         return;
       }
@@ -215,8 +215,8 @@ export class PageRenderer {
       }
 
       if (this.checkSectionOverflow(primaryContent)) {
-        this.renderPages({ workExperiences: array.slice(index) }, pageNum + 1);
         workExperience.remove();
+        this.renderPages({ workExperiences: array.slice(index) }, pageNum + 1);
         array.splice(0);
         return;
       }
