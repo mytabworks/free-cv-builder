@@ -7,7 +7,7 @@ import { useCVBuilder } from "../cv-builder-context"
 import { CVSkillsField } from "../(fields)/skills-field"
 import { CVWorkExperienceField } from "../(fields)/work-experience-field"
 import { CVOtherSectionField } from "../(fields)/other-section-field"
-
+import { FieldsetAccordion } from "@/components/fieldset-accordion"
 
 export function CVInformationForm() {
 	const { data, setData } = useCVBuilder()
@@ -33,8 +33,7 @@ export function CVInformationForm() {
   return (
     <ScrollArea className="h-full w-full">
 			<div className="space-y-6">
-				<fieldset className="space-y-2 bg-white border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
-					<h2 className="text-xl">BASIC INFORMATION</h2>
+				<FieldsetAccordion title="BASIC INFORMATION">
 					<div>
 						<Input
 							id="photo"
@@ -131,7 +130,7 @@ export function CVInformationForm() {
 							rows={4}
 						/>
 					</div>
-				</fieldset>
+				</FieldsetAccordion>
 				<CVSkillsField />
 				<CVWorkExperienceField />
 				<CVOtherSectionField />
