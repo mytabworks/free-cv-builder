@@ -17,6 +17,9 @@
       --photo-radius: 50%;
       --photo-size: 80%;
 			--page-row: row;
+			--skill-rating-height: 8px;
+			--skill-rating-radius: 5px;
+			--skill-rating-track-color: #f7fafc;
 		}
 
 		* {
@@ -56,9 +59,9 @@
 		}
 
 		li {
-			margin-bottom: 1mm;
+			margin-bottom: 2mm;
 			line-height: 1.5;
-			text-align: justify;
+			text-align: left;
 		}
 
 		.page {
@@ -198,12 +201,15 @@
 
 				> ul {
 					flex: 1;
-					
-					> li {
-						list-style: circle;
-					}
 				}
+			}
 
+			li {
+				list-style: circle;
+			}
+
+			&[list-section-type="fcv-skills"] li {
+				list-style: none;
 			}
 		}
 
@@ -265,15 +271,15 @@
 
 			.skill-progress {
 				position: relative;
-				height: 8px;
-				background-color: rgba(255, 255, 255, 0.5);
-				border-radius: 5px;
+				height: var(--skill-rating-height);
+				background-color: var(--skill-rating-track-color);
+				border-radius: var(--skill-rating-radius);
 				overflow: hidden;
 	
 				.skill-progress-bar {
 					height: 100%;
 					background-color: var(--theme-color);
-					border-radius: 5px;
+					border-radius: var(--skill-rating-radius);
 					display: flex;
 					justify-content: center;
 					color: #fff;
