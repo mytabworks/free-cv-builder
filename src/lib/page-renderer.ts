@@ -10,10 +10,6 @@ interface Section {
   points: string[];
 }
 
-interface Education {
-  points: string[];
-}
-
 interface WorkExperience {
   position?: string;
   company?: string;
@@ -92,18 +88,19 @@ export class PageRenderer {
 
     if(!section) {
       section = this.createElement('div', 'list-section', null, secondaryContent);
-      section.setAttribute('list-section-type', 'skills')
-      if(!this.DOM.querySelector('[list-section-type="skills"] > .list-section-title')) {
+      section.setAttribute('list-section-type', 'fcv-skills')
+      if(!this.DOM.querySelector('[list-section-type="fcv-skills"] > .list-section-title')) {
         this.createElement('h3', 'list-section-title', 'SKILLS', section);
       }
     }
 
     const contentElement = this.createElement('div', 'list-section-content', null, section);
     if (data.skillSplit) {
+      const collectedCutSkills: Skill[] = []
       const half = Math.ceil(data.skills.length / 2);
       Array.from({ length: 2 }).forEach((_, i) => {
         const list = this.createElement('ul', null, null, contentElement);
-        data.skills!.slice(i * half, (i + 1) * half).forEach(point => {
+        data.skills!.slice(i * half, (i + 1) * half).forEach((point, index, array) => {
           const item = this.createElement('li', null, point.name, list)
 
           if(data.showRatings) {
@@ -114,8 +111,32 @@ export class PageRenderer {
             const bar = this.createElement('div', 'skill-progress-bar', null, progress)
             bar.style.width = rating
           }
+
+          if (this.checkSectionOverflow(secondaryContent)) {
+            if (index === 0) {
+              section.remove()
+            } else {
+              item.remove()
+            }
+            
+            const cutItems = index === 0 ? array : array.slice(index, array.length)
+
+            collectedCutSkills.push(...cutItems)
+
+            array.splice(0)
+          }
         });
       });
+
+      if(collectedCutSkills.length > 0) {
+        this.renderPages({
+          skills: collectedCutSkills,
+          showRatings: data.showRatings,
+          skillSplit: data.skillSplit,
+          skillRatingBlock: data.skillRatingBlock,
+        }, pageNum + 1)
+      }
+
     } else {
       const list = this.createElement('ul', null, null, contentElement);
       data.skills.forEach((point, index, array) => {
@@ -140,6 +161,8 @@ export class PageRenderer {
           this.renderPages({
             skills: index === 0 ? array : array.slice(index, array.length),
             showRatings: data.showRatings,
+            skillSplit: data.skillSplit,
+            skillRatingBlock: data.skillRatingBlock,
           }, pageNum + 1)
           
           array.splice(0)
@@ -174,20 +197,29 @@ export class PageRenderer {
 
           if (this.checkSectionOverflow(secondaryContent)) {
             if (pointIndex === 0) {
-              this.renderPages({
-                sections: [
-                  {
-                    title: section.title,
-                    points: pointArray.slice(pointIndex, pointArray.length)
-                  },
-                  ...array.slice(index + 1, array.length)
-                ]
-              }, pageNum + 1)
+              sectionElement.remove()
 
-              item.remove()
-              array.splice(0)
+              this.renderPages({
+                sections: array.slice(index, array.length)
+              }, pageNum + 1)
+              
               pointArray.splice(0)
+              return array.splice(0)
             }
+
+            this.renderPages({
+              sections: [
+                {
+                  title: section.title,
+                  points: pointArray.slice(pointIndex, pointArray.length)
+                },
+                ...array.slice(index + 1, array.length)
+              ]
+            }, pageNum + 1)
+
+            item.remove()
+            array.splice(0)
+            pointArray.splice(0)
           }
         });
       }
@@ -228,11 +260,12 @@ export class PageRenderer {
           if (this.checkSectionOverflow(primaryContent)) {
 
             if (pointIndex === 0) {
+              workExperience.remove()
               this.renderPages({
                 workExperiences: array.slice(index, array.length)
               }, pageNum + 1)
 
-              workExperience.remove()
+              pointArray.splice(0)
               return array.splice(0)
             }
 
