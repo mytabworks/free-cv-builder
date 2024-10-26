@@ -35,13 +35,16 @@ export function CVInformationForm() {
 			<div className="space-y-6">
 				<FieldsetAccordion title="BASIC INFORMATION">
 					<div>
-						<Input
-							id="photo"
-							type="file"
-							accept="image/*"
-							onChange={handlePhotoUpload}
-							placeholder="Upload a photo"
-						/>
+						<div className="flex flex-col mb-3 relative">
+							<input type="file" id="photo" onChange={handlePhotoUpload} accept="image/*" className="z-[1px] absolute opacity-0 w-full h-full cursor-pointer inset-0" />
+							<label htmlFor="photo" className="flex flex-col p-3 items-center justify-center w-full h-32 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-gray-500">
+								{data.photo ? (
+									<img src={data.photo} className="max-w-full max-h-full object-cover rounded-lg" />
+								) : (
+									<p className="text-gray-600 text-sm">Drag and drop a photo here or click to select</p>
+								)}
+							</label>
+						</div>
 					</div>
 					<div>
 						<Label htmlFor="name">Full Name</Label>
