@@ -8,6 +8,8 @@ import { googleFonts } from "@/lib/page-renderer"
 import { Switch } from "@/components/ui/switch"
 import { SkillSettingsForm } from "./skill-settings-form"
 import { FieldsetAccordion } from "@/components/fieldset-accordion"
+import { downloadData } from "@/lib/download-data"
+import { DownloadIcon, Import } from "lucide-react"
 
 export function CVSettingsForm() {
 	const { data, setData } = useCVBuilder()
@@ -26,12 +28,14 @@ export function CVSettingsForm() {
     setData(prev => ({ ...prev, [name]: value }))
   }
 
+	const handleExport = () => downloadData(data, `${data.name.toLowerCase().replaceAll(" ", "-")}-cv-data.json`)
+
   return (
     <ScrollArea className="h-full">
 			<FieldsetAccordion title="SETTINGS">
-				<div>
+				<div className="flex gap-2">
 					<form 
-						className="flex items-center mb-5" 
+						className="flex items-center mb-5 flex-1" 
 						onSubmit={(e) => {
 							e.preventDefault()
 							const file = (e as any).target?.[0]?.files[0]
@@ -53,8 +57,14 @@ export function CVSettingsForm() {
 							className="mr-2"
 							required
 						/>
-						<Button type="submit">Import Data</Button>
+						<Button type="submit"><Import /> Import Data</Button>
 					</form>
+						<Button 
+							type="button" 
+							onClick={handleExport}
+						>
+							<DownloadIcon /> Export Data
+						</Button>
 				</div>
 				<div>
 					<Label htmlFor="template">Template</Label>
