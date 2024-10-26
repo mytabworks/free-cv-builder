@@ -10,13 +10,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ModalConfirm } from "@/components/ui/modal"
 import { useState } from "react"
 import * as Accordion from "@radix-ui/react-accordion";
+import { randomUUID } from "@/lib/random-UUID"
 
 export function CVOtherSectionField() {
   const { data: { otherSections }, setData } = useCVBuilder()
 
 	const addOtherSection = () => {
     const newSection: TWOtherSection = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       title: '',
       keyPoints: [],
     }
@@ -45,7 +46,7 @@ export function CVOtherSectionField() {
 					keyPoints: [
 						...section.keyPoints, 
 						{ 
-							id: crypto.randomUUID(), 
+							id: randomUUID(), 
 							text: "" 
 						}
 					] 

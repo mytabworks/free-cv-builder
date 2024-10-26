@@ -7,6 +7,7 @@ import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, us
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { useCVBuilder } from "../cv-builder-context";
 import { SortableItem } from "@/components/sortable-item";
+import { randomUUID } from "@/lib/random-UUID";
 
 export function CVEducationField() {
   const { data: { education }, setData } = useCVBuilder()
@@ -16,7 +17,7 @@ export function CVEducationField() {
     if (newEducation.trim()) {
       setData(prev => ({
         ...prev,
-        education: [...prev.education, { id: crypto.randomUUID(), details: newEducation.trim() }]
+        education: [...prev.education, { id: randomUUID(), details: newEducation.trim() }]
       }))
       setNewEducation('')
     }

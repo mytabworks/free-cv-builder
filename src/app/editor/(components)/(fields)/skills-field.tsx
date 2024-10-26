@@ -86,7 +86,7 @@ export function CVSkillsField() {
 					<Accordion.Trigger className="flex justify-between items-center group/accordion w-full hover:no-underline">
 						<h2 className="text-xl">SKILLS</h2>
 						<div className="flex gap-5">
-							<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2">
+							<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
 								<Switch
 									id="skill-split"
 									checked={skillSplit}
@@ -94,7 +94,7 @@ export function CVSkillsField() {
 								/>
 								<Label htmlFor="skill-split">Split Column</Label>
 							</div>
-							<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2">
+							<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
 								<Switch
 									id="show-ratings"
 									checked={showRatings}
