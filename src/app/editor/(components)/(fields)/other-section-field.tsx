@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Trash2, GripVertical, Plus, ChevronDown } from "lucide-react"
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from "@dnd-kit/core"
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core"
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { TWOtherSection, useCVBuilder } from "../cv-builder-context";
 import { SortableItem } from "@/components/sortable-item";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,6 +11,7 @@ import { ModalConfirm } from "@/components/ui/modal"
 import { useState } from "react"
 import * as Accordion from "@radix-ui/react-accordion";
 import { randomUUID } from "@/lib/random-UUID"
+import { useSensorDefault } from "@/hooks/use-sensor-default"
 
 export function CVOtherSectionField() {
   const { data: { otherSections }, setData } = useCVBuilder()
@@ -79,12 +80,7 @@ export function CVOtherSectionField() {
     }))
   }
 
-	const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
+	const sensors = useSensorDefault()
 
 	const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -161,13 +157,13 @@ export function CVOtherSectionField() {
                 className="flex items-center"
               >
                 <Card className="group-[:has([data-state='open']):hover]:opacity-30 group-[:has([data-state='open']):focus-within]:opacity-30 hover:!opacity-100 focus-within:!opacity-100 focus-within:border-neutral-500 hover:border-neutral-500 mb-4 w-full">
-                  <CardContent className="pt-6">
+                  <CardContent>
                     <Accordion.Root type="single" defaultValue={section.keyPoints.length === 0 ? section.id : undefined} collapsible className="w-full">
                       <Accordion.Item value={section.id} className="w-full">
                         <Accordion.Trigger className="group/accordion w-full hover:no-underline" onClick={(e) => (e.target as HTMLElement)?.closest('button')?.blur()}>
                           <div className="flex items-center">
                             <GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />
-                            <div className="flex justify-between align-center gap-4 flex-1" onPointerDown={preventDragConflict}>
+                            <div className="flex justify-between align-center gap-4 flex-1" onPointerDown={preventDragConflict} onTouchStart={preventDragConflict}>
                               <div>
                                 <h3 className="text-lg font-semibold flex-grow mb-0">{section.title || `Section ${index + 1}`}</h3>
                               </div>
@@ -179,6 +175,7 @@ export function CVOtherSectionField() {
                               size="sm"
                               className="ml-2"
                               onPointerDown={preventDragConflict}
+                              onTouchStart={preventDragConflict}
                             >
                               <ChevronDown className="group-[[data-state='open']]/accordion:rotate-180 h-4 w-4" />
                             </Button>
@@ -189,6 +186,7 @@ export function CVOtherSectionField() {
                               size="sm"
                               className="ml-2"
                               onPointerDown={preventDragConflict}
+                              onTouchStart={preventDragConflict}
                               onClick={(e) => {
                                 e.stopPropagation()
                                 setRemove(section.id)

@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Trash2, GripVertical, Plus, Check, ChevronDown } from "lucide-react"
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from "@dnd-kit/core"
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { Trash2, GripVertical, Plus, ChevronDown } from "lucide-react"
+import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core"
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { TWorkExperience, useCVBuilder } from "../cv-builder-context";
 import { SortableItem } from "@/components/sortable-item";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,6 +13,7 @@ import { useMemo, useState } from "react"
 import { Switch } from "@/components/ui/switch"
 import * as Accordion from "@radix-ui/react-accordion";
 import { randomUUID } from "@/lib/random-UUID"
+import { useSensorDefault } from "@/hooks/use-sensor-default"
 
 export function CVWorkExperienceField() {
   const { data: { workExperiences }, setData } = useCVBuilder()
@@ -88,12 +89,7 @@ export function CVWorkExperienceField() {
     }))
   }
 
-	const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
+	const sensors = useSensorDefault()
 
 	const handleWEDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -170,7 +166,7 @@ export function CVWorkExperienceField() {
 							className="flex items-center"
 						>
 							<Card className="group-[:has([data-state='open']):hover]:opacity-30 group-[:has([data-state='open']):focus-within]:opacity-30 hover:!opacity-100 focus-within:!opacity-100 focus-within:border-neutral-500 hover:border-neutral-500 mb-4 w-full">
-								<CardContent className="pt-6">
+								<CardContent>
 									<Accordion.Root type="single" defaultValue={exp.keyPoints.length === 0 ? exp.id : undefined} collapsible className="w-full">
 										<Accordion.Item value={exp.id} className="w-full">
 											<Accordion.Trigger className="group/accordion w-full hover:no-underline" onClick={(e) => (e.target as HTMLElement)?.closest('button')?.blur()}>

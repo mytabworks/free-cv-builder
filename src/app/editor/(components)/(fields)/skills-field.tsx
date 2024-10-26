@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ChevronDown, GripVertical, Star, X } from "lucide-react"
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from "@dnd-kit/core"
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core"
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { TSkill, useCVBuilder } from "../cv-builder-context";
 import { SortableItem } from "@/components/sortable-item";
 import { Switch } from "@/components/ui/switch";
@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import * as Accordion from "@radix-ui/react-accordion";
 import { randomUUID } from "@/lib/random-UUID";
+import { useSensorDefault } from "@/hooks/use-sensor-default";
 
 export function CVSkillsField() {
   const { data: { skills, showRatings, skillSplit }, setData } = useCVBuilder()
@@ -59,12 +60,7 @@ export function CVSkillsField() {
     }))
   }
 
-	const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
+	const sensors = useSensorDefault()
 
 	const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -137,7 +133,7 @@ export function CVSkillsField() {
 									<SortableItem 
 										key={item.id} 
 										id={item.id} 
-										className="flex items-center bg-slate-200 p-0 mb-2 rounded-md"
+										className="flex items-center bg-slate-200 px-1 mb-2 rounded-md"
 										gripIcon={<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />}
 									>
 										<div 
