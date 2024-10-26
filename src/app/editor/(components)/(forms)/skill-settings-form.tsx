@@ -70,7 +70,8 @@ export function SkillSettingsForm() {
 					<div className="flex items-center space-x-2 mt-6">
 						<Switch
 							id="skillRatingBlock"
-							checked={data.skillRatingBlock}
+							checked={data.skillRatingBlock || data.skillSplit}
+							disabled={data.skillSplit}
 							onCheckedChange={() => setData(prev => ({...prev, skillRatingBlock: !prev.skillRatingBlock}))}
 						/>
 						<Label htmlFor="skillRatingBlock">Rating is under the Skill?</Label>
