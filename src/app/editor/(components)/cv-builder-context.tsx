@@ -60,11 +60,22 @@ export type TCVData = {
 	textColor: string;
 	textSize: number;
 	reverse: boolean;
+	displaySecondarySection: boolean;
 };
 
+export type TShowPanel = {
+	showLeft: boolean;
+	showRight: boolean;
+	width: number;
+	isDragging: boolean;
+}
+
 type TCVBuilderContext = {
-    data: TCVData;
-    setData: React.Dispatch<React.SetStateAction<TCVData>>;
+	data: TCVData;
+	setData: React.Dispatch<React.SetStateAction<TCVData>>;
+	panel: TShowPanel;
+	setPanel: React.Dispatch<React.SetStateAction<TShowPanel>>;
+
 };
 
 export const CVBuilderContext = createContext<TCVBuilderContext | null>(null);

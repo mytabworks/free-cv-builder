@@ -11,6 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import * as Accordion from "@radix-ui/react-accordion";
+import { randomUUID } from "@/lib/random-UUID";
 
 export function CVSkillsField() {
   const { data: { skills, showRatings, skillSplit }, setData } = useCVBuilder()
@@ -22,7 +23,7 @@ export function CVSkillsField() {
   const addSkill = () => {
     if (skillInput.trim()) {
       const newSkill: TSkill = {
-        id: Date.now().toString(),
+        id: randomUUID(),
         name: skillInput.trim(),
         rating: 5
       }
@@ -83,7 +84,7 @@ export function CVSkillsField() {
     <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
 			<Accordion.Root type="single" defaultValue="default" collapsible className="w-full">
 				<Accordion.Item value="default" className="w-full">
-					<Accordion.Trigger className="flex justify-between items-center group/accordion w-full hover:no-underline">
+					<Accordion.Trigger className="flex justify-between items-center group/accordion w-full hover:no-underline flex-wrap">
 						<h2 className="text-xl">SKILLS</h2>
 						<div className="flex gap-5">
 							<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
@@ -136,12 +137,13 @@ export function CVSkillsField() {
 									<SortableItem 
 										key={item.id} 
 										id={item.id} 
-										className="flex items-center bg-slate-200 px-2 py-1 mb-2 rounded-md"
+										className="flex items-center bg-slate-200 p-0 mb-2 rounded-md"
 										gripIcon={<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />}
 									>
 										<div 
-											className="flex items-center justify-between w-full" 
+											className="flex items-center justify-between w-full px-2 py-1" 
 											onPointerDown={(e) => e.stopPropagation()}
+											onTouchStart={(e) => e.stopPropagation()}
 										>
 											<div 
 												className="w-full"

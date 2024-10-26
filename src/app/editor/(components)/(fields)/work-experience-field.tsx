@@ -12,6 +12,7 @@ import { ModalConfirm } from "@/components/ui/modal"
 import { useMemo, useState } from "react"
 import { Switch } from "@/components/ui/switch"
 import * as Accordion from "@radix-ui/react-accordion";
+import { randomUUID } from "@/lib/random-UUID"
 
 export function CVWorkExperienceField() {
   const { data: { workExperiences }, setData } = useCVBuilder()
@@ -20,7 +21,7 @@ export function CVWorkExperienceField() {
 
 	const addWorkExperience = () => {
     const newExperience: TWorkExperience = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       startDate: '',
       endDate: '',
       jobTitle: '',
@@ -54,7 +55,7 @@ export function CVWorkExperienceField() {
 					keyPoints: [
 						...exp.keyPoints, 
 						{ 
-							id: crypto.randomUUID(), 
+							id: randomUUID(), 
 							text: "" 
 						}
 					] 
@@ -175,14 +176,14 @@ export function CVWorkExperienceField() {
 											<Accordion.Trigger className="group/accordion w-full hover:no-underline" onClick={(e) => (e.target as HTMLElement)?.closest('button')?.blur()}>
 												<div className="flex items-center">
 													<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />
-													<div className="flex justify-between align-center gap-4 flex-1" onPointerDown={preventDragConflict}>
+													<div className="flex justify-between align-center gap-4 flex-1 flex-wrap" onPointerDown={preventDragConflict} onTouchStart={preventDragConflict}>
 														<div className="flex justify-start flex-col">
-															<h3 className="text-lg font-semibold flex-grow mb-0">{exp.jobTitle || `Work Experience ${index + 1}`}</h3>
-															<span className="text-left text-sm text-neutral-500 dark:text-neutral-400">{exp.companyName}</span>
+															<h3 className="text-xs md:text-lg font-semibold flex-grow mb-0">{exp.jobTitle || `Work Experience ${index + 1}`}</h3>
+															<span className="text-left text-xs md:text-sm text-neutral-500 dark:text-neutral-400">{exp.companyName}</span>
 														</div>
 														{exp.startDate && (exp.endDate || exp.currentRole) && (
 															<div className="flex items-center space-x-2">
-																<span className="text-sm text-neutral-500 dark:text-neutral-400">
+																<span className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400">
 																	{exp.startDate ? new Date(exp.startDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}
 																	{" - "}
 																	{exp.currentRole ? "Present" : exp.endDate ? new Date(exp.endDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}
@@ -197,6 +198,7 @@ export function CVWorkExperienceField() {
 														size="sm"
 														className="ml-2"
 														onPointerDown={preventDragConflict}
+														onTouchStart={preventDragConflict}
 													>
 														<ChevronDown className="group-[[data-state='open']]/accordion:rotate-180 h-4 w-4" />
 													</Button>
@@ -207,6 +209,7 @@ export function CVWorkExperienceField() {
 														size="sm"
 														className="ml-2"
 														onPointerDown={preventDragConflict}
+														onTouchStart={preventDragConflict}
 														onClick={(e) => {
 															e.stopPropagation()
 															setRemove(exp.id)
@@ -217,7 +220,7 @@ export function CVWorkExperienceField() {
 												</div>
 											</Accordion.Trigger>
 											<Accordion.Content>
-												<div className="pt-4" onPointerDown={preventDragConflict} onKeyDown={preventDragConflict}>
+												<div className="pt-4" onPointerDown={preventDragConflict} onTouchStart={preventDragConflict} onKeyDown={preventDragConflict}>
 													<div className="grid grid-cols-2 gap-4">
 														<div className="flex items-center space-x-2 mb-3">
 															<Switch
@@ -288,7 +291,7 @@ export function CVWorkExperienceField() {
 																		className="flex items-center mt-2"
 																		gripIcon={<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />}
 																	>
-																		<div className="flex items-center w-full" onPointerDown={preventDragConflict} onKeyDown={preventDragConflict}>
+																		<div className="flex items-center w-full" onPointerDown={preventDragConflict} onTouchStart={preventDragConflict} onKeyDown={preventDragConflict}>
 																			<Textarea
 																				value={point.text}
 																				onChange={(e) => updateKeyPoint(exp.id, point.id, e.target.value)}

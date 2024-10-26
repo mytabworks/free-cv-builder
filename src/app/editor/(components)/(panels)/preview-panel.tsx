@@ -22,6 +22,7 @@ export function CVPreviewPanel() {
 		return () => {
 			clearTimeout(cleanup)
 			setReady(false)
+			setStartScalingDown(false)
 		}
 	}, [data.template])
 
@@ -88,14 +89,60 @@ export function CVPreviewPanel() {
 
   }, [data, ready]);
 
+	const [startScalingDown, setStartScalingDown] = useState(false)
+
+	useEffect(() => {
+		if(!ready) return;
+		const frameWindow = ref.current?.contentWindow
+
+		if(!frameWindow) return;
+
+		const media = frameWindow?.matchMedia('(max-width: 210mm)')
+
+		const handler = () => {
+			setStartScalingDown(media.matches)
+			if(!media.matches) {
+				frameWindow.document.body.style.zoom = ""
+			}
+		}
+
+		handler()
+
+		media?.addEventListener('change', handler)
+
+		return () => {
+			media?.removeEventListener('change',handler)
+		}
+	}, [ready])
+
+	useEffect(() => {
+		if(!startScalingDown) return;
+
+		const frameWindow = ref.current?.contentWindow
+
+		if(!frameWindow) return;
+
+		const handler = () => {
+			frameWindow.document.body.style.zoom = (frameWindow.innerWidth / 794).toString()
+		}
+
+		handler()
+
+		frameWindow?.addEventListener('resize', handler)
+
+		return () => {
+			frameWindow?.removeEventListener('resize', handler)
+		}
+	}, [startScalingDown])
+
   return (
-		<div className="h-full flex flex-col">
-			<div className="flex justify-between mb-3 mx-auto w-[210mm] pr-2">
+		<div className="h-[calc(100%-40px)] md:h-full flex flex-col px-3 md:px-2">
+			<div className="flex justify-between flex-wrap mb-3 mx-auto w-full max-w-[210mm] gap-3">
 				<a
 					href="https://ko-fi.com/yourkofiusername"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="bg-white text-emerald-600 py-1 px-5 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-gray-200 transition-all duration-200"
+					className="bg-white text-emerald-600 py-2.5 px-5 md:py-1 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-gray-200 transition-all duration-200"
 				>
 					Buy me a Ko-Fi ☕
 				</a>
