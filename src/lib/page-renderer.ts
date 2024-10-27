@@ -35,17 +35,22 @@ export interface PageData {
 }
 
 export class PageRenderer {
+  private displaySecondarySection: boolean;
   private maxHeight: number;
   private container: HTMLElement | null;
   private DOM: Document;
 
-  constructor(DOM: Document, maxHeight: number = A4_HEIGHT) {
+  constructor(DOM: Document, { 
+    maxHeight = A4_HEIGHT,
+    displaySecondarySection = true
+  }: { maxHeight?: number, displaySecondarySection?: boolean } = {}) {
+    this.displaySecondarySection = displaySecondarySection;
     this.maxHeight = maxHeight;
     this.container = DOM.getElementById('container');
     this.DOM = DOM
   }
 
-  private checkSectionOverflow(element: HTMLElement): boolean {
+  private isPageOverflow(element: HTMLElement): boolean {
     return element.clientHeight > this.maxHeight;
   }
 
@@ -69,33 +74,44 @@ export class PageRenderer {
     pageElement = this.createElement('div', 'page');
     pageElement.setAttribute('data-page', pageNum.toString());
 
-    const secondaryElement = this.createElement('div', 'secondary', null, pageElement);
-    this.createElement('div', 'secondary-content', null, secondaryElement);
-
-    const primaryElement = this.createElement('div', 'primary', null, pageElement);
-    this.createElement('div', 'primary-content', null, primaryElement);
-
     this.container?.appendChild(pageElement);
 
-    return pageElement;
+    if(this.displaySecondarySection) {
+      const secondaryElement = this.createElement('div', 'secondary', null, pageElement);
+      this.createElement('div', 'secondary-content', null, secondaryElement);
+  
+      const primaryElement = this.createElement('div', 'primary', null, pageElement);
+      this.createElement('div', 'primary-content', null, primaryElement);
+      return pageElement;
+    }
+
+    return this.createElement('div', 'single-container', null, pageElement);
+
   }
 
   private renderSkill(pageElement: HTMLElement, data: PageData, pageNum: number): void {
-    const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
-    if (!Array.isArray(data.skills) || data.skills.length === 0 || !secondaryContent) return;
+    const container = this.displaySecondarySection 
+      ? pageElement.querySelector<HTMLElement>('.secondary-content') 
+      : pageElement.querySelector<HTMLElement>('.single-container-content[data-single-type="experience"] > .narrower-content')
+      
+    if (!Array.isArray(data.skills) || data.skills.length === 0 || !container) return;
+      
+    const baseOverflow = pageNum !== 1 || this.displaySecondarySection 
+      ? container
+      : pageElement
 
-    let section = pageElement?.querySelector('[list-section-type="fcv-skills"]')
+    let section = pageElement?.querySelector('[data-list-section-type="fcv-skills"]')
 
     if(!section) {
-      section = this.createElement('div', 'list-section', null, secondaryContent);
-      section.setAttribute('list-section-type', 'fcv-skills')
-      if(!this.DOM.querySelector('[list-section-type="fcv-skills"] > .list-section-title')) {
+      section = this.createElement('div', 'list-section', null, container);
+      section.setAttribute('data-list-section-type', 'fcv-skills')
+      if(!this.DOM.querySelector('[data-list-section-type="fcv-skills"] > .list-section-title')) {
         this.createElement('h3', 'list-section-title', 'SKILLS', section);
       }
     }
 
     const contentElement = this.createElement('div', 'list-section-content', null, section);
-    if (data.skillSplit) {
+    if (!data.skillSplit) {
       const collectedCutSkills: Skill[] = []
       const half = Math.ceil(data.skills.length / 2);
       Array.from({ length: 2 }).forEach((_, i) => {
@@ -112,7 +128,7 @@ export class PageRenderer {
             bar.style.width = rating
           }
 
-          if (this.checkSectionOverflow(secondaryContent)) {
+          if (this.isPageOverflow(baseOverflow)) {
             if (index === 0) {
               section.remove()
             } else {
@@ -151,7 +167,7 @@ export class PageRenderer {
           bar.style.width = rating
         }
 
-        if (this.checkSectionOverflow(secondaryContent)) {
+        if (this.isPageOverflow(baseOverflow)) {
           if (index === 0) {
             section.remove()
           } else {
@@ -172,18 +188,25 @@ export class PageRenderer {
   }
 
   private renderSection(pageElement: HTMLElement, data: PageData, pageNum: number): void {
-    const secondaryContent = pageElement.querySelector('.secondary-content') as HTMLElement;
-    if (!Array.isArray(data.sections) || data.sections.length === 0 || !secondaryContent) return;
+    const container = this.displaySecondarySection 
+      ? pageElement.querySelector<HTMLElement>('.secondary-content') 
+      : pageElement.querySelector<HTMLElement>('.single-container-content[data-single-type="experience"] > .narrower-content')
+
+    if (!Array.isArray(data.sections) || data.sections.length === 0 || !container) return;
+
+    const baseOverflow = pageNum !== 1 || this.displaySecondarySection 
+      ? container
+      : pageElement
 
     data.sections.forEach((section, index, array) => {
-      const sectionElement = this.createElement('div', 'list-section', null, secondaryContent);
-      sectionElement.setAttribute('list-section-type', section.title)
-      if(!this.DOM.querySelector(`[list-section-type="${section.title}"] > .list-section-title`)) {
+      const sectionElement = this.createElement('div', 'list-section', null, container);
+      sectionElement.setAttribute('data-list-section-type', section.title)
+      if(!this.DOM.querySelector(`[data-list-section-type="${section.title}"] > .list-section-title`)) {
         this.createElement('h3', 'list-section-title', section.title, sectionElement);
       }
 
       const contentElement = this.createElement('div', 'list-section-content', null, sectionElement);
-      if (this.checkSectionOverflow(secondaryContent)) {
+      if (this.isPageOverflow(baseOverflow)) {
         sectionElement.remove();
         this.renderPages({ sections: array.slice(index) }, pageNum + 1);
         array.splice(0);
@@ -195,7 +218,7 @@ export class PageRenderer {
         section.points.forEach((point, pointIndex, pointArray) => {
           const item = this.createElement('li', null, point, list)
 
-          if (this.checkSectionOverflow(secondaryContent)) {
+          if (this.isPageOverflow(baseOverflow)) {
             if (pointIndex === 0) {
               sectionElement.remove()
 
@@ -227,12 +250,19 @@ export class PageRenderer {
   }
 
   private renderWorkExperience(pageElement: HTMLElement, data: PageData, pageNum: number): void {
-    const primaryContent = pageElement.querySelector('.primary-content') as HTMLElement;
-    if (!Array.isArray(data.workExperiences) || !primaryContent) return;
+    const container = this.displaySecondarySection 
+      ? pageElement.querySelector<HTMLElement>('.primary-content') 
+      : pageElement.querySelector<HTMLElement>('.single-container-content[data-single-type="experience"] > .wider-content')
 
-    this.createElement('div', 'segment-breaker', 'WORK EXPERIENCE', primaryContent);
+    if (!Array.isArray(data.workExperiences) || !container) return;
 
-    const workExperienceSection = this.createElement('div', 'work-experience-section', null, primaryContent);
+    const baseOverflow = pageNum !== 1 || this.displaySecondarySection 
+      ? container
+      : pageElement
+
+    this.createElement('div', 'segment-breaker', 'WORK EXPERIENCE', container);
+
+    const workExperienceSection = this.createElement('div', 'work-experience-section', null, container);
 
     data.workExperiences.forEach((experience, index, array) => {
       const workExperience = this.createElement('div', 'work-experience', null, workExperienceSection);
@@ -246,7 +276,7 @@ export class PageRenderer {
         this.createElement('h4', 'work-experience-company', experience.company, workExperience);
       }
 
-      if (this.checkSectionOverflow(primaryContent)) {
+      if (this.isPageOverflow(baseOverflow)) {
         workExperience.remove();
         this.renderPages({ workExperiences: array.slice(index) }, pageNum + 1);
         array.splice(0);
@@ -257,7 +287,7 @@ export class PageRenderer {
         const contentElement = this.createElement('ul', 'work-experience-content', null, workExperience);
         experience.points.forEach((point, pointIndex, pointArray) => {
           const item = this.createElement('li', null, point, contentElement)
-          if (this.checkSectionOverflow(primaryContent)) {
+          if (this.isPageOverflow(baseOverflow)) {
 
             if (pointIndex === 0) {
               workExperience.remove()
@@ -288,6 +318,33 @@ export class PageRenderer {
   }
 
   private renderIntro(pageElement: HTMLElement, data: PageData): void {
+
+    if(!this.displaySecondarySection) {
+      const singleContainer = this.createElement('div', 'single-container-content', null, pageElement);
+      singleContainer.setAttribute('data-single-type', 'intro');
+      const narrowerContent = this.createElement('div', 'narrower-content', null, singleContainer);
+
+      if (data.photo) {
+        const photoElement = this.createElement('img', 'photo', null, narrowerContent) as HTMLImageElement;
+        photoElement.src = data.photo;
+      }
+
+      const widerContent = this.createElement('div', 'wider-content', null, singleContainer);
+
+      if (data.name) this.createElement('h2', 'primary-content-intro', data.name, widerContent);
+      if (data.title) this.createElement('h2', 'primary-content-title', data.title, widerContent);
+      if (data.contacts) this.createElement('h4', 'primary-content-subtitle', data.contacts, widerContent);
+      if (data.website) this.createElement('h5', 'primary-content-other', data.website, widerContent);
+      if (data.linkedin) this.createElement('h5', 'primary-content-other', data.linkedin, widerContent);
+      if (data.address) this.createElement('h5', 'primary-content-other', data.address, widerContent);
+
+      if (data.summary) {
+        this.createElement('h5', 'primary-content-summary', 'SUMMARY', pageElement);
+        this.createElement('p', 'primary-content-summary-content', data.summary, pageElement);
+      }
+      return;
+    }
+
     const primaryContent = pageElement.querySelector('.primary-content') as HTMLElement;
     if (!primaryContent) return;
 
@@ -314,7 +371,18 @@ export class PageRenderer {
 
   public renderPages(data: PageData, pageNum: number): void {
     const pageElement = this.createPageElement(pageNum);
-    this.renderIntro(pageElement, data);
+
+    if(pageNum === 1) {
+      this.renderIntro(pageElement, data);
+    }
+
+    if(!this.displaySecondarySection) {
+      const experienceSingle = this.createElement('div', 'single-container-content', null, pageElement);
+      experienceSingle.setAttribute('data-single-type', 'experience');
+      this.createElement('div', 'wider-content', null, experienceSingle);
+      this.createElement('div', 'narrower-content', null, experienceSingle);
+    }
+
     this.renderSkill(pageElement, data, pageNum);
     this.renderSection(pageElement, data, pageNum);
     this.renderWorkExperience(pageElement, data, pageNum);

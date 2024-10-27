@@ -10,11 +10,11 @@ export function CVPreviewPanel() {
 
 	const ref = useRef<HTMLIFrameElement>(null);
 
-	const onDownload = () => {
+	const handleDownload = () => {
 		ref.current?.contentWindow?.print();
 	}
 
-	useEffect(() => {
+	const handleChangeTemplate = () => {
 		const cleanup = setTimeout(() => {
 			setReady(true)
 		}, 1000)
@@ -24,12 +24,14 @@ export function CVPreviewPanel() {
 			setReady(false)
 			setStartScalingDown(false)
 		}
-	}, [data.template])
+	}
 
-	useEffect(() => {
+	useEffect(handleChangeTemplate, [data.template])
+
+	const handleFrameRender = () => {
     if(!ready || !ref.current?.contentWindow?.document) return;
 
-		const renderer = new PageRenderer(ref.current?.contentWindow?.document)
+		const renderer = new PageRenderer(ref.current?.contentWindow?.document, { displaySecondarySection: true })
 
 		const websiteSection = data.website || data.linkedin ? `${data.website || ''}${data.linkedin ? `${data.website ? ' | ' : ''}${data.linkedin}` : ''}` : ''
 		const collection: PageData = {
@@ -87,11 +89,13 @@ export function CVPreviewPanel() {
 
 		renderer.renderPages(collection, 1)
 
-  }, [data, ready]);
+  }
+
+	useEffect(handleFrameRender, [data, ready]);
 
 	const [startScalingDown, setStartScalingDown] = useState(false)
 
-	useEffect(() => {
+	const handleScaleDownTrigger = () => {
 		if(!ready) return;
 		const frameWindow = ref.current?.contentWindow
 
@@ -113,9 +117,11 @@ export function CVPreviewPanel() {
 		return () => {
 			media?.removeEventListener('change',handler)
 		}
-	}, [ready])
+	}
 
-	useEffect(() => {
+	useEffect(handleScaleDownTrigger, [ready])
+
+	const handleScaleDown = () => {
 		if(!startScalingDown) return;
 
 		const frameWindow = ref.current?.contentWindow
@@ -133,7 +139,9 @@ export function CVPreviewPanel() {
 		return () => {
 			frameWindow?.removeEventListener('resize', handler)
 		}
-	}, [startScalingDown])
+	}
+
+	useEffect(handleScaleDown, [startScalingDown])
 
   return (
 		<div className="h-[calc(100%-40px)] md:h-full flex flex-col px-3 md:px-2">
@@ -146,7 +154,7 @@ export function CVPreviewPanel() {
 				>
 					Buy me a Ko-Fi ☕
 				</a>
-				<Button onClick={onDownload}><DownloadIcon /> Download PDF</Button>
+				<Button onClick={handleDownload}><DownloadIcon /> Download PDF</Button>
 			</div>
 			<iframe ref={ref} key={data.template} src={`/templates/${data.template}.html`} className="h-full" />
 		</div>

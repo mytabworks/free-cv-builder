@@ -110,6 +110,10 @@
 			&:not(:last-child) {
 				margin-bottom: 5mm;
 			}
+
+			&:has(.single-container) {
+				display: block;
+			}
 		}
 
 		.allow-page {
@@ -197,10 +201,6 @@
 				font-size: 5mm;
 				white-space: pre;
 			}
-
-			.primary-content-summary-content {
-				margin-bottom: 5mm;
-			}
 		}
 
 		.photo {
@@ -255,7 +255,7 @@
 			font-size: 5mm;
 			font-weight: 700;
 			color: var(--theme-color);
-			margin: 0 0 5mm;
+			margin-bottom: 5mm;
 			display: flex;
 			align-items: center;
 			gap: 5mm;
@@ -267,6 +267,10 @@
 				width: 100%;
 				height: 2px;
 				background-color: var(--theme-color);
+			}
+
+			&:not(:first-child) {
+				margin-top: 5mm;
 			}
 		}
 
@@ -323,6 +327,20 @@
 				}
 			}
     }
+
+		.single-container {
+			.single-container-content {
+				display: flex;
+
+				.wider-content {
+					width: 130mm;
+				}
+
+				.narrower-content {
+					width: 80mm;
+				}
+			}
+		}
 
 		@media print {
 			@page {
