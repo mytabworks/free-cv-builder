@@ -174,12 +174,12 @@ export function CVWorkExperienceField() {
 													<GripVertical className="mr-2 cursor-grab active:cursor-grabbing" />
 													<div className="flex justify-between align-center gap-4 flex-1 flex-wrap" onPointerDown={preventDragConflict} onTouchStart={preventDragConflict}>
 														<div className="flex justify-start flex-col">
-															<h3 className="text-xs md:text-lg font-semibold flex-grow mb-0">{exp.jobTitle || `Work Experience ${index + 1}`}</h3>
-															<span className="text-left text-xs md:text-sm text-neutral-500 dark:text-neutral-400">{exp.companyName}</span>
+															<h3 className="text-xs @lg:text-lg font-semibold flex-grow mb-0">{exp.jobTitle || `Work Experience ${index + 1}`}</h3>
+															<span className="text-left text-xs @lg:text-sm text-neutral-500 dark:text-neutral-400">{exp.companyName}</span>
 														</div>
 														{exp.startDate && (exp.endDate || exp.currentRole) && (
 															<div className="flex items-center space-x-2">
-																<span className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400">
+																<span className="text-xs @lg:text-sm text-neutral-500 dark:text-neutral-400">
 																	{exp.startDate ? new Date(exp.startDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}
 																	{" - "}
 																	{exp.currentRole ? "Present" : exp.endDate ? new Date(exp.endDate).toLocaleDateString('en-US', { year: 'numeric', month: exp.showMonth ? 'short' : undefined }) : ''}

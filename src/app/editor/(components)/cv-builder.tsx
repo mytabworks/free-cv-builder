@@ -15,7 +15,7 @@ import { defaultCVData } from "@/constants/default-cv-data";
 
 export function CVBuilder() {
   const [data, setData] = useState<TCVData>(() => {
-    const getData = localStorage.getItem('lime-cv-data')
+    const getData = typeof window !== 'undefined' && localStorage.getItem('lime-cv-data')
     if(getData) return JSON.parse(getData)
     return defaultCVData
   })
@@ -48,7 +48,7 @@ export function CVBuilder() {
 
   useEffectMounted(() => {
     if(dirty) {
-      return localStorage.setItem('lime-cv-data', JSON.stringify({ ...data, photo: null }))
+      return localStorage.setItem('lime-cv-data', JSON.stringify({ ...data }))
     }
 
     setDirty(true)
@@ -66,7 +66,7 @@ export function CVBuilder() {
         {/* Left side - Tabs */}
         {panel.showLeft && (
           <div 
-            className={classNames("bg-slate-50 max-md:!w-full p-3 md:p-6", null, panel.showRight ? 'w-full md:w-[50%]' : 'w-full')} 
+            className={classNames("@container bg-slate-50 max-md:!w-full p-3 md:p-6", null, panel.showRight ? 'w-full md:w-[50%]' : 'w-full')} 
             style={{ width: panel.showRight ? `${panel.width}%` : '100%' }}
           >
             <header className="mb-5 flex items-center justify-between">
@@ -78,14 +78,13 @@ export function CVBuilder() {
                 onClick={() => 
                   setPanel(prev => ({ 
                     ...prev, 
-                    showRight: !panel.showRight, 
-                    showLeft: panel.showRight 
+                    showRight: !panel.showRight 
                   })
                 )}
               >
                 Preview CV
                 {" "}
-                {panel.showRight ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <ChevronRight className="h-4 w-4" />
               </Button>
             </header>
             <CVFormPanel />
@@ -98,7 +97,7 @@ export function CVBuilder() {
         {/* Right side - Preview */}
         {panel.showRight && (
           <div 
-            className={classNames("max-md:h-screen max-md:!w-full max-md:bg-emerald-100 py-6", null, panel.showLeft ? 'md:w-[50%]' : '')} 
+            className={classNames("max-md:fixed max-md:inset-0 max-md:h-screen max-md:!w-full max-md:bg-emerald-100 py-3  md:py-6", null, panel.showLeft ? 'md:w-[50%]' : '')} 
             style={{ width: panel.showLeft ? `${100 - panel.width}%` : '100%' }}
           >
             <header className="max-md:!block hidden px-3 mb-5">
@@ -106,12 +105,11 @@ export function CVBuilder() {
                 onClick={() => 
                   setPanel(prev => ({ 
                     ...prev, 
-                    showLeft: !panel.showLeft, 
-                    showRight: panel.showLeft 
+                    showRight: !panel.showRight, 
                   }))
                 }
               >
-                {panel.showLeft ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+                <ChevronLeft className="h-4 w-4" />
                 {" "}
                 Back
               </Button>
