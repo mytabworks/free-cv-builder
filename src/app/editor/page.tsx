@@ -1,4 +1,9 @@
-import { CVBuilder } from "./(components)/cv-builder";
+import dynamic from 'next/dynamic'
+import { CVBuilder as OGBuilder } from "./(components)/cv-builder";
+
+const CVBuilder = dynamic(() => Promise.resolve(OGBuilder), {
+  ssr: false
+})
 
 export default function Editor() {
   return (
