@@ -1,4 +1,5 @@
 export function isMobile() {
+  if(typeof navigator === 'undefined') return false
   // const agentData = (navigator as any).userAgentData
 
   // if (agentData) {
