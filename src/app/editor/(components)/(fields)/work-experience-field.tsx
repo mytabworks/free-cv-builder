@@ -291,9 +291,15 @@ export function CVWorkExperienceField() {
 																			<Textarea
 																				value={point.text}
 																				onChange={(e) => updateKeyPoint(exp.id, point.id, e.target.value)}
-																				onKeyDown={(e) => e.key === 'Enter' && addKeyPoint(exp.id)}
+																				onKeyDown={(e) => {
+																					if(e.key === 'Enter') {
+																						e.preventDefault()
+																						addKeyPoint(exp.id)
+																					}
+																				}}
 																				placeholder="Key achievement or responsibility"
 																				rows={2}
+																				autoFocus={point.text === ""}
 																			/>
 																			<Button
 																				type="button"

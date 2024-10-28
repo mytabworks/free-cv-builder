@@ -222,9 +222,14 @@ export function CVOtherSectionField() {
                                         <Input
                                           value={point.text}
                                           onChange={(e) => updateKeyPoint(section.id, point.id, e.target.value)}
-                                          onKeyDown={(e) => e.key === 'Enter' && addKeyPoint(section.id)}
+                                          onKeyDown={(e) => {
+                                            if(e.key === 'Enter') {
+                                              e.preventDefault()
+                                              addKeyPoint(section.id)
+                                            }
+                                          }}
                                           placeholder={`${section.title || ''} item`}
-                                          autoFocus
+                                          autoFocus={point.text === ""}
                                         />
                                         <Button
                                           type="button"
