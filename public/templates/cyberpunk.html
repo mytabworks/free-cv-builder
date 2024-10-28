@@ -205,7 +205,11 @@
 
     /* Sections (skills, education) */
     .list-section {
-
+			&:not(:has(.list-section-title)) {
+				.list-section-content {
+					padding-top: 0;
+				}
+			}
     }
 
     .list-section-title {
@@ -316,7 +320,12 @@
       font-weight: bold;
       display: flex;
       justify-content: space-between;
+			gap: 10mm;
       color: var(--theme-color);
+    }
+
+		.work-experience-position-year {
+      white-space: pre;
     }
 
     .work-experience-company {

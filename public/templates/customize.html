@@ -217,6 +217,12 @@
 
 		.list-section {
 
+			&:not(:has(.list-section-title)) {
+				.list-section-content {
+					padding-top: 0;
+				}
+			}
+
 			.list-section-title {
 				font-size: 1.25em;
 				font-weight: bold;
