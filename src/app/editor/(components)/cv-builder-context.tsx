@@ -45,6 +45,7 @@ export type TCVData = {
 	font: string;
 	themeColor: string;
 	template: string;
+	showIcons: boolean;
 	showRatings: boolean;
 	skillSplit: boolean;
 	skillRatingBlock: boolean;

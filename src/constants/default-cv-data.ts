@@ -139,6 +139,7 @@ export const defaultCVData = {
   "photoRadius": 50,
   "photoSize": 75,
   "reverse": false,
+  "showIcons": false,
   "skillSplit": false,
   "skillRatingBlock": false,
   "skillRatingHeight": 8,

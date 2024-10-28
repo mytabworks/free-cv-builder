@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCVBuilder } from "../cv-builder-context";
 import { Button } from "@/components/ui/button";
 import { DownloadIcon } from "lucide-react";
@@ -31,18 +31,19 @@ export function CVPreviewPanel() {
 	const handleFrameRender = () => {
     if(!ready || !ref.current?.contentWindow?.document) return;
 
-		const renderer = new PageRenderer(ref.current?.contentWindow?.document, { displaySecondarySection: true })
+		const renderer = new PageRenderer(ref.current?.contentWindow?.document, { displaySecondarySection: data.displaySecondarySection })
 
-		const websiteSection = data.website || data.linkedin ? `${data.website || ''}${data.linkedin ? `${data.website ? ' | ' : ''}${data.linkedin}` : ''}` : ''
 		const collection: PageData = {
 			name: data.name,
 			title: data.currentTitle,
-			contacts: `${data.email || ''}${data.phone ? `${data.email ? ' | ' : ''}${data.phone}` : ''}`,
-			website: websiteSection.length <= 65 ? websiteSection : data.website,
-			linkedin: websiteSection.length <= 65 ? '' : data.linkedin,
+			email: data.email,
+			contact: data.phone,
+			website: data.website,
+			linkedin: data.linkedin,
 			address: data.address,
 			summary: data.summary,
 			photo: data.photo,
+			showIcons: data.showIcons,
 			showRatings: data.showRatings,
 			skillRatingBlock: data.skillRatingBlock,
 			skillSplit: data.skillSplit,
