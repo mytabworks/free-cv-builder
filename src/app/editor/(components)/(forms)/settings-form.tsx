@@ -151,31 +151,33 @@ export function CVSettingsForm() {
 							/>
 						</div>
 					</div>
-					<div className="flex gap-3">
-						<div className="flex-1">
-							<Label htmlFor="primaryBGColor">Primary Section BG Color</Label>
-							<Input
-								id="primaryBGColor"
-								name="primaryBGColor"
-								type="color"
-								className="p-1"
-								value={data.primaryBGColor}
-								onChange={handleInputChange}
-							/>
+					{data.template !== "cyberpunk" && (
+						<div className="flex gap-3">
+							<div className="flex-1">
+								<Label htmlFor="primaryBGColor">Primary Section BG Color</Label>
+								<Input
+									id="primaryBGColor"
+									name="primaryBGColor"
+									type="color"
+									className="p-1"
+									value={data.primaryBGColor}
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="flex-1">
+								<Label htmlFor="primaryTextColor">Primary Section Text Color</Label>
+								<Input
+									id="primaryTextColor"
+									name="primaryTextColor"
+									type="color"
+									className="p-1"
+									value={data.primaryTextColor}
+									onChange={handleInputChange}
+								/>
+							</div>
 						</div>
-						<div className="flex-1">
-							<Label htmlFor="primaryTextColor">Primary Section Text Color</Label>
-							<Input
-								id="primaryTextColor"
-								name="primaryTextColor"
-								type="color"
-								className="p-1"
-								value={data.primaryTextColor}
-								onChange={handleInputChange}
-							/>
-						</div>
-					</div>
-					{data.displaySecondarySection && (
+					)}
+					{data.displaySecondarySection && data.template !== "cyberpunk" && (
 						<div className="flex gap-3">
 							<div className="flex-1">
 								<Label htmlFor="secondaryBGColor">Secondary Section BG Color</Label>
