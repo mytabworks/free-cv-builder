@@ -90,7 +90,7 @@ export function CVSettingsForm() {
 							</SelectContent>
 						</Select>
 					</div>
-					<div className="flex gap-5">
+					<div className="flex gap-3">
 						<div className="flex-1">
 							<Label htmlFor="font">Font</Label>
 							<Select
@@ -127,7 +127,7 @@ export function CVSettingsForm() {
 							</div>
 						</div>
 					</div>
-					<div className="flex gap-5">
+					<div className="flex gap-3">
 						<div className="flex-1">
 							<Label htmlFor="themeColor">Theme Color</Label>
 							<Input
@@ -151,7 +151,7 @@ export function CVSettingsForm() {
 							/>
 						</div>
 					</div>
-					<div className="flex gap-5">
+					<div className="flex gap-3">
 						<div className="flex-1">
 							<Label htmlFor="primaryBGColor">Primary Section BG Color</Label>
 							<Input
@@ -175,31 +175,33 @@ export function CVSettingsForm() {
 							/>
 						</div>
 					</div>
-					<div className="flex gap-5">
-						<div className="flex-1">
-							<Label htmlFor="secondaryBGColor">Secondary Section BG Color</Label>
-							<Input
-								id="secondaryBGColor"
-								name="secondaryBGColor"
-								type="color"
-								className="p-1"
-								value={data.secondaryBGColor}
-								onChange={handleInputChange}
-							/>
+					{data.displaySecondarySection && (
+						<div className="flex gap-3">
+							<div className="flex-1">
+								<Label htmlFor="secondaryBGColor">Secondary Section BG Color</Label>
+								<Input
+									id="secondaryBGColor"
+									name="secondaryBGColor"
+									type="color"
+									className="p-1"
+									value={data.secondaryBGColor}
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="flex-1">
+								<Label htmlFor="secondaryTextColor">Secondary Section Text Color</Label>
+								<Input
+									id="secondaryTextColor"
+									name="secondaryTextColor"
+									type="color"
+									className="p-1"
+									value={data.secondaryTextColor}
+									onChange={handleInputChange}
+								/>
+							</div>
 						</div>
-						<div className="flex-1">
-							<Label htmlFor="secondaryTextColor">Secondary Section Text Color</Label>
-							<Input
-								id="secondaryTextColor"
-								name="secondaryTextColor"
-								type="color"
-								className="p-1"
-								value={data.secondaryTextColor}
-								onChange={handleInputChange}
-							/>
-						</div>
-					</div>
-					<div className="flex gap-5">
+					)}
+					<div className="flex gap-3">
 						<div className="flex-1">
 							<Label htmlFor="photoSize">Photo Size</Label>
 							<div className="flex gap-2">
@@ -212,6 +214,7 @@ export function CVSettingsForm() {
 									step={5}
 									className="p-0"
 									value={data.photoSize}
+									disabled={!data.displaySecondarySection}
 									onChange={handleInputChange}
 								/>
 								<div className="w-[50px] bg-slate-100 rounded-md flex items-center justify-center text-sm">
@@ -239,14 +242,44 @@ export function CVSettingsForm() {
 							</div>
 						</div>
 					</div>
-					<div className="flex-1">
-						<div className="flex items-center space-x-2 mt-5">
-							<Switch
-								id="reverse-row"
-								checked={data.reverse}
-								onCheckedChange={() => setData(prev => ({...prev, reverse: !prev.reverse}))}
-							/>
-							<Label htmlFor="reverse-row">Reverse Row</Label>
+					<div className="flex gap-3">
+						<div className="flex-1">
+							<div className="flex items-center space-x-2 mt-5">
+								<Switch
+									id="display-secondary-section"
+									checked={!data.displaySecondarySection}
+									onCheckedChange={() => 
+										setData(prev => ({
+											...prev, 
+											displaySecondarySection: !prev.displaySecondarySection,
+											photoSize: !prev.displaySecondarySection ? prev.photoSize : 100
+										})
+									)}
+								/>
+								<Label htmlFor="display-secondary-section">Hide Secondary Section</Label>
+							</div>
+						</div>
+						<div className="flex-1">
+							<div className="flex items-center space-x-2 mt-5">
+								<Switch
+									id="reverse-row"
+									checked={data.reverse}
+									onCheckedChange={() => setData(prev => ({...prev, reverse: !prev.reverse}))}
+								/>
+								<Label htmlFor="reverse-row">Reverse Row</Label>
+							</div>
+						</div>
+					</div>
+					<div className="flex gap-3">
+						<div className="flex-1">
+							<div className="flex items-center space-x-2 mt-5">
+								<Switch
+									id="show-icon"
+									checked={data.showIcons}
+									onCheckedChange={() => setData(prev => ({...prev, showIcons: !prev.showIcons}))}
+								/>
+								<Label htmlFor="show-icon">Show Icons</Label>
+							</div>
 						</div>
 					</div>
 				</div>

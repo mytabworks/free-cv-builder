@@ -113,6 +113,7 @@
 
 			&:has(.single-container) {
 				display: block;
+				background-color: var(--primary-bg-color);
 			}
 		}
 
@@ -172,35 +173,36 @@
 			padding-top: 10mm;
 			background-color: var(--primary-bg-color);
 			color: var(--primary-text-color);
+		}
 
-			.primary-content-intro {
-				font-size: 8mm;
-				color: var(--primary-text-color);
-			}
+		.primary-content-intro {
+			font-size: 8mm;
+			color: var(--primary-text-color);
+		}
 
-			.primary-content-title {
-				font-size: 6mm;
-				font-weight: 500;
-			}
+		.primary-content-title {
+			font-size: 6mm;
+			font-weight: 500;
+		}
 
-			.primary-content-subtitle {
-				font-size: 4mm;
-				font-weight: 400;
-				margin-bottom: 3mm;
-				color: var(--primary-text-color);
-			}
+		.primary-content-subtitle {
+			font-size: 1.25em;
+			font-weight: 400;
+			margin-bottom: 3mm;
+			color: var(--primary-text-color);
+		}
 
-			.primary-content-other {
-				font-size: 3.5mm;
-				font-weight: 400;
-				color: var(--primary-text-color);
-			}
+		.primary-content-other {
+			font-size: 1.1em;
+			font-weight: 400;
+			color: var(--primary-text-color);
+			word-break: break-all;
+		}
 
-			.primary-content-summary {
-				margin-top: 5mm;
-				font-size: 5mm;
-				white-space: pre;
-			}
+		.primary-content-summary {
+			margin-top: 5mm;
+			font-size: 1.5em;
+			white-space: pre;
 		}
 
 		.photo {
@@ -214,7 +216,7 @@
 		.list-section {
 
 			.list-section-title {
-				font-size: 4mm;
+				font-size: 1.25em;
 				font-weight: bold;
 				text-transform: uppercase;
 				background-color: var(--theme-color);
@@ -239,7 +241,7 @@
 				list-style: circle;
 			}
 
-			&[list-section-type="fcv-skills"] {
+			&[data-list-section-type="fcv-skills"] {
 				ul {
 					padding-right: 3mm;
 				}
@@ -252,7 +254,7 @@
 
 		.segment-breaker {
 			text-transform: uppercase;
-			font-size: 5mm;
+			font-size: 1.5em;
 			font-weight: 700;
 			color: var(--theme-color);
 			margin-bottom: 5mm;
@@ -282,7 +284,7 @@
 					display: flex;
 					justify-content: space-between;
 					gap: 10mm;
-					font-size: 3.7mm;
+					font-size: 1.16em;
 					font-weight: 500;
 					color: #2f2f32;
 					margin-bottom: 2mm;
@@ -294,7 +296,7 @@
 				}
 
 				.work-experience-company {
-					font-size: 3.7mm;
+					font-size: 1.16em;
 				}
 			}
 		}
@@ -329,8 +331,37 @@
     }
 
 		.single-container {
+			padding: 10mm;
+
+			.primary-content-summary-content {
+				margin-bottom: 5mm;
+			}
+
+			&:has(.primary-content-summary-content) {
+				.photo {
+					margin-bottom: 0;
+				}
+			}
+
 			.single-container-content {
+				gap: 10mm;
 				display: flex;
+
+				&[data-single-type="experience"] {
+					flex-direction: var(--page-row);
+				}
+
+				&[data-single-type="intro"] {
+					margin-bottom: 5mm;
+					
+					.wider-content {
+						width: 100%;
+					}
+
+					.narrower-content:empty {
+						display: none;
+					}
+				}
 
 				.wider-content {
 					width: 130mm;
@@ -339,6 +370,18 @@
 				.narrower-content {
 					width: 80mm;
 				}
+			}
+		}
+
+		.icon {
+			color: var(--theme-color);
+			margin-right: 7px;
+			position: relative;
+			top: 0.1em;
+			
+			svg {
+				height: 1em !important;
+				width: 1em !important;
 			}
 		}
 
