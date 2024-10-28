@@ -162,7 +162,6 @@
 
       &:has(.single-container) {
 				display: block;
-				background-color: var(--primary-bg-color);
 			}
 		}
 
@@ -174,20 +173,23 @@
     .secondary {
       width: 30%;
       background-color: #111;
-      padding: 25px;
       box-sizing: border-box;
       
       .secondary-content {
         display: flex;
         flex-direction: column;
+        padding: 25px;
       }
     }
 
     .primary {
       width: 70%;
-      padding: 25px;
       box-sizing: border-box;
       background-color: #151515;
+
+      .primary-content {
+        padding: 25px;
+      }
     }
 
     /* Styling for profile photo */
