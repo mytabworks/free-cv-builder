@@ -12,6 +12,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffectMounted } from "@/hooks/use-effect-mounted";
 import { useNavigationBlocker } from "@/hooks/use-navigation-blocker";
 import { defaultCVData } from "@/constants/default-cv-data";
+import Image from "next/image";
 
 export function CVBuilder() {
   const [data, setData] = useState<TCVData>(() => {
@@ -71,7 +72,7 @@ export function CVBuilder() {
           >
             <header className="mb-5 flex items-center justify-between">
               <Link to="/">
-                <h1 className="text-lg md:text-2xl font-bold text-emerald-600">Free CV Builder</h1>
+                <Image src="/free-cv-builder-logo.png" height={48} width={255} alt="Free CV Builder Logo" className="h-12 w-auto" />
               </Link>
               <Button 
                 className="max-md:!flex hidden"

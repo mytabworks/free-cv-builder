@@ -1,6 +1,7 @@
 import { Link } from "@/components/link";
 import { LockKeyholeIcon } from "lucide-react";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Free CV Builder | Create CV Online for Free",
@@ -40,13 +41,15 @@ export const metadata: Metadata = {
 };
 
 export default function LandingPage() {
-  const mykofilink = "https://ko-fi.com/yourkofiusername"
+  const mykofilink = "https://ko-fi.com/mytabworks"
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-emerald-100 to-emerald-300">
       <header className="fixed top-0 left-0 right-0 z-10 flex justify-between items-center py-5 bg-white shadow-md">
         <div className="container mx-auto flex justify-between items-center px-4">
-          <Link to="/"><h1 className="text-lg md:text-2xl font-bold text-emerald-600">Free CV Builder</h1></Link>
+          <Link to="/">
+            <Image src="/free-cv-builder-logo.png" height={48} width={255} alt="Free CV Builder Logo" className="h-12 w-auto" />
+          </Link>
           <nav className="hidden md:flex items-center">
             <a href="#features" className="text-sm md:text-lg font-semibold text-emerald-500 hover:text-emerald-700 mx-2 md:mx-4">Features</a>
             <a href="#how-it-works" className="text-sm md:text-lg font-semibold text-emerald-500 hover:text-emerald-700 mx-2 md:mx-4">How it Works</a>
@@ -78,7 +81,7 @@ export default function LandingPage() {
         </section>
 
         {/* Privacy Emphasis Section */}
-        <section id="features" className="mt-12 md:mt-16 py-8 md:py-12 bg-white bg-opacity-70">
+        <section id="features" className="mt-12 md:mt-16 py-8 md:py-10 bg-white bg-opacity-70">
           <div className="container mx-auto px-4 md:px-8">
             <div className="text-center">
               <div className="flex justify-center mb-4">
@@ -96,7 +99,7 @@ export default function LandingPage() {
         </section>
 
         {/* How it Works Section */}
-        <section id="how-it-works" className="mt-1 text-center backdrop-blur-sm py-8 md:py-12">
+        <section id="how-it-works" className="text-center backdrop-blur-sm py-8 md:py-10">
           <div className="container mx-auto px-4 md:px-8">
             <h3 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-8">How It Works</h3>
             <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-3">
@@ -130,7 +133,7 @@ export default function LandingPage() {
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fadeIn">
             Enjoyed using the Free CV Builder?
           </h3>
-          <p className="text-base md:text-lg text-white mb-6 md:mb-8">Support my work and help keep this project running.</p>
+          <p className="text-base md:text-lg text-white mb-6 md:mb-8">Don't forget to buy me a Ko-Fi! to support my work and help keep this project running.</p>
           <a
             href={mykofilink}
             target="_blank"
