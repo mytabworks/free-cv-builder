@@ -80,35 +80,36 @@ export function CVSkillsField() {
     <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
 			<Accordion.Root type="single" defaultValue="default" collapsible className="w-full">
 				<Accordion.Item value="default" className="w-full">
-					<Accordion.Trigger className="flex justify-between items-center group/accordion w-full hover:no-underline flex-wrap">
-						<h2 className="text-xl">SKILLS</h2>
-						<div className="flex gap-5">
-							<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
-								<Switch
-									id="skill-split"
-									checked={skillSplit}
-									onCheckedChange={toggleSwitch('skillSplit')}
-								/>
-								<Label htmlFor="skill-split">Split Column</Label>
+					<Accordion.Trigger asChild className="flex justify-between items-center group/accordion w-full hover:no-underline flex-wrap">
+						<a href="#">
+							<h2 className="text-xl">SKILLS</h2>
+							<div className="flex gap-5">
+								<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
+									<Switch
+										id="skill-split"
+										checked={skillSplit}
+										onCheckedChange={toggleSwitch('skillSplit')}
+									/>
+									<Label htmlFor="skill-split">Split Column</Label>
+								</div>
+								<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
+									<Switch
+										id="show-ratings"
+										checked={showRatings}
+										onCheckedChange={toggleSwitch('showRatings')}
+									/>
+									<Label htmlFor="show-ratings">Show Ratings</Label>
+								</div>
+								<Button
+									type="button"
+									variant="secondary"
+									size="sm"
+									className="ml-2"
+								>
+									<ChevronDown className="group-[[data-state='open']]/accordion:rotate-180 h-4 w-4" />
+								</Button>
 							</div>
-							<div className="group-[[data-state='closed']]/accordion:hidden flex items-center space-x-2" onClick={(e) => e.stopPropagation()}>
-								<Switch
-									id="show-ratings"
-									checked={showRatings}
-									onCheckedChange={toggleSwitch('showRatings')}
-								/>
-								<Label htmlFor="show-ratings">Show Ratings</Label>
-							</div>
-							<Button
-								as="a"
-								type="button"
-								variant="secondary"
-								size="sm"
-								className="ml-2"
-							>
-								<ChevronDown className="group-[[data-state='open']]/accordion:rotate-180 h-4 w-4" />
-							</Button>
-						</div>
+						</a>
 					</Accordion.Trigger>
 					<Accordion.Content className="pt-3">
 						<form 
