@@ -36,6 +36,37 @@
 			/* -webkit-font-smoothing: antialiased; */
 			user-select: none;
 			-webkit-user-select: none;
+
+			&::-webkit-scrollbar {
+				height: 2px;
+				width: 2px;
+			}
+
+			&::-webkit-scrollbar-track {
+				border-radius: 5px;
+				background-color: #DFE9EB;
+			}
+
+			&::-webkit-scrollbar-track:hover {
+				background-color: #B8C0C2;
+			}
+
+			&::-webkit-scrollbar-track:active {
+				background-color: #B8C0C2;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				border-radius: 5px;
+				background-color: var(--theme-color);
+			}
+
+			&::-webkit-scrollbar-thumb:hover {
+				background-color: var(--theme-color);
+			}
+
+			&::-webkit-scrollbar-thumb:active {
+				background-color: var(--theme-color);
+			}
 		}
 
 		h1,
@@ -100,6 +131,7 @@
 			.page {
 				margin: 0;
 				box-shadow: none;
+				visibility: visible !important;
 
 				&::after,
 				&::before {
@@ -118,6 +150,7 @@
     .page {
       width: 210mm; /* A4 Width */
       height: 297mm; /* Height will be determined by content */
+			overflow: hidden;
       background-color: var(--primary-bg-color); /* White background for a clean look */
       margin: 0 auto; /* Center the page with a small bottom margin */
       border: 1px solid var(--secondary-text-color); /* Light grey border for a classic look */
@@ -128,7 +161,7 @@
 				margin-bottom: 5mm;
 			}
 
-      &:has(.single-container) {
+      &[data-page-type="single"] {
 				display: block;
 				background-color: var(--primary-bg-color);
 			}
@@ -139,7 +172,6 @@
       width: 30%; /* Width for left column */
       background-color: var(--secondary-bg-color); /* Light grey background for contrast */
       color: var(--secondary-text-color);
-      border-right: 1px solid var(--secondary-text-color); /* Divider between columns */
       box-sizing: border-box; /* Include padding in width */
 
       .secondary-content {
@@ -148,6 +180,14 @@
         padding: 20px; /* Padding for content */
       }
     }
+
+		.page[data-reverse="false"] .secondary {
+			border-right: 1px solid var(--secondary-text-color);
+		}
+
+		.page[data-reverse="true"] .secondary {
+			border-left: 1px solid var(--secondary-text-color);
+		}
 
     .primary {
       width: 70%; /* Width for right column */
@@ -304,6 +344,7 @@
 		.single-container {
 			padding: 10mm;
       color: var(--primary-text-color);
+			background-color: var(--primary-bg-color);
 
 			.primary-content-summary-content {
 				margin-bottom: 5mm;
