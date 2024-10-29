@@ -151,7 +151,9 @@ export function CVSettingsForm() {
 							/>
 						</div>
 					</div>
-					{data.template !== "cyberpunk" && (
+					{(["cyberpunk", "creative"].includes(data.template) === false 
+					|| (["creative"].includes(data.template) === true && data.displaySecondarySection === true))
+					&& (
 						<div className="flex gap-3">
 							<div className="flex-1">
 								<Label htmlFor="primaryBGColor">Primary Section BG Color</Label>
@@ -177,7 +179,7 @@ export function CVSettingsForm() {
 							</div>
 						</div>
 					)}
-					{data.displaySecondarySection && data.template !== "cyberpunk" && (
+					{data.displaySecondarySection && ["cyberpunk", "creative"].includes(data.template) === false && (
 						<div className="flex gap-3">
 							<div className="flex-1">
 								<Label htmlFor="secondaryBGColor">Secondary Section BG Color</Label>
