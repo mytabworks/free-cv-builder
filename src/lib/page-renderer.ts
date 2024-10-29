@@ -41,15 +41,25 @@ export interface PageData {
 }
 
 export class PageRenderer {
+  private reverse: boolean;
   private displaySecondarySection: boolean;
   private maxHeight: number;
   private container: HTMLElement | null;
   private DOM: Document;
 
-  constructor(DOM: Document, { 
-    maxHeight = A4_HEIGHT,
-    displaySecondarySection = true
-  }: { maxHeight?: number, displaySecondarySection?: boolean } = {}) {
+  constructor(
+    DOM: Document, 
+    { 
+      maxHeight = A4_HEIGHT,
+      displaySecondarySection = true,
+      reverse = false
+    }: { 
+      maxHeight?: number, 
+      displaySecondarySection?: boolean ,
+      reverse?: boolean
+    } = {}
+  ) {
+    this.reverse = reverse;
     this.displaySecondarySection = displaySecondarySection;
     this.maxHeight = maxHeight;
     this.container = DOM.getElementById('container');
@@ -79,6 +89,8 @@ export class PageRenderer {
 
     pageElement = this.createElement('div', 'page');
     pageElement.setAttribute('data-page', pageNum.toString());
+    pageElement.setAttribute('data-page-type', this.displaySecondarySection ? 'double' : 'single');
+    pageElement.setAttribute('data-reverse', this.reverse.toString());
 
     this.container?.appendChild(pageElement);
 
