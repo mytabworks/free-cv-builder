@@ -131,6 +131,7 @@
 			.page {
 				margin: 0;
 				box-shadow: none;
+				visibility: visible !important;
 
 				&::after,
 				&::before {
@@ -148,6 +149,7 @@
     .page {
       width: 210mm;
       height: 297mm;
+			overflow: hidden;
       display: flex;
       flex-direction: var(--page-row);
       background-color: #0d0d0d;
@@ -160,7 +162,7 @@
 				margin-bottom: 5mm;
 			}
 
-      &:has(.single-container) {
+      &[data-page-type="single"] {
 				display: block;
 			}
 		}
@@ -343,30 +345,6 @@
       color: var(--primary-text-color);;
       padding: 4px 0;
       border-bottom: 1px solid #2d2d2d;
-    }
-
-    /* Buttons or Contact Info */
-    .contact-buttons {
-      display: flex;
-      flex-direction: column;
-      margin-top: 30px;
-    }
-
-    .contact-buttons a {
-      display: inline-block;
-      padding: 10px 15px;
-      margin-bottom: 10px;
-      font-size: 14px;
-      text-decoration: none;
-      color: #0ff;
-      background-color: var(--theme-color);
-      border-radius: 5px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(255, 0, 124, 0.7);
-    }
-
-    .contact-buttons a:hover {
-      background-color: #ff4da6;
     }
 
     .skill-name {
