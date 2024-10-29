@@ -31,7 +31,13 @@ export function CVPreviewPanel() {
 	const handleFrameRender = () => {
     if(!ready || !ref.current?.contentWindow?.document) return;
 
-		const renderer = new PageRenderer(ref.current?.contentWindow?.document, { displaySecondarySection: data.displaySecondarySection })
+		const renderer = new PageRenderer(
+			ref.current?.contentWindow?.document, 
+			{ 
+				displaySecondarySection: data.displaySecondarySection,
+				reverse: data.reverse
+			}
+		)
 
 		const collection: PageData = {
 			name: data.name,
@@ -93,6 +99,16 @@ export function CVPreviewPanel() {
   }
 
 	useEffect(handleFrameRender, [data, ready]);
+
+	const handleReAlignmentAfterFontAndTemplateChange = () => {
+		const cleanup = setTimeout(handleFrameRender, 2000)
+
+		return () => {
+			clearTimeout(cleanup)
+		}
+	}
+
+	useEffect(handleReAlignmentAfterFontAndTemplateChange, [data.template, data.font]);
 
 	const [startScalingDown, setStartScalingDown] = useState(false)
 
