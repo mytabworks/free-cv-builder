@@ -179,7 +179,7 @@ export function CVSettingsForm() {
 							</div>
 						</div>
 					)}
-					{data.displaySecondarySection && ["cyberpunk", "creative"].includes(data.template) === false && (
+					{data.displaySecondarySection && ["cyberpunk", "creative", "flatdesign"].includes(data.template) === false && (
 						<div className="flex gap-3">
 							<div className="flex-1">
 								<Label htmlFor="secondaryBGColor">Secondary Section BG Color</Label>

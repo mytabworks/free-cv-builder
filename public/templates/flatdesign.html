@@ -10,11 +10,16 @@
 			--text-color: #5f5f62;
 			--text-font: 'Arial';
 			--text-font-size: 13px;
-			--primary-text-color: #5f5f62;
-			--secondary-text-color: #5f5f62;
+			--primary-text-color: var(--text-color);
+			--secondary-text-color: var(--text-color);
 			--secondary-bg-color: #f0f0f0;
 			--primary-bg-color: #f0f0f0;
-			--photo-radius: 50%;
+      --photo-radius: 50%;
+      --photo-size: 80%;
+			--page-row: row;
+			--skill-rating-height: 8px;
+			--skill-rating-radius: 5px;
+			--skill-rating-track-color: #f7fafc;
 		}
 
 		* {
@@ -31,6 +36,37 @@
 			/* -webkit-font-smoothing: antialiased; */
 			user-select: none;
 			-webkit-user-select: none;
+
+			&::-webkit-scrollbar {
+				height: 2px;
+				width: 2px;
+			}
+
+			&::-webkit-scrollbar-track {
+				border-radius: 5px;
+				background-color: #DFE9EB;
+			}
+
+			&::-webkit-scrollbar-track:hover {
+				background-color: #B8C0C2;
+			}
+
+			&::-webkit-scrollbar-track:active {
+				background-color: #B8C0C2;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				border-radius: 5px;
+				background-color: var(--theme-color);
+			}
+
+			&::-webkit-scrollbar-thumb:hover {
+				background-color: var(--theme-color);
+			}
+
+			&::-webkit-scrollbar-thumb:active {
+				background-color: var(--theme-color);
+			}
 		}
 
 		h1,
@@ -95,6 +131,7 @@
 			.page {
 				margin: 0;
 				box-shadow: none;
+				visibility: visible !important;
 
 				&::after,
 				&::before {
@@ -111,58 +148,62 @@
 	<style>
 		/* General page layout */
 		.page {
-			width: 210mm;
-			height: 297mm;
-			display: flex;
-			flex-direction: row;
-			background-color: #f9f9f9;
-			color: #333;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-			box-sizing: border-box;
-			margin: 0 auto 5mm; /* Center the page with a bottom margin */
-		}
+      width: 210mm; /* A4 Width */
+      height: 297mm; /* Height will be determined by content */
+			overflow: hidden;
+      background-color: var(--primary-bg-color); /* White background for a clean look */
+      margin: 0 auto; /* Center the page with a small bottom margin */
+      display: flex;
+      flex-direction: var(--page-row);
 
-		.page:last-child {
-      margin-bottom: 0;
+      &:not(:last-child) {
+				margin-bottom: 5mm;
+			}
+
+      &[data-page-type="single"] {
+				display: block;
+				background-color: var(--primary-bg-color);
+			}
     }
 
 		/* Layout for secondary (left) and primary (right) sections */
 		.secondary {
-			width: 30%;
+			width: 35%;
 			background-color: var(--theme-color);
-			color: white;
-			padding: 20px;
-			box-sizing: border-box;
-
+			color: #fff;
+			
 			.secondary-content {
 				display: flex;
 				flex-direction: column;
+				padding: 10mm 5.5mm;
 			}
 		}
 
 		.primary {
-			width: 70%;
-			padding: 20px;
-			box-sizing: border-box;
+			width: 65%;
+			
+			.primary-content {
+				padding: 10mm 5.5mm;
+			}
 		}
 
 		/* Styling the profile photo */
 		.photo {
-			width: 175px;
-			height: 175px;
+			width: var(--photo-size);
+			aspect-ratio: 1;
 			border-radius: var(--photo-radius);
-			border: 4px solid white;
+			border: 4px solid #fff;
 			margin: 0 auto 20px;
 			object-fit: cover;
 		}
 
 		/* Styling for the list sections (skills, education) */
 		.list-section {
-			margin-bottom: 40px;
+			margin-bottom: 20px;
 		}
 
 		.list-section-title {
-			font-size: 16px;
+			font-size: 1.23em;
 			font-weight: 600;
 			border-bottom: 2px solid #FFF;
 			padding-bottom: 5px;
@@ -175,7 +216,7 @@
 		}
 
 		.list-section-content li {
-			font-size: 14px;
+			font-size: 1.1em;
 			padding: 4px 0;
 			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 			text-align: left;
@@ -183,48 +224,48 @@
 
 		/* Primary content (name, contact, summary) */
 		.primary-content-intro {
-			font-size: 28px;
+			font-size: 2.2em;
 			font-weight: 700;
 			margin-bottom: 5px;
-			color: var(--theme-color);
+
 		}
 
 		.primary-content-title {
-			font-size: 18px;
-			margin-bottom: 5px;
-			color: #555;
-		}
-
-		.primary-content-subtitle {
-			font-size: 16px;
-			color: #888;
-			margin-bottom: 20px;
-		}
-
-		.primary-content-summary {
-			font-size: 18px;
-			font-weight: bold;
+			font-size: 1.4em;
 			margin-bottom: 10px;
 			color: var(--theme-color);
 		}
 
+		.primary-content-subtitle {
+			font-size: 1.23em;
+			margin-bottom: 10px;
+			color: var(--primary-text-color);
+		}
+
+		.primary-content-summary {
+			font-size: 1.4em;
+			font-weight: bold;
+			margin: 15px 0 10px;
+			color: var(--theme-color);
+		}
+
 		.primary-content-summary-content {
-			font-size: 14px;
+			font-size: 1.1em;
 			color: #444;
 			line-height: 1.6;
-			margin-bottom: 20px;
+			margin-bottom: 15px;
 		}
 
 		/* Work experience section */
 		.segment-breaker {
-			font-size: 18px;
+			font-size: 1.4em;
 			font-weight: bold;
 			color: var(--theme-color);
-			margin: 30px 0 20px;
-		}
+			margin-bottom: 20px;
 
-		.work-experience-section {
-			margin-top: 10px;
+			&:not(:first-child) {
+				margin-top: 20px;
+			}
 		}
 
 		.work-experience {
@@ -232,16 +273,20 @@
 		}
 
 		.work-experience-position {
-			font-size: 16px;
+			font-size: 1.23em;
 			font-weight: bold;
 			display: flex;
 			justify-content: space-between;
-			color: #333;
+			color: var(--primary-text-color);
 		}
 
+		.work-experience-position-year {
+      white-space: pre; /* Preserve line breaks */
+    }
+
 		.work-experience-company {
-			font-size: 14px;
-			color: #666;
+			font-size: 1.1em;
+			color: var(--theme-color);
 			margin-bottom: 10px;
 		}
 
@@ -251,19 +296,24 @@
 		}
 
 		.work-experience-content li {
-			font-size: 14px;
-			color: #555;
-			padding: 4px 0;
-			border-bottom: 1px solid #eee;
+			font-size: 1.1em;
+			color: var(--primary-text-color);
+			padding: 4px 0 0;
+
+			&::after {
+				content: "";
+				opacity: 0.05;
+				margin-top: 4px;
+				border-bottom: 1px solid var(--primary-text-color);
+				display: block;
+        width: 100%;
+			}
 		}
 
 		/* Secondary Section Items (Skills & Education) */
-		.secondary-content {
-			margin-top: 20px;
-		}
 
 		.secondary h3 {
-			font-size: 16px;
+			font-size: 1.23em;
 			color: #FFF;
 			margin-bottom: 15px;
 		}
@@ -275,38 +325,157 @@
 
 		.secondary li {
 			padding: 8px 0;
-			font-size: 14px;
-			color: white;
+			font-size: 1.1em;
+			color: #FFF;
 			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 		}
 
-		/* Skill rating progress bar */
-		.skill-progress {
-			position: relative;
-			width: 100%;
-			height: 8px;
-			background-color: rgba(255, 255, 255, 0.2);
-			border-radius: 5px;
-			overflow: hidden;
-		}
-
-		.skill-progress-bar {
-			height: 100%;
-			background-color: #3b82f6;
-			border-radius: 5px;
-		}
-
 		.skill-name {
-			margin-bottom: 5px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			&:not(.skill-block) {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.skill-progress {
+					width: 40%;
+				}
+			}
+
+			.skill-progress {
+				position: relative;
+				height: var(--skill-rating-height);
+				background-color: var(--skill-rating-track-color);
+				border-radius: var(--skill-rating-radius);
+				overflow: hidden;
+	
+				.skill-progress-bar {
+					height: 100%;
+					background-color: var(--theme-color);
+					border-radius: var(--skill-rating-radius);
+					display: flex;
+					justify-content: center;
+					color: #fff;
+					mix-blend-mode: color-burn;
+				}
+			}
+    }
+
+		.single-container {
+
+			&:has(.primary-content-summary-content) {
+				.photo {
+					margin-bottom: 0;
+				}
+			}
+
+			.single-container-content {
+				gap: 10mm;
+				display: flex;
+				padding: 10mm 10mm 0;
+
+				&:not(:first-child) {
+					padding: 0 10mm 10mm;
+				}
+
+				&[data-single-type="experience"] {
+					padding-bottom: 10mm;
+					flex-direction: var(--page-row);
+
+					.work-experience-content {
+						li {
+							&::after {
+								opacity: 0;
+							}
+						}
+					}
+
+					.list-section-title {
+						border-color: var(--primary-text-color);
+					}
+
+					.list-section-content {
+						li {
+							color: var(--primary-text-color);
+							border: 0;
+
+							.skill-progress-bar {
+								mix-blend-mode: unset;
+							}
+						}
+					}
+				}
+
+				&[data-single-type="intro"] {
+					background-color: var(--theme-color);
+					padding-bottom: 7mm;
+					
+					.wider-content {
+						width: 100%;
+
+						* {
+							color: #fff !important;
+						}
+					}
+
+					.narrower-content:empty {
+						display: none;
+					}
+				}
+
+				.wider-content {
+					width: 130mm;
+				}
+
+				.narrower-content {
+					width: 80mm;
+				}
+			}
+
+			.primary-content-summary {
+				margin: 15px 10mm 10px;
+			}
+
+			.primary-content-summary-content {
+				margin: 0 10mm 5mm;
+				color: var(--primary-text-color);
+			}
 		}
 
-		.skill-percentage {
-			font-size: 12px;
-			color: #9ca3af;
-			margin-left: 5px;
+		.icon {
+			color: var(--theme-color);
+			margin-right: 7px;
+			position: relative;
+			top: 0.1em;
+			
+			svg {
+				height: 1em !important;
+				width: 1em !important;
+			}
+		}
+
+    .list-section {
+			&:not(:has(.list-section-title)) {
+				.list-section-content {
+					padding-top: 0;
+				}
+			}
+    }
+
+    .list-section-content {
+      display: flex;
+      justify-content: center;
+      gap: 5mm;
+
+      > ul {
+        flex: 1;
+      }
+    }
+
+    .primary-content-other {
+			font-size: 1em;
+			font-weight: 400;
+			color: var(--primary-text-color);
+			word-break: break-all;
 		}
 	</style>
 </head>
