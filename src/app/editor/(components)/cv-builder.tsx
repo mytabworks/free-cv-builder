@@ -55,7 +55,13 @@ export function CVBuilder() {
     setDirty(true)
   }, [data])
 
-  useNavigationBlocker(dirty)
+  useEffect(() => {
+    if(data.name) {
+      document.title = data.name!.replaceAll(' ', '-').toLowerCase() + '-cv'
+    }
+  }, [data.name])
+
+  // useNavigationBlocker(dirty)
 
   return (
     <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>

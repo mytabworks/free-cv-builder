@@ -336,7 +336,7 @@ export class PageRenderer {
   }
 
   private renderIntro(pageElement: HTMLElement, data: PageData): void {
-
+    this.DOM.title = data.name!.replaceAll(' ', '-').toLowerCase() + '-cv'
     const renderGeneric = (element: HTMLElement, data: PageData) => {
       if (data.name) this.createElement('h2', 'primary-content-intro', data.name, element);
       if (data.title) this.createElement('h2', 'primary-content-title', data.title, element);
