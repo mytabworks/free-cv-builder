@@ -152,7 +152,6 @@
       width: 210mm;
       height: 297mm;
       overflow: hidden;
-      background-color: #f9f9f9; /* Light background for contrast */
       margin: 0 auto; /* Center the page with a small bottom margin */
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       display: flex;
@@ -300,9 +299,16 @@
     }
 
     .work-experience-position {
-      font-size: 1.2em;
+      font-size: 1.23em;
       font-weight: bold;
       color: var(--primary-text-color);
+			display: flex;
+      justify-content: space-between;
+      gap: 10mm;
+    }
+
+		.work-experience-position-year {
+      white-space: pre; /* Preserve line breaks */
     }
 
     .work-experience-company {
