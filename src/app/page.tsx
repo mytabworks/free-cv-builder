@@ -1,13 +1,13 @@
 import { Link } from "@/components/link";
 import { buymeacoffee } from "@/constants/variables";
-import { LockKeyholeIcon } from "lucide-react";
+import { LockKeyholeIcon, PencilRulerIcon } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Free CV Builder | Create CV Online for Free",
   description: "Build your professional CV online for free. No sign-up required. Fast, easy, and secure CV builder with customizable templates.",
-  keywords: "Free CV Builder, online CV builder, no sign-up CV builder, free resume builder, create CV for free",
+  keywords: "Free CV Builder, online CV builder, no sign-up CV builder, free resume builder, create CV for free, free CV maker, free resume maker",
   robots: "index, follow",
   openGraph: {
     type: "website",
@@ -74,9 +74,9 @@ export default function LandingPage() {
           </p>
           <Link
             to="/editor"
-            className="bg-neutral-900 text-white py-3 px-6 md:py-3 md:px-6 rounded-full text-sm md:text-lg hover:bg-neutral-800 transition-all duration-200"
+            className="bg-neutral-900 text-white py-3 px-6 md:py-3 md:px-6 rounded-full text-sm md:text-lg hover:bg-neutral-800 transition-all duration-200 inline-flex items-center gap-2"
           >
-            <b>Create Your CV Now </b>
+            <b>Create Your CV Now</b><PencilRulerIcon className="inline size-4 sm:size-6"/>
           </Link>
         </section>
 
@@ -133,7 +133,7 @@ export default function LandingPage() {
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fadeIn">
             Enjoyed using the Free CV Builder?
           </h3>
-          <p className="text-base md:text-lg text-white mb-6 md:mb-8">Don't forget to buy me a Ko-Fi! to support my work and help keep this project running.</p>
+          <p className="text-base md:text-lg text-white mb-6 md:mb-8">If you got hired using this tool, consider buying me a coffee to support my work and keep this project running. Cheers!</p>
           <a
             href={buymeacoffee}
             target="_blank"
