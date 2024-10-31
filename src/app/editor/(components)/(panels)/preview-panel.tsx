@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { DownloadIcon } from "lucide-react";
 import { PageData, PageRenderer } from "@/lib/page-renderer";
 import { isIOSMobile, isMobile, isSafari } from "@/lib/is-mobile";
+import { buymeacoffee } from "@/constants/variables";
 
 export function CVPreviewPanel() {
 	const { data } = useCVBuilder()
@@ -177,12 +178,12 @@ export function CVPreviewPanel() {
 		<div className="h-[calc(100%-40px)] md:h-full flex flex-col px-3 md:px-2">
 			<div className="flex justify-between flex-wrap mb-3 mx-auto w-full max-w-[210mm] gap-3">
 				<a
-					href="https://ko-fi.com/yourkofiusername"
+					href={buymeacoffee}
 					target="_blank"
 					rel="noopener noreferrer"
 					className="bg-white text-emerald-600 py-2.5 px-5 md:py-1 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-gray-200 transition-all duration-200"
 				>
-					Buy me a Ko-Fi ☕
+					Buy me a Coffee ☕
 				</a>
 				<Button onClick={handleDownload}><DownloadIcon /> Download PDF</Button>
 			</div>

@@ -1,0 +1,1 @@
+export const buymeacoffee = "https://buymeacoffee.com/mytabworks";

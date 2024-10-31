@@ -1,4 +1,5 @@
 import { Link } from "@/components/link";
+import { buymeacoffee } from "@/constants/variables";
 import { LockKeyholeIcon } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -41,7 +42,6 @@ export const metadata: Metadata = {
 };
 
 export default function LandingPage() {
-  const mykofilink = "https://ko-fi.com/mytabworks"
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-emerald-100 to-emerald-300">
@@ -54,12 +54,12 @@ export default function LandingPage() {
             <a href="#features" className="text-sm md:text-lg font-semibold text-emerald-500 hover:text-emerald-700 mx-2 md:mx-4">Features</a>
             <a href="#how-it-works" className="text-sm md:text-lg font-semibold text-emerald-500 hover:text-emerald-700 mx-2 md:mx-4">How it Works</a>
             <a
-              href={mykofilink}
+              href={buymeacoffee}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-600 text-white py-2 px-2 md:py-2 md:px-6 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-emerald-700 transition-all"
             >
-              Buy me a Ko-Fi ☕
+              Buy me a Coffee ☕
             </a>
           </nav>
         </div>
@@ -135,12 +135,12 @@ export default function LandingPage() {
           </h3>
           <p className="text-base md:text-lg text-white mb-6 md:mb-8">Don't forget to buy me a Ko-Fi! to support my work and help keep this project running.</p>
           <a
-            href={mykofilink}
+            href={buymeacoffee}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white text-emerald-600 py-3 px-6 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-gray-200 transition-all duration-200"
           >
-            Buy me a Ko-Fi ☕
+            Buy me a Coffee ☕
           </a>
         </section>
       </main>
