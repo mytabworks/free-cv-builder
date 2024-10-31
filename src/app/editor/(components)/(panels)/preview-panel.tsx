@@ -3,6 +3,7 @@ import { useCVBuilder } from "../cv-builder-context";
 import { Button } from "@/components/ui/button";
 import { DownloadIcon } from "lucide-react";
 import { PageData, PageRenderer } from "@/lib/page-renderer";
+import { isIOSMobile, isMobile, isSafari } from "@/lib/is-mobile";
 
 export function CVPreviewPanel() {
 	const { data } = useCVBuilder()
@@ -11,6 +12,18 @@ export function CVPreviewPanel() {
 	const ref = useRef<HTMLIFrameElement>(null);
 
 	const handleDownload = () => {
+		if(isIOSMobile()) {
+			return alert("iOS Devices is not supported yet, please use a desktop browser Chrome/Edge/Firefox/Opera or android devices with updated Chrome/Edge")
+		}
+
+		if(isMobile()) {
+			alert("Please set Paper Size to (A4 / ISO A4) in the settings")
+		}
+
+		if(isSafari()) {
+			alert("Please consider using a other desktop browser like Chrome/Edge/Firefox/Opera for better output")
+		}
+
 		ref.current?.contentWindow?.print();
 	}
 
