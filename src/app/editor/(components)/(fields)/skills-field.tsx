@@ -13,6 +13,7 @@ import { Slider } from "@/components/ui/slider";
 import * as Accordion from "@radix-ui/react-accordion";
 import { randomUUID } from "@/lib/random-UUID";
 import { useSensorDefault } from "@/hooks/use-sensor-default";
+import { skillOptions } from "@/constants/skills-options";
 
 export function CVSkillsField() {
   const { data: { skills, showRatings, skillSplit }, setData } = useCVBuilder()
@@ -125,7 +126,13 @@ export function CVSkillsField() {
 								placeholder="Add a skill (e.g. MS Excel)"
 								className="mr-2"
 								required
+								list="skill-auto"
 							/>
+							<datalist id="skill-auto">
+								{skillOptions.map((each) => (
+									<option value={each}>{each}</option>
+								))}
+							</datalist>
 							<Button type="submit">Add</Button>
 						</form>
 						<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
