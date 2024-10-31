@@ -19,7 +19,7 @@ export function CVPreviewPanel() {
 		}
 
 		if(isMobile()) {
-			alert("Please set Paper Size to (A4 / ISO A4) in the settings")
+			alert("Note! set Paper Size to (A4 / ISO A4) in the next pop-up print settings")
 		}
 
 		if(isSafari()) {
