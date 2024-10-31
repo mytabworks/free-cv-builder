@@ -19,7 +19,7 @@ export function CVPreviewPanel() {
 		}
 
 		if(isMobile()) {
-			alert("Note! please set Paper Size to (A4 / ISO A4) in the next pop-up print settings for better output")
+			alert("Note! In the next pop-up, please set Paper Size to (A4 / ISO A4), and change Printer to (Save as PDF)")
 		}
 
 		if(isSafari()) {
