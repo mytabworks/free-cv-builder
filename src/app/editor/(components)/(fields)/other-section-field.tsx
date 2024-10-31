@@ -134,7 +134,7 @@ export function CVOtherSectionField() {
 			<h2 className="text-xl mb-3">OTHER SECTION</h2>
 			<ModalConfirm
 				show={remove !== null}
-				title={(<div className="flex"><Trash2 className="mr-1" /> Remove {remove ? otherSections.find(section => section.id !== remove)?.title || 'Section' : ''}?</div>)}
+				title={(<div className="flex"><Trash2 className="mr-1" /> Remove {remove ? otherSections.find(section => section.id === remove)?.title || 'Section' : ''}</div>)}
 				message="Are you sure you want to continue?"
 				onConfirm={(confirm) => {
 					if (confirm) {
