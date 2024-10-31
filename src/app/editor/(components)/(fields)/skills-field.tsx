@@ -69,8 +69,8 @@ export function CVSkillsField() {
     if (active.id !== over?.id) {
 
       const items = skills
-      const oldIndex = items.findIndex((item: any) => item.id === active.id);
-      const newIndex = items.findIndex((item: any) => item.id === over?.id);
+      const oldIndex = items.findIndex((item: TSkill) => item.id === active.id);
+      const newIndex = items.findIndex((item: TSkill) => item.id === over?.id);
 
       const newItems = arrayMove(items, oldIndex, newIndex);
       setData(prev => ({ ...prev, skills: newItems }));

@@ -6,7 +6,7 @@ export type TSkill = {
 	rating: number;
 }
 
-export type TWOtherSection = {
+export type TOtherSection = {
 	id: string;
 	title: string;
 	keyPoints: { id: string; text: string }[];
@@ -14,8 +14,8 @@ export type TWOtherSection = {
 
 export type TWorkExperience = {
 	id: string;
-	startDate: any;
-	endDate: any;
+	startDate: string;
+	endDate: string;
 	currentRole: boolean;
 	showMonth: boolean;
 	jobTitle: string;
@@ -33,7 +33,7 @@ export type TCVData = {
 	linkedin: string;
 	summary: string;
 	skills: TSkill[];
-	otherSections: TWOtherSection[];
+	otherSections: TOtherSection[];
 	workExperiences: TWorkExperience[];
 	photo: string | null;
 	font: string;

@@ -10,7 +10,6 @@ import { CVResizer } from "./cv-resizer";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffectMounted } from "@/hooks/use-effect-mounted";
-import { useNavigationBlocker } from "@/hooks/use-navigation-blocker";
 import { defaultCVData } from "@/constants/default-cv-data";
 import Image from "next/image";
 

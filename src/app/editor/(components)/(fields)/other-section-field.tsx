@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label"
 import { Trash2, GripVertical, Plus, ChevronDown } from "lucide-react"
 import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core"
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import { TWOtherSection, useCVBuilder } from "../cv-builder-context";
+import { TOtherSection, useCVBuilder } from "../cv-builder-context";
 import { SortableItem } from "@/components/sortable-item";
 import { Card, CardContent } from "@/components/ui/card";
 import { ModalConfirm } from "@/components/ui/modal"
@@ -17,7 +17,7 @@ export function CVOtherSectionField() {
   const { data: { otherSections }, setData } = useCVBuilder()
 
 	const addOtherSection = () => {
-    const newSection: TWOtherSection = {
+    const newSection: TOtherSection = {
       id: randomUUID(),
       title: '',
       keyPoints: [],
@@ -29,7 +29,7 @@ export function CVOtherSectionField() {
     }))
   }
 
-  const updateOtherSection = (id: string, field: keyof TWOtherSection, value: string | boolean) => {
+  const updateOtherSection = (id: string, field: keyof TOtherSection, value: string | boolean) => {
     setData(prev => ({
       ...prev,
       otherSections: prev.otherSections.map(section =>
@@ -88,8 +88,8 @@ export function CVOtherSectionField() {
     if (active.id !== over?.id) {
 
       const items = otherSections
-      const oldIndex = items.findIndex((item: any) => item.id === active.id);
-      const newIndex = items.findIndex((item: any) => item.id === over?.id);
+      const oldIndex = items.findIndex((item: TOtherSection) => item.id === active.id);
+      const newIndex = items.findIndex((item: TOtherSection) => item.id === over?.id);
 
       const newItems = arrayMove(items, oldIndex, newIndex);
       setData(prev => ({ ...prev, otherSections: newItems }));
@@ -109,8 +109,8 @@ export function CVOtherSectionField() {
 		const section = otherSections.find(section => section.id === sectionId)
 
 		const items = section?.keyPoints || []
-		const oldIndex = items.findIndex((item: any) => item.id === activePointId);
-		const newIndex = items.findIndex((item: any) => item.id === overPointId);
+		const oldIndex = items.findIndex((item: TOtherSection["keyPoints"][number]) => item.id === activePointId);
+		const newIndex = items.findIndex((item: TOtherSection["keyPoints"][number]) => item.id === overPointId);
 
 		const newItems = arrayMove(items, oldIndex, newIndex);
 
@@ -127,7 +127,7 @@ export function CVOtherSectionField() {
 
 	const [remove, setRemove] = useState<string | null>(null);
 
-	const preventDragConflict = (e: any) => e.stopPropagation()
+	const preventDragConflict = (e: React.MouseEvent | React.TouchEvent | React.KeyboardEvent) => e.stopPropagation()
 
   return (
     <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">

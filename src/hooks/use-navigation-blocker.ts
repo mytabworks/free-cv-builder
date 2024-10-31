@@ -1,8 +1,6 @@
-import { useRouter } from "next/navigation";
 import { useEffect } from 'react';
 
 export function useNavigationBlocker(shouldBlock: boolean) {
-  const router = useRouter();
 
   useEffect(() => {
     if (!shouldBlock) return;

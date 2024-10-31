@@ -7,6 +7,7 @@ import { CVSkillsField } from "../(fields)/skills-field"
 import { CVWorkExperienceField } from "../(fields)/work-experience-field"
 import { CVOtherSectionField } from "../(fields)/other-section-field"
 import { FieldsetAccordion } from "@/components/fieldset-accordion"
+import Image from "next/image"
 
 export function CVInformationForm() {
 	const { data, setData } = useCVBuilder()
@@ -16,7 +17,7 @@ export function CVInformationForm() {
 		if (file) {
 			const reader = new FileReader();
 			reader.onloadend = () => {
-				const img = new Image();
+				const img = new window.Image();
 				img.onload = () => {
 					const targetWidth = 500; // Desired width
 					const targetHeight = 500; // Desired height
@@ -58,7 +59,7 @@ export function CVInformationForm() {
 									<input type="file" id="photo" onChange={handlePhotoUpload} accept="image/*" className="z-[1px] absolute opacity-0 w-full h-full cursor-pointer inset-0" />
 									<label htmlFor="photo" className="flex flex-col p-3 items-center justify-center w-full h-32 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-gray-500">
 										{data.photo ? (
-											<img src={data.photo} className="max-w-full max-h-full object-cover rounded-lg" />
+											<Image src={data.photo} width={50} height={50} alt="CV Profile" className="max-w-full max-h-full object-cover rounded-lg" />
 										) : (
 											<p className="text-gray-600 text-sm">Drag and drop a photo here or click to select</p>
 										)}

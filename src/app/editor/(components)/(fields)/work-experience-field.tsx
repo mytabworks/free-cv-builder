@@ -97,8 +97,8 @@ export function CVWorkExperienceField() {
     if (active.id !== over?.id) {
 
       const items = workExperiences
-      const oldIndex = items.findIndex((item: any) => item.id === active.id);
-      const newIndex = items.findIndex((item: any) => item.id === over?.id);
+      const oldIndex = items.findIndex((item: TWorkExperience) => item.id === active.id);
+      const newIndex = items.findIndex((item: TWorkExperience) => item.id === over?.id);
 
       const newItems = arrayMove(items, oldIndex, newIndex);
       setData(prev => ({ ...prev, workExperiences: newItems }));
@@ -118,8 +118,8 @@ export function CVWorkExperienceField() {
 		const experience = workExperiences.find(exp => exp.id === expId)
 
 		const items = experience?.keyPoints || []
-		const oldIndex = items.findIndex((item: any) => item.id === activePointId);
-		const newIndex = items.findIndex((item: any) => item.id === overPointId);
+		const oldIndex = items.findIndex((item: TWorkExperience["keyPoints"][number]) => item.id === activePointId);
+		const newIndex = items.findIndex((item: TWorkExperience["keyPoints"][number]) => item.id === overPointId);
 
 		const newItems = arrayMove(items, oldIndex, newIndex);
 
@@ -136,7 +136,7 @@ export function CVWorkExperienceField() {
 
 	const [remove, setRemove] = useState<string | null>(null);
 
-	const preventDragConflict = (e: any) => e.stopPropagation()
+	const preventDragConflict = (e: React.MouseEvent | React.TouchEvent | React.KeyboardEvent) => e.stopPropagation()
 
   return (
     <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">

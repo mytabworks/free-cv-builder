@@ -1,9 +1,9 @@
-export function downloadData(data: any, filename: string, type = 'application/json') {
+export function downloadData<P = unknown>(data: P, filename: string, type = 'application/json') {
   // 1. Convert JSON data to a string
   const jsonString = type === 'application/json' && typeof data === "object" ? JSON.stringify(data, null, 2) : data;
 
   // 2. Create a blob from the string
-  const blob = new Blob([jsonString], { type });
+  const blob = new Blob([jsonString as BlobPart], { type });
 
   // 3. Create a URL for the blob
   const url = URL.createObjectURL(blob);

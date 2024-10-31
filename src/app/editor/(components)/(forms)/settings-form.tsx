@@ -39,13 +39,13 @@ export function CVSettingsForm() {
 							className="flex flex-wrap @sm:flex-nowrap gap-3 items-center" 
 							onSubmit={(e) => {
 								e.preventDefault()
-								const file = (e as any).target?.[0]?.files[0]
+								const input = (e.target as HTMLFormElement)?.[0] as HTMLInputElement
+								const file = input?.files?.[0]
 								
 								if(file) {
 									const reader = new FileReader()
 									reader.onloadend = () => {
 										const imported = JSON.parse(reader.result as string)
-										console.log(imported)
 										setData(prev => ({ ...prev, ...imported }))
 									}
 									reader.readAsText(file)
