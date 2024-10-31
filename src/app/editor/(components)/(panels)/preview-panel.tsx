@@ -14,7 +14,8 @@ export function CVPreviewPanel() {
 
 	const handleDownload = () => {
 		if(isIOSMobile()) {
-			return alert("iOS Devices is not supported yet, please use a desktop browser Chrome/Edge/Firefox/Opera or android devices with updated Chrome/Edge")
+			alert("iOS Devices is not supported yet, please use a desktop browser Chrome/Edge/Firefox/Opera or android devices with updated Chrome/Edge")
+			return alert("You can export/download your CV-data to a JSON file, and then import the JSON file to use it in desktop/android browser Chrome/Edge")
 		}
 
 		if(isMobile()) {
@@ -23,6 +24,7 @@ export function CVPreviewPanel() {
 
 		if(isSafari()) {
 			alert("Please consider using a other desktop browser like Chrome/Edge/Firefox/Opera for better output")
+			alert("You can export/download your CV-data to a JSON file, and then import the JSON file to use it in other desktop browser like Chrome/Edge/Firefox/Opera")
 		}
 
 		ref.current?.contentWindow?.print();
