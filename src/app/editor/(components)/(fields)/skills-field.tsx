@@ -130,7 +130,7 @@ export function CVSkillsField() {
 							/>
 							<datalist id="skill-auto">
 								{skillOptions.map((each) => (
-									<option value={each}>{each}</option>
+									<option key={each} value={each}>{each}</option>
 								))}
 							</datalist>
 							<Button type="submit">Add</Button>
