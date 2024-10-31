@@ -10,10 +10,16 @@
 			--text-color: #5f5f62;
 			--text-font: 'Arial';
 			--text-font-size: 13px;
-			--primary-text-color: #5f5f62;
-			--secondary-text-color: #5f5f62;
+			--primary-text-color: var(--text-color);
+			--secondary-text-color: var(--text-color);
 			--secondary-bg-color: #f0f0f0;
 			--primary-bg-color: #f0f0f0;
+      --photo-radius: 50%;
+      --photo-size: 80%;
+			--page-row: row;
+			--skill-rating-height: 8px;
+			--skill-rating-radius: 5px;
+			--skill-rating-track-color: #f7fafc;
 		}
 
 		* {
@@ -30,6 +36,37 @@
 			/* -webkit-font-smoothing: antialiased; */
 			user-select: none;
 			-webkit-user-select: none;
+
+      &::-webkit-scrollbar {
+				height: 2px;
+				width: 2px;
+			}
+
+			&::-webkit-scrollbar-track {
+				border-radius: 5px;
+				background-color: #DFE9EB;
+			}
+
+			&::-webkit-scrollbar-track:hover {
+				background-color: #B8C0C2;
+			}
+
+			&::-webkit-scrollbar-track:active {
+				background-color: #B8C0C2;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				border-radius: 5px;
+				background-color: var(--theme-color);
+			}
+
+			&::-webkit-scrollbar-thumb:hover {
+				background-color: var(--theme-color);
+			}
+
+			&::-webkit-scrollbar-thumb:active {
+				background-color: var(--theme-color);
+			}
 		}
 
 		h1,
@@ -114,15 +151,21 @@
       width: 210mm;
       height: 297mm;
       display: flex;
-      flex-direction: row;
+      flex-direction: var(--page-row);
       background-color: #e0e0e0;
-      color: #333;
-      box-sizing: border-box;
-      padding: 5mm;
-      margin: 0 auto 5mm; /* Center the page with a bottom margin */
-      border-radius: 3mm;
+      color: var(--text-color);
+      margin: 0 auto; /* Center the page with a bottom margin */
+      border-radius: 1.5mm;
       gap: 5mm;
-      /* box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.7); */
+      overflow: hidden;
+
+      &:not(:last-child) {
+        margin-bottom: 5mm;
+      }
+
+      &[data-page-type="single"] {
+        display: block;
+      }
     }
 
     .page:last-child {
@@ -131,21 +174,21 @@
 
     /* Secondary (left column) and primary (right column) sections */
     .secondary {
-      width: 30%;
+      width: 35%;
       background-color: #e0e0e0;
-      padding: 25px 15px;
-      box-sizing: border-box;
-      border-radius: 20px;
-      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.7);
+      
+      .secondary-content {
+        padding: 10mm 2.5mm 10mm 10mm; /* Padding for content */
+      }
     }
 
     .primary {
-      width: 70%;
-      padding: 25px;
-      box-sizing: border-box;
+      width: 65%;
       background-color: #e0e0e0;
-      border-radius: 20px;
-      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.7);
+      
+      .primary-content {
+        padding: 10mm 10mm 10mm 2.5mm; /* Padding for content */
+      }
     }
 
     /* Secondary content */
@@ -156,9 +199,8 @@
 
     /* Styling for profile photo with neumorphism effect */
     .photo {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
+      width: var(--photo-size);
+      border-radius: var(--photo-radius);
       margin: 0 auto 20px;
       border: none;
       object-fit: cover;
@@ -168,11 +210,11 @@
 
     /* Sections (skills, education) */
     .list-section {
-      margin-bottom: 40px;
+      margin-bottom: 5mm;
     }
 
     .list-section-title {
-      font-size: 18px;
+      font-size: 1.4em;
       font-weight: bold;
       color: var(--theme-color);
       margin-bottom: 10px;
@@ -188,15 +230,14 @@
     }
 
     .list-section-content li {
-      font-size: 14px;
-      padding: 5px 0;
-      color: #555;
+      font-size: 1em;
+      padding: 6px 0;
       text-align: left;
     }
 
     /* Primary content (name, contact, summary) */
     .primary-content-intro {
-      font-size: 32px;
+      font-size: 2.3em;
       font-weight: 700;
       color: var(--theme-color);
       margin-bottom: 10px;
@@ -206,41 +247,47 @@
     }
 
     .primary-content-title {
-      font-size: 18px;
+      font-size: 1.4em;
       margin-bottom: 8px;
-      color: #777;
+      color: var(--text-color);
     }
 
     .primary-content-subtitle {
-      font-size: 16px;
-      color: #999;
-      margin-bottom: 25px;
+      font-size: 1.23em;
+      font-weight: 500;
+      color: var(--text-color);
+      margin-bottom: 8px;
     }
 
     .primary-content-summary {
-      font-size: 18px;
+      font-size: 1.4em;
       font-weight: bold;
       color: var(--theme-color);
-      margin-bottom: 15px;
+      margin: 20px 0 10px;
       letter-spacing: 1px;
+      text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7), -2px -2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .primary-content-summary-content {
-      font-size: 14px;
+      font-size: 1em;
       line-height: 1.6;
-      color: #666;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     /* Work experience section */
     .segment-breaker {
-      font-size: 18px;
+      font-size: 1.4em;
       font-weight: bold;
       color: var(--theme-color);
-      margin: 30px 0 20px;
       border-bottom: 2px solid rgba(0, 0, 0, 0.05);
       padding-bottom: 5px;
       letter-spacing: 1px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7), -2px -2px 5px rgba(0, 0, 0, 0.1);
+
+      &:not(:first-child) {
+				margin-top: 20px;
+			}
     }
 
     .work-experience-section {
@@ -252,16 +299,16 @@
     }
 
     .work-experience-position {
-      font-size: 16px;
+      font-size: 1.23em;
       font-weight: bold;
       display: flex;
       justify-content: space-between;
-      color: #555;
+      color: var(--text-color);
     }
 
     .work-experience-company {
-      font-size: 14px;
-      color: #777;
+      font-size: 1.1em;
+      color: var(--theme-color);
       margin-bottom: 10px;
     }
 
@@ -271,60 +318,129 @@
     }
 
     .work-experience-content li {
-      font-size: 14px;
-      color: #666;
-      padding: 8px 0;
+      font-size: 1em;
+      padding: 6px 0;
     }
 
-    /* Skill rating progress bar */
     .skill-name {
-      margin-bottom: 5px;
+			&:not(.skill-block) {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.skill-progress {
+					width: 40%;
+				}
+			}
+
+			.skill-progress {
+				position: relative;
+				height: var(--skill-rating-height);
+				background-color: var(--skill-rating-track-color);
+				border-radius: var(--skill-rating-radius);
+				overflow: hidden;
+	
+				.skill-progress-bar {
+					height: 100%;
+					background-color: var(--theme-color);
+					border-radius: var(--skill-rating-radius);
+					display: flex;
+					justify-content: center;
+					color: #fff;
+				}
+			}
+    }
+
+		.single-container {
+
+			&:has(.primary-content-summary-content) {
+				.photo {
+					margin-bottom: 0;
+				}
+			}
+
+			.single-container-content {
+				gap: 10mm;
+				display: flex;
+				padding: 10mm 10mm 0;
+
+				&:not(:first-child) {
+					padding: 0 10mm 10mm;
+				}
+
+				&[data-single-type="experience"] {
+					padding-bottom: 10mm;
+					flex-direction: var(--page-row);
+				}
+
+				&[data-single-type="intro"] {
+					padding-bottom: 5mm;
+
+					.wider-content {
+						width: 100%;
+					}
+
+					.narrower-content:empty {
+						display: none;
+					}
+				}
+
+				.wider-content {
+					width: 130mm;
+				}
+
+				.narrower-content {
+					width: 80mm;
+				}
+			}
+
+			.primary-content-summary {
+				margin: 0 10mm 10px;
+			}
+
+			.primary-content-summary-content {
+				margin: 0 10mm 10mm;
+				color: var(--text-color);
+			}
+		}
+
+		.icon {
+			color: var(--theme-color);
+			margin-right: 7px;
+			position: relative;
+			top: 0.1em;
+			
+			svg {
+				height: 1em !important;
+				width: 1em !important;
+			}
+		}
+
+    .list-section {
+			&:not(:has(.list-section-title)) {
+				.list-section-content {
+					padding-top: 0;
+				}
+			}
+    }
+
+    .list-section-content {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--theme-color);
+      justify-content: center;
+      gap: 5mm;
+
+      > ul {
+        flex: 1;
+      }
     }
 
-    .skill-progress {
-      position: relative;
-      width: 100%;
-      height: 8px;
-      background-color: #e0e0e0;
-      border-radius: 10px;
-      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1), inset -2px -2px 4px rgba(255, 255, 255, 0.7);
-      overflow: hidden;
-    }
-
-    .skill-progress-bar {
-      height: 100%;
-      background-color: #4caf50;
-      border-radius: 10px;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Buttons or Contact Info */
-    .contact-buttons {
-      display: flex;
-      flex-direction: column;
-      margin-top: 30px;
-    }
-
-    .contact-buttons a {
-      display: inline-block;
-      padding: 10px 15px;
-      margin-bottom: 10px;
-      font-size: 14px;
-      text-decoration: none;
-      color: #333;
-      background-color: #e0e0e0;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.7);
-    }
-
-    .contact-buttons a:hover {
-      background-color: #d0d0d0;
-    }
+    .primary-content-other {
+			font-size: 1em;
+			font-weight: 400;
+			color: var(--text-color);
+			word-break: break-all;
+		}
+	</style>
 	</style>
 </head>
 
