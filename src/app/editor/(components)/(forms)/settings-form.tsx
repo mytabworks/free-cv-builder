@@ -260,7 +260,7 @@ export function CVSettingsForm() {
 										})
 									)}
 								/>
-								<Label htmlFor="display-secondary-section">Hide Secondary Section</Label>
+								<Label htmlFor="display-secondary-section">Remove Secondary Section</Label>
 							</div>
 						</div>
 						<div className="flex-1">
