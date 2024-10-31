@@ -23,11 +23,6 @@ export type TWorkExperience = {
 	keyPoints: { id: string; text: string }[];
 }
 
-export type TEducation = {
-	id: string;
-	details: string;
-}
-
 export type TCVData = {
 	name: string;
 	currentTitle: string;
@@ -40,7 +35,6 @@ export type TCVData = {
 	skills: TSkill[];
 	otherSections: TWOtherSection[];
 	workExperiences: TWorkExperience[];
-	education: TEducation[];
 	photo: string | null;
 	font: string;
 	themeColor: string;

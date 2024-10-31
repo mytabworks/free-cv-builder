@@ -49,7 +49,7 @@ export const defaultCVData = {
       "id": "1",
       "title": "Education",
       "keyPoints": [
-        { "id": "1", "text": "Bachelor of Science in Information Technology, Tarlac State University" },
+        { "id": "1", "text": "Bachelor of Science in Information Technology, TSU" },
         { "id": "2", "text": "Certification in Full Stack Development, Coding Academy, 2019" },
         { "id": "3", "text": "Advanced JavaScript Training, Online Course, 2021" }
       ]
@@ -110,25 +110,10 @@ export const defaultCVData = {
       ]
     }
   ],
-  "education": [
-    {
-      "id": "1",
-      "details": "Bachelor of Science in Computer Science, University of Technology, 2018"
-    },
-    {
-      "id": "2",
-      "details": "Certification in Full Stack Development, Coding Academy, 2019"
-    },
-    {
-      "id": "3",
-      "details": "Advanced JavaScript Training, Online Course, 2021"
-    }
-  ],
   "photo": "/default-profile.png",
-  "sectionOrder": ["skills", "workExperiences", "education"] as const,
   "font": "Arial",
   "themeColor": "#0070f3",
-  "template": "customize",
+  "template": "flatdesign",
   "showRatings": true,
   "textColor": '#5f5f62',
   "textSize": 13,
