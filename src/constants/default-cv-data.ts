@@ -3,7 +3,7 @@ export const defaultCVData = {
   "currentTitle": "Software Engineer",
   "email": "john.doe@example.com",
   "phone": "+1234567890",
-  "address": "Manila, Philippines",
+  "address": "Makati, Philippines",
   "website": "https://portfolio.com",
   "linkedin": "https://www.linkedin.com/in/username",
   "summary": "Dynamic and results-oriented software developer with over 5 years of experience in building scalable web applications. Proficient in both front-end and back-end technologies, with a strong background in JavaScript and Python. Adept at collaborating in agile teams to deliver high-quality software solutions that meet customer needs. Committed to continuous learning and adapting to new challenges in a fast-paced environment.",
@@ -49,7 +49,7 @@ export const defaultCVData = {
       "id": "1",
       "title": "Education",
       "keyPoints": [
-        { "id": "1", "text": "Bachelor of Science in Computer Science, University of Technology, 2018" },
+        { "id": "1", "text": "Bachelor of Science in Information Technology, Tarlac State University" },
         { "id": "2", "text": "Certification in Full Stack Development, Coding Academy, 2019" },
         { "id": "3", "text": "Advanced JavaScript Training, Online Course, 2021" }
       ]
@@ -124,7 +124,7 @@ export const defaultCVData = {
       "details": "Advanced JavaScript Training, Online Course, 2021"
     }
   ],
-  "photo": "https://img.freepik.com/free-photo/cute-cartoon-kid-posing-portrait_23-2151870575.jpg?t=st=1729495496~exp=1729499096~hmac=c0f4e1d57bd84bb393d4fe15d44c19c6830c41adc3fb248bdd70fb2b2d76f08d&w=996",
+  "photo": "/default-profile.png",
   "sectionOrder": ["skills", "workExperiences", "education"] as const,
   "font": "Arial",
   "themeColor": "#0070f3",
@@ -139,7 +139,7 @@ export const defaultCVData = {
   "photoRadius": 50,
   "photoSize": 75,
   "reverse": false,
-  "showIcons": false,
+  "showIcons": true,
   "skillSplit": false,
   "skillRatingBlock": false,
   "skillRatingHeight": 8,
