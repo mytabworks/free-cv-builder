@@ -78,7 +78,7 @@ export function CVBuilder() {
           >
             <header className="mb-5 flex items-center justify-between">
               <Link to="/">
-                <Image src="/free-cv-builder-logo.png" height={48} width={255} alt="Free CV Builder Logo" className="h-12 w-auto" />
+                <Image src="/free-cv-builder-logo.png" height={30} width={200} alt="Free CV Builder Logo" className="h-8 md:h-10 w-auto" />
               </Link>
               <Button 
                 className="max-md:!flex hidden"
