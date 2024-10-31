@@ -143,7 +143,7 @@ export function CVWorkExperienceField() {
 			<h2 className="text-xl mb-3">WORK EXPERIENCE</h2>
 			<ModalConfirm
 				show={remove !== null}
-				title={(<div className="flex"><Trash2 className="mr-1" /> Remove Work Experience?</div>)}
+				title={(<div className="flex"><Trash2 className="mr-1" /> Remove Work Experience</div>)}
 				message="Are you sure you want to continue?"
 				onConfirm={(confirm) => {
 					if (confirm) {
