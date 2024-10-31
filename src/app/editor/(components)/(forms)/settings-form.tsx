@@ -151,7 +151,7 @@ export function CVSettingsForm() {
 							/>
 						</div>
 					</div>
-					{(["cyberpunk", "creative"].includes(data.template) === false 
+					{(["cyberpunk", "creative", "neumorphism", "minimalist"].includes(data.template) === false
 					|| (["creative"].includes(data.template) === true && data.displaySecondarySection === true))
 					&& (
 						<div className="flex gap-3">
@@ -296,7 +296,7 @@ export function CVSettingsForm() {
 const fonts = [...googleFonts, 'Arial', 'Helvetica', 'Times New Roman', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'];
 const templates = [
 	{
-		label: 'Customize',
+		label: 'Modern V2',
 		value: 'customize'
 	},
 	{
@@ -316,7 +316,7 @@ const templates = [
 		value: 'flatdesign'
 	},
 	{
-		label: 'Neumorphism',
+		label: 'Neumorphic',
 		value: 'neumorphism'
 	},
 	{
