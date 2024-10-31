@@ -16,7 +16,7 @@ import Image from "next/image";
 
 export function CVBuilder() {
   const [data, setData] = useState<TCVData>(() => {
-    const getData = typeof window !== 'undefined' && localStorage.getItem('lime-cv-data')
+    const getData = typeof window !== 'undefined' && localStorage.getItem('fcvbuider-cv-data')
     if(getData) return JSON.parse(getData)
     return defaultCVData
   })
@@ -49,7 +49,7 @@ export function CVBuilder() {
 
   useEffectMounted(() => {
     if(dirty) {
-      return localStorage.setItem('lime-cv-data', JSON.stringify({ ...data }))
+      return localStorage.setItem('fcvbuider-cv-data', JSON.stringify({ ...data }))
     }
 
     setDirty(true)
