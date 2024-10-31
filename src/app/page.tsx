@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "Build your professional CV online for free. No sign-up required. Fast, easy, and secure CV builder with customizable templates.",
     images: [
       {
-        url: "https://free-cv-builder.vercel.app/images/og-image.png",
+        url: "https://free-cv-builder.vercel.app/free-cv-builder-logo.png",
         width: 1200,
         height: 630,
         alt: "Free CV Builder | Create CV Online for Free",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description: "Build your professional CV online for free. No sign-up required. Fast, easy, and secure CV builder with customizable templates.",
     images: [
       {
-        url: "https://free-cv-builder.vercel.app/images/og-image.png",
+        url: "https://free-cv-builder.vercel.app/free-cv-builder-logo.png",
         width: 1200,
         height: 630,
         alt: "Free CV Builder | Create CV Online for Free",
