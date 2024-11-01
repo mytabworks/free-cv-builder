@@ -48,7 +48,7 @@ export default function LandingPage() {
       <header className="fixed top-0 left-0 right-0 z-10 flex justify-between items-center py-5 bg-white shadow-md">
         <div className="container mx-auto flex justify-between items-center px-4">
           <Link to="/">
-            <Image src="/free-cv-builder-logo.png" height={30} width={200} alt="Free CV Builder Logo" className="h-8 md:h-10 w-auto" />
+            <Image src="/free-cv-builder-logo.png" height={40} width={196} alt="Free CV Builder Logo" className="h-8 md:h-10 w-auto" />
           </Link>
           <nav className="hidden md:flex items-center">
             <a href="#features" className="text-sm md:text-lg font-semibold text-emerald-500 hover:text-emerald-700 mx-2 md:mx-4">Features</a>
