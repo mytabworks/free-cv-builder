@@ -19,8 +19,7 @@ export function CVPreviewPanel() {
 		}
 
 		if(isAppBrowser()) {
-			alert("You should open this LINK to browser like Chrome or Edge. This will not work on Social Media Browsers!")
-			return alert("You can export/download your CV-data to a JSON file, and then import the JSON file to use it in other browser like Chrome/Edge")
+			return alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
 		}
 
 		if(isMobile()) {
