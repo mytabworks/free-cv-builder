@@ -21,3 +21,25 @@ export function isSafari() {
   const userAgent = navigator.userAgent;
   return userAgent.includes("Safari") && !userAgent.includes("Chrome");
 }
+
+export function isAppBrowser() {
+  const userAgent = navigator.userAgent || navigator.vendor || (window as unknown as { opera: string }).opera;
+
+  // Check for Facebook app
+  const isFacebookApp = /FBAN|FBAV|FB_IAB/.test(userAgent);
+  
+  // Check for Messenger app
+  const isMessengerApp = /FB_MESSENGER/.test(userAgent);
+
+  // Check for LinkedIn in-app browser identifiers
+  const isLinkedInApp = /LinkedIn|LiInternal/.test(userAgent);
+
+  // Check for Instagram in-app browser identifier
+  const isInstagramApp = /Instagram/.test(userAgent);
+
+  if (isFacebookApp || isMessengerApp || isLinkedInApp || isInstagramApp) {
+    return true;
+  }
+  
+  return false
+}

@@ -3,7 +3,7 @@ import { useCVBuilder } from "../cv-builder-context";
 import { Button } from "@/components/ui/button";
 import { DownloadIcon } from "lucide-react";
 import { PageData, PageRenderer } from "@/lib/page-renderer";
-import { isIOSMobile, isMobile, isSafari } from "@/lib/is-mobile";
+import { isAppBrowser, isIOSMobile, isMobile, isSafari } from "@/lib/is-mobile";
 import { buymeacoffee } from "@/constants/variables";
 
 export function CVPreviewPanel() {
@@ -16,6 +16,11 @@ export function CVPreviewPanel() {
 		if(isIOSMobile()) {
 			alert("iOS Devices is not supported yet, please use a desktop browser Chrome/Edge/Firefox/Opera or android devices with updated Chrome/Edge")
 			return alert("You can export/download your CV-data to a JSON file, and then import the JSON file to use it in desktop/android browser Chrome/Edge")
+		}
+
+		if(isAppBrowser()) {
+			alert("You should open this LINK to browser like Chrome or Edge. This will not work on Social Media Browsers!")
+			return alert("You can export/download your CV-data to a JSON file, and then import the JSON file to use it in other browser like Chrome/Edge")
 		}
 
 		if(isMobile()) {
