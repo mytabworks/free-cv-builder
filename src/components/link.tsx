@@ -5,10 +5,9 @@ import { useRouter } from "next/navigation";
 
 interface LinkProps extends Omit<React.HTMLProps<HTMLAnchorElement>, "href"> {
   to: string;
-  block?: () => boolean
 }
 
-export function Link({to, block, ...props}: LinkProps) {
+export function Link({to, ...props}: LinkProps) {
   const router = useRouter()
 
   return (
