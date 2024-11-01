@@ -8,10 +8,11 @@ import { CVPreviewPanel } from "./(panels)/preview-panel";
 import { Link } from "@/components/link";
 import { CVResizer } from "./cv-resizer";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, DownloadIcon } from "lucide-react";
 import { useEffectMounted } from "@/hooks/use-effect-mounted";
 import { defaultCVData } from "@/constants/default-cv-data";
 import Image from "next/image";
+import { downloadData } from "@/lib/download-data";
 
 export function CVBuilder() {
   const [data, setData] = useState<TCVData>(() => {
@@ -106,7 +107,7 @@ export function CVBuilder() {
             className={classNames("max-md:fixed max-md:inset-0 max-md:h-screen max-md:!w-full max-md:bg-emerald-100 py-3  md:py-6", null, panel.showLeft ? 'md:w-[50%]' : '')} 
             style={{ width: panel.showLeft ? `${100 - panel.width}%` : '100%' }}
           >
-            <header className="max-md:!block hidden px-3 mb-5">
+            <header className="max-md:!flex justify-between hidden px-3 mb-5">
               <Button 
                 onClick={() => 
                   setPanel(prev => ({ 
@@ -118,6 +119,12 @@ export function CVBuilder() {
                 <ChevronLeft className="h-4 w-4" />
                 {" "}
                 Back
+              </Button>
+              <Button 
+									type="button" 
+									onClick={() => downloadData(data, `${data.name.toLowerCase().replaceAll(" ", "-")}-cv-data.json`)}
+								>
+                <DownloadIcon /> Export Data
               </Button>
             </header>
             <CVPreviewPanel />
