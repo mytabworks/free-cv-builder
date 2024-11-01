@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <GAnalytics />
+        <GAnalytics measurementId="G-8GM2K9HJM9" />
         {children}
       </body>
     </html>

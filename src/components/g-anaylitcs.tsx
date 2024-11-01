@@ -1,9 +1,9 @@
-export function GAnalytics() {
+export function GAnalytics({ measurementId }: { measurementId: string }) {
   return (
     <>
       <script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=G-0E2E6E8F1E"
+        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
       ></script>
       <script
         dangerouslySetInnerHTML={{
@@ -11,7 +11,7 @@ export function GAnalytics() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-0E2E6E8F1E');
+            gtag('config', '${measurementId}', {
           `,
         }}
       ></script>
