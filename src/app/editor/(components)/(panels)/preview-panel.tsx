@@ -187,9 +187,8 @@ export function CVPreviewPanel() {
 					href={buymeacoffee}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="bg-white text-emerald-600 py-2.5 px-5 md:py-1 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-gray-200 transition-all duration-200"
 				>
-					Buy me a Coffee ☕
+					<img height={43} width={190} alt="Buy me a coffee" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=mytabworks&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
 				</a>
 				<Button onClick={handleDownload}><DownloadIcon /> Download PDF</Button>
 			</div>

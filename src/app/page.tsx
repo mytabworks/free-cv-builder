@@ -57,9 +57,8 @@ export default function LandingPage() {
               href={buymeacoffee}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 text-white py-2 px-2 md:py-2 md:px-6 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-emerald-700 transition-all"
             >
-              Buy me a Coffee ☕
+              <img height={43} width={200} alt="Buy me a coffee" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=mytabworks&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
             </a>
           </nav>
         </div>
@@ -134,14 +133,11 @@ export default function LandingPage() {
             Enjoyed using the Free CV Builder?
           </h3>
           <p className="text-base md:text-lg text-white mb-6 md:mb-8">If you got hired using this tool, consider buying me a coffee to support my work and keep this project running. Cheers!</p>
-          <a
-            href={buymeacoffee}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-white text-emerald-600 py-3 px-6 rounded-full text-sm md:text-lg font-bold shadow-md hover:bg-gray-200 transition-all duration-200"
-          >
-            Buy me a Coffee ☕
-          </a>
+          <div className="flex justify-center">
+            <a href={buymeacoffee} target="_blank">
+              <img alt="Buy me a coffee" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=mytabworks&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
+            </a>
+          </div>
         </section>
       </main>
       <footer className="py-4 bg-emerald-800 text-white text-center">
