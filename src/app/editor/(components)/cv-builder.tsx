@@ -124,7 +124,7 @@ export function CVBuilder() {
 									type="button" 
 									onClick={() => downloadData(data, `${data.name.toLowerCase().replaceAll(" ", "-")}-cv-data.json`)}
 								>
-                <DownloadIcon /> Export Data
+                <DownloadIcon /> Download Data
               </Button>
             </header>
             <CVPreviewPanel />
