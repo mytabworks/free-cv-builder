@@ -44,7 +44,7 @@ export const defaultCVData = {
       "rating": 3
     }
   ],
-  otherSections: [
+  "otherSections": [
     {
       "id": "1",
       "title": "Education",
@@ -113,7 +113,7 @@ export const defaultCVData = {
   "photo": "/default-profile.png",
   "font": "Arial",
   "themeColor": "#0070f3",
-  "template": "flatdesign",
+  "template": "",
   "showRatings": true,
   "textColor": '#5f5f62',
   "textSize": 13,
