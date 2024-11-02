@@ -13,6 +13,7 @@ import { useEffectMounted } from "@/hooks/use-effect-mounted";
 import { defaultCVData } from "@/constants/default-cv-data";
 import Image from "next/image";
 import { downloadData } from "@/lib/download-data";
+import { CVTemplateSelection } from "./cv-template-selection";
 
 export function CVBuilder() {
   const [data, setData] = useState<TCVData>(() => {
@@ -61,7 +62,13 @@ export function CVBuilder() {
     }
   }, [data.name])
 
-  // useNavigationBlocker(dirty)
+  if(!data.template) {
+    return (
+      <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>
+        <CVTemplateSelection />
+      </CVBuilderContext.Provider>
+    )
+  }
 
   return (
     <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>
