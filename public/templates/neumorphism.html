@@ -184,6 +184,10 @@
       }
     }
 
+		[data-reverse="true"] .secondary > .secondary-content {
+			padding: 10mm 10mm 10mm 2.5mm; /* Padding for content */
+		}
+
     .primary {
       width: 65%;
       background-color: #e0e0e0;
@@ -192,6 +196,10 @@
         padding: 10mm 10mm 10mm 2.5mm; /* Padding for content */
       }
     }
+
+		[data-reverse="true"] .primary > .primary-content {
+			padding: 10mm 2.5mm 10mm 10mm; /* Padding for content */
+		}
 
     /* Secondary content */
     .secondary-content {
@@ -377,7 +385,7 @@
 				}
 
 				&[data-single-type="intro"] {
-					padding-bottom: 5mm;
+					padding-bottom: 6mm;
 
 					.wider-content {
 						width: 100%;
