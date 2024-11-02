@@ -36,7 +36,7 @@ export function CVSettingsForm() {
 				<div className="space-y-3">
 					<div>
 						<form 
-							className="flex flex-wrap @sm:flex-nowrap gap-3 items-center" 
+							className="flex flex-wrap @md:flex-nowrap gap-3 items-center" 
 							onSubmit={(e) => {
 								e.preventDefault()
 								const input = (e.target as HTMLFormElement)?.[0] as HTMLInputElement
@@ -58,18 +58,18 @@ export function CVSettingsForm() {
 								className="w-full"
 								required
 							/>
-							<div className="flex w-full @sm:w-auto gap-3">
+							<div className="flex w-full @md:w-auto gap-3">
 								<Button 
 									type="submit" 
-									className="w-full @sm:w-50">
-									<Import /> Import Data
+									className="w-full @md:w-50">
+									<Import /> Upload Data
 								</Button>
 								<Button 
 									type="button" 
 									onClick={handleExport}
-									className="w-full @sm:w-50"
+									className="w-full @md:w-50"
 								>
-									<DownloadIcon /> Export Data
+									<DownloadIcon /> Download Data
 								</Button>
 							</div>
 						</form>

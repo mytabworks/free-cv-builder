@@ -87,7 +87,7 @@ export function CVInformationForm() {
 								/>
 							</div>
 							<div className="flex flex-wrap gap-3">
-								<div className="w-full @sm:flex-1">
+								<div className="w-full @md:flex-1">
 									<Label htmlFor="email">Email</Label>
 									<Input
 										id="email"
@@ -98,7 +98,7 @@ export function CVInformationForm() {
 										placeholder="johndoe@example.com"
 									/>
 								</div>
-								<div className="w-full @sm:flex-1">
+								<div className="w-full @md:flex-1">
 									<Label htmlFor="phone">Mobile Number</Label>
 									<Input
 										id="phone"
@@ -110,7 +110,7 @@ export function CVInformationForm() {
 								</div>
 							</div>
 							<div className="flex flex-wrap gap-3">
-								<div className="w-full @sm:flex-1">
+								<div className="w-full @md:flex-1">
 									<Label htmlFor="email">Website</Label>
 									<Input
 										id="website"
@@ -121,7 +121,7 @@ export function CVInformationForm() {
 										placeholder="https://portfolio.com"
 									/>
 								</div>
-								<div className="w-full @sm:flex-1">
+								<div className="w-full @md:flex-1">
 									<Label htmlFor="linkedin">LinkedIn</Label>
 									<Input
 										id="linkedin"
