@@ -4,12 +4,14 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { useCVBuilder } from "../cv-builder-context"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-import { googleFonts } from "@/lib/page-renderer"
 import { Switch } from "@/components/ui/switch"
 import { SkillSettingsForm } from "./skill-settings-form"
 import { FieldsetAccordion } from "@/components/fieldset-accordion"
 import { downloadData } from "@/lib/download-data"
+import { LayoutSelectionField } from "../(fields)/layout-selection-field"
 import { DownloadIcon, Import } from "lucide-react"
+import { templates } from "@/constants/templates"
+import { fonts } from "@/constants/fonts"
 
 export function CVSettingsForm() {
 	const { data, setData } = useCVBuilder()
@@ -90,6 +92,22 @@ export function CVSettingsForm() {
 							</SelectContent>
 						</Select>
 					</div>
+					<LayoutSelectionField 
+						value={data.displaySecondarySection ? data.reverse ? 'right' : 'left' : 'top'}
+						onChange={(layout) => {
+
+							const layoutData = {
+								reverse: layout === 'right',
+								displaySecondarySection: layout !== 'top',
+								photoSize: layout !== 'top' ? data.photoSize : 100
+							}
+
+							setData(prev => ({ 
+								...prev, 
+								...layoutData 
+							}))
+						}}
+					/>
 					<div className="flex gap-3">
 						<div className="flex-1">
 							<Label htmlFor="font">Font</Label>
@@ -292,43 +310,3 @@ export function CVSettingsForm() {
 		</ScrollArea>
   )
 }
-
-const fonts = [...googleFonts, 'Arial', 'Helvetica', 'Times New Roman', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'];
-const templates = [
-	{
-		label: 'Modern V2',
-		value: 'customize'
-	},
-	{
-		label: 'Cyberpunk',
-		value: 'cyberpunk'
-	},
-	{
-		label: 'Classic',
-		value: 'classic'
-	},
-	{
-		label: 'Creative',
-		value: 'creative'
-	},
-	{
-		label: 'Flat design',
-		value: 'flatdesign'
-	},
-	{
-		label: 'Neumorphic',
-		value: 'neumorphism'
-	},
-	{
-		label: 'Modern',
-		value: 'modern'
-	},
-	{
-		label: 'Minimalist',
-		value: 'minimalist'
-	},
-	{
-		label: 'Professional',
-		value: 'professional'
-	}
-];
