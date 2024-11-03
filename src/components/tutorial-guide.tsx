@@ -185,7 +185,7 @@ export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
               left: `${popoverPosition.left}px`,
             }}
           >
-            <h3 className="font-semibold mb-2 text-gray-800 text-center">Step {currentStep + 1}</h3>
+            <h3 className="font-semibold mb-2 text-gray-800 text-center">Step {currentStep + 1} / {steps.length}</h3>
             <p className="text-sm text-gray-600 text-center">{steps[currentStep].content}</p>
             <div className="flex justify-between mt-4">
               <Button 
