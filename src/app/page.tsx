@@ -135,7 +135,7 @@ export default function LandingPage() {
           <p className="text-base md:text-lg text-white mb-6 md:mb-8">If you got hired using this tool, consider buying me a coffee to support my work and keep this project running. Cheers!</p>
           <div className="flex justify-center">
             <a href={buymeacoffee} target="_blank">
-              <img alt="Buy me a coffee" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=mytabworks&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
+              <img height={50} width={235} alt="Buy me a coffee" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=mytabworks&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
             </a>
           </div>
         </section>
