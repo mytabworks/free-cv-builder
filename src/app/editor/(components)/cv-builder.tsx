@@ -20,7 +20,7 @@ import { isMobile } from "@/lib/is-mobile";
 
 export function CVBuilder() {
   const [tutorialActive, setTutorialActive] = useState(() => {
-    return true || typeof window !== 'undefined' && localStorage.getItem('fcvbuider-tutorial-active') === null
+    return typeof window !== 'undefined' && localStorage.getItem('fcvbuider-cv-data') === null
   })
 
   const [data, setData] = useState<TCVData>(() => {
