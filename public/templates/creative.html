@@ -110,24 +110,11 @@
 				/* For Firefox */
 
 				zoom: 1 !important;
+				transform: none !important;
+				transform-origin: none !important;
 
-				&.safari-print {
-					width: 210mm;
-					/* A4 width */
-					height: auto;
-					/* Let the height be auto for flow */
-					margin: 0;
-					/* Reset margins if needed */
-
-					.page {
-						width: 210mm;
-					}
-				}
-
-				/* Hide everything on non-Safari prints */
-				&:not(.safari-print) * {
+				* {
 					visibility: hidden;
-					/* Hide everything */
 				}
 			}
 

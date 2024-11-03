@@ -144,6 +144,8 @@ export function CVPreviewPanel() {
 			setStartScalingDown(media.matches)
 			if(!media.matches) {
 				frameWindow.document.body.style.zoom = ""
+				frameWindow.document.body.style.transform = ""
+				frameWindow.document.body.style.transformOrigin = ""
 			}
 		}
 
@@ -166,7 +168,19 @@ export function CVPreviewPanel() {
 		if(!frameWindow) return;
 
 		const handler = () => {
-			frameWindow.document.body.style.zoom = (frameWindow.innerWidth / 794).toString()
+
+			const scale = frameWindow.innerWidth / 794
+
+			if((isIOSMobile() || isSafari()) && scale < 0.7) {
+				frameWindow.document.body.style.zoom = ""
+				frameWindow.document.body.style.transform = `scale(${scale})`
+				frameWindow.document.body.style.transformOrigin = `top left`
+				return ;
+			}
+
+			frameWindow.document.body.style.transform = ""
+			frameWindow.document.body.style.transformOrigin = ""
+			frameWindow.document.body.style.zoom = scale.toString()
 		}
 
 		handler()
