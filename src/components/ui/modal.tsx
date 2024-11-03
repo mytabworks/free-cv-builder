@@ -27,7 +27,7 @@ export function ModalConfirm({
     <Dialog.Root open={show}>
       <Dialog.Portal>
         <Dialog.Overlay className="z-10 fixed inset-0 bg-gray-900 bg-opacity-50" />
-        <Dialog.Content className="z-10 fixed bg-white p-6 rounded-md shadow-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <Dialog.Content className="z-10 fixed bg-white p-3 sm:p-6 rounded-md shadow-lg top-1/2 left-[1rem] max-sm:right-[1rem] sm:left-1/2 transform sm:-translate-x-1/2 -translate-y-1/2">
           <Dialog.Title className="text-lg font-bold">{title}</Dialog.Title>
           <Dialog.Description className="mt-4">{message}</Dialog.Description>
           <div className="mt-6 flex justify-end space-x-4">
