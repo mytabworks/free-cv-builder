@@ -21,7 +21,7 @@ export function LayoutSelectionField({ value, onChange }: LayoutSelectionFieldPr
   ]
 
   return (
-    <div>
+    <div data-tutorial-target="layout">
       <Label htmlFor="template">Layout</Label>
       <div className="flex gap-3 mt-3">
         {items.map((item) => (

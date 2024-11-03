@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import classNames from "classnames"
 import { CVBuilderContext, TCVData, TShowPanel } from "./cv-builder-context";
 import { CVFormPanel } from "./(panels)/form-panel";
@@ -14,8 +14,15 @@ import { defaultCVData } from "@/constants/default-cv-data";
 import Image from "next/image";
 import { downloadData } from "@/lib/download-data";
 import { CVTemplateSelection } from "./cv-template-selection";
+import { TutorialGuide } from "@/components/tutorial-guide";
+import { tutorialSteps, tutorialStepsMobile } from "@/constants/tutorial-steps";
+import { isMobile } from "@/lib/is-mobile";
 
 export function CVBuilder() {
+  const [tutorialActive, setTutorialActive] = useState(() => {
+    return true || typeof window !== 'undefined' && localStorage.getItem('fcvbuider-tutorial-active') === null
+  })
+
   const [data, setData] = useState<TCVData>(() => {
     const getData = typeof window !== 'undefined' && localStorage.getItem('fcvbuider-cv-data')
     if(getData) return JSON.parse(getData)
@@ -62,6 +69,8 @@ export function CVBuilder() {
     }
   }, [data.name])
 
+  const steps = useMemo(() => isMobile() ? tutorialStepsMobile : tutorialSteps, [])
+
   if(!data.template) {
     return (
       <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>
@@ -72,6 +81,11 @@ export function CVBuilder() {
 
   return (
     <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>
+      <TutorialGuide
+        active={tutorialActive} 
+        onFinish={() => setTutorialActive(false)}
+        steps={steps} 
+      />
       <div 
         className={classNames("flex flex-col md:flex-row dark:bg-neutral-950", { 
           "select-none relative after:content-[''] after:absolute after:inset-0": panel.isDragging
@@ -95,6 +109,7 @@ export function CVBuilder() {
                     showRight: !panel.showRight 
                   })
                 )}
+                data-tutorial-target="preview-button"
               >
                 Preview CV
                 {" "}
@@ -122,6 +137,7 @@ export function CVBuilder() {
                     showRight: !panel.showRight, 
                   }))
                 }
+                data-tutorial-target="back-button"
               >
                 <ChevronLeft className="h-4 w-4" />
                 {" "}

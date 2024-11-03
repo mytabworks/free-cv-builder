@@ -63,34 +63,56 @@ export function CVSettingsForm() {
 							<div className="flex w-full @md:w-auto gap-3">
 								<Button 
 									type="submit" 
-									className="w-full @md:w-50">
-									<Import /> Upload Data
+									className="w-full @md:w-50"
+									data-tutorial-target="import"
+									>
+									<Import /> Import Data
 								</Button>
 								<Button 
 									type="button" 
 									onClick={handleExport}
 									className="w-full @md:w-50"
+									data-tutorial-target="export"
 								>
 									<DownloadIcon /> Download Data
 								</Button>
 							</div>
 						</form>
 					</div>
-					<div>
-						<Label htmlFor="template">Template</Label>
-						<Select
-							value={data.template}
-							onValueChange={handleSelectChange('template')}
-						>
-							<SelectTrigger>
-								<SelectValue placeholder="Select a template" />
-							</SelectTrigger>
-							<SelectContent>
-								{templates.map((template) => (
-									<SelectItem key={template.value} value={template.value}>{template.label}</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
+					<div className="flex gap-3">
+						<div data-tutorial-target="template" className="flex-1">
+							<Label htmlFor="template">Template</Label>
+							<Select
+								value={data.template}
+								onValueChange={handleSelectChange('template')}
+							>
+								<SelectTrigger>
+									<SelectValue placeholder="Select a template" />
+								</SelectTrigger>
+								<SelectContent>
+									{templates.map((template) => (
+										<SelectItem key={template.value} value={template.value}>{template.label}</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
+						<div data-tutorial-target="size" className="flex-1">
+							<Label htmlFor="size">Paper Size</Label>
+							<Select
+								value="A4"
+								disabled
+								// onValueChange={handleSelectChange('font')}
+							>
+								<SelectTrigger>
+									<SelectValue placeholder="Select a paper size" />
+								</SelectTrigger>
+								<SelectContent>
+									{['A4'].map((size) => (
+										<SelectItem key={size} value={size}>{size}</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</div>
 					</div>
 					<LayoutSelectionField 
 						value={data.displaySecondarySection ? data.reverse ? 'right' : 'left' : 'top'}
@@ -109,7 +131,7 @@ export function CVSettingsForm() {
 						}}
 					/>
 					<div className="flex gap-3">
-						<div className="flex-1">
+						<div data-tutorial-target="font" className="flex-1">
 							<Label htmlFor="font">Font</Label>
 							<Select
 								value={data.font}
@@ -146,7 +168,7 @@ export function CVSettingsForm() {
 						</div>
 					</div>
 					<div className="flex gap-3">
-						<div className="flex-1">
+						<div data-tutorial-target="theme-color" className="flex-1">
 							<Label htmlFor="themeColor">Theme Color</Label>
 							<Input
 								id="themeColor"
@@ -223,7 +245,7 @@ export function CVSettingsForm() {
 							</div>
 						</div>
 					)}
-					<div className="flex gap-3">
+					<div className="flex gap-3" data-tutorial-target="photo">
 						<div className="flex-1">
 							<Label htmlFor="photoSize">Photo Size</Label>
 							<div className="flex gap-2">

@@ -57,14 +57,14 @@ export function CVInformationForm() {
   return (
     <ScrollArea className="h-full w-full">
 			<div className="space-y-3">
-				<FieldsetAccordion title="BASIC INFORMATION">
+				<FieldsetAccordion title="BASIC INFORMATION" data-tutorial-target="personal-info">
 					<div className="space-y-3">
 							<div>
 								<div className="w-full @md:w-[50%] flex flex-col mb-3 relative">
 									<input type="file" id="photo" onChange={handlePhotoUpload} accept="image/*" className="z-[1px] absolute opacity-0 w-full h-full cursor-pointer inset-0" />
 									{data.photo ? (
 										<div className="flex flex-col items-center gap-3 p-3 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-gray-500">
-											<img src={data.photo} alt="CV Profile" className="max-w-auto max-h-24 object-cover rounded-lg" />
+											<img src={data.photo} alt="CV Profile" className="max-w-auto h-24 object-cover rounded-lg" />
 											<div className="flex gap-3">
 												<Button>Change Photo</Button>
 												<Button variant="danger" className="position-relative z-[1]" onClick={handleRemovePhoto}>Remove Photo</Button>

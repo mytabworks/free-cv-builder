@@ -139,7 +139,7 @@ export function CVWorkExperienceField() {
 	const preventDragConflict = (e: React.MouseEvent | React.TouchEvent | React.KeyboardEvent) => e.stopPropagation()
 
   return (
-    <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
+    <fieldset data-tutorial-target="work-experience" className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
 			<h2 className="text-xl mb-3">WORK EXPERIENCE</h2>
 			<ModalConfirm
 				show={remove !== null}

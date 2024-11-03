@@ -78,7 +78,7 @@ export function CVSkillsField() {
   };
 
   return (
-    <fieldset className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
+    <fieldset data-tutorial-target="skills" className="space-y-2 border border-neutral-300 hover:border-neutral-500 focus-within:border-neutral-500 p-4 rounded-md bg-white">
 			<Accordion.Root type="single" defaultValue="default" collapsible className="w-full">
 				<Accordion.Item value="default" className="w-full">
 					<Accordion.Trigger asChild className="flex justify-between items-center group/accordion w-full hover:no-underline flex-wrap">

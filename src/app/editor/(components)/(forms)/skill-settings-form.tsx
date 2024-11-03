@@ -13,7 +13,7 @@ export function SkillSettingsForm() {
   }
 
   return (
-    <FieldsetAccordion title="SKILL RATING SETTINGS">
+    <FieldsetAccordion title="SKILL RATING SETTINGS" data-tutorial-target="skill-rating-settings">
 			<div className="flex gap-5">
 				<div className="flex-1">
 					<Label htmlFor="skillRatingHeight">Rating Height</Label>

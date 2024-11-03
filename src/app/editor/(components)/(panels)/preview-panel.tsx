@@ -204,9 +204,9 @@ export function CVPreviewPanel() {
 				>
 					<img height={43} width={190} alt="Buy me a coffee" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=mytabworks&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
 				</a>
-				<Button onClick={handleDownload}><DownloadIcon /> Download PDF</Button>
+				<Button onClick={handleDownload} data-tutorial-target="download"><DownloadIcon /> Download PDF</Button>
 			</div>
-			<iframe ref={ref} key={data.template} src={`/templates/${data.template}.html`} className="h-full" />
+			<iframe data-tutorial-target="preview" ref={ref} key={data.template} src={`/templates/${data.template}.html`} className="h-full" />
 		</div>
   )
 }

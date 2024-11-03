@@ -14,6 +14,7 @@ export function CVFormPanel() {
 					CV Information
 				</TabsTrigger>
 				<TabsTrigger
+					data-tutorial-target="cv-settings"
 					value="cv-settings"
 					className="w-1/2 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:shadow-slate-500 rounded-sm transition-all"
 				>
