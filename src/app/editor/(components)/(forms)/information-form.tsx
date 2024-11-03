@@ -7,7 +7,7 @@ import { CVSkillsField } from "../(fields)/skills-field"
 import { CVWorkExperienceField } from "../(fields)/work-experience-field"
 import { CVOtherSectionField } from "../(fields)/other-section-field"
 import { FieldsetAccordion } from "@/components/fieldset-accordion"
-import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
 export function CVInformationForm() {
 	const { data, setData } = useCVBuilder()
@@ -20,7 +20,7 @@ export function CVInformationForm() {
 				const img = new window.Image();
 				img.onload = () => {
 					const targetWidth = 500; // Desired width
-					const targetHeight = 500; // Desired height
+					const targetHeight = img.naturalHeight / img.naturalWidth * 500; // Desired height
 	
 					// Create a canvas and set its dimensions
 					const canvas = document.createElement("canvas");
@@ -44,6 +44,11 @@ export function CVInformationForm() {
 		}
 	};
 
+	const handleRemovePhoto = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation()
+		setData(prev => ({ ...prev, photo: null }));
+	}
+
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setData(prev => ({ ...prev, [name]: value }))
@@ -55,15 +60,21 @@ export function CVInformationForm() {
 				<FieldsetAccordion title="BASIC INFORMATION">
 					<div className="space-y-3">
 							<div>
-								<div className="flex flex-col mb-3 relative">
+								<div className="w-full @md:w-[50%] flex flex-col mb-3 relative">
 									<input type="file" id="photo" onChange={handlePhotoUpload} accept="image/*" className="z-[1px] absolute opacity-0 w-full h-full cursor-pointer inset-0" />
-									<label htmlFor="photo" className="flex flex-col p-3 items-center justify-center w-full h-32 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-gray-500">
-										{data.photo ? (
-											<Image src={data.photo} width={50} height={50} alt="CV Profile" className="max-w-full max-h-full object-cover rounded-lg" />
-										) : (
+									{data.photo ? (
+										<div className="flex flex-col items-center gap-3 p-3 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-gray-500">
+											<img src={data.photo} alt="CV Profile" className="max-w-auto max-h-24 object-cover rounded-lg" />
+											<div className="flex gap-3">
+												<Button>Change Photo</Button>
+												<Button variant="danger" className="position-relative z-[1]" onClick={handleRemovePhoto}>Remove Photo</Button>
+											</div>
+										</div>
+									) : (
+										<label htmlFor="photo" className="flex flex-col p-3 items-center justify-center w-full h-32 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-gray-500">
 											<p className="text-gray-600 text-sm">Drag and drop a photo here or click to select</p>
-										)}
-									</label>
+										</label>
+									)}
 								</div>
 							</div>
 							<div>
