@@ -71,15 +71,27 @@ export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
       // Check for overflowed ancestor and scroll it if necessary
       let ancestor = targetElement.parentElement;
       let isScrolled = false;
-      
+
       while (ancestor) {
         const hasVerticalScroll = ancestor.scrollHeight > ancestor.clientHeight;
         const hasHorizontalScroll = ancestor.scrollWidth > ancestor.clientWidth;
-
+      
         if (hasVerticalScroll || hasHorizontalScroll) {
-          // Scroll the ancestor to make the targetElement visible
-          targetElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'end' });
-          isScrolled = true;
+          // Calculate the bounding rectangles of both the target element and the ancestor
+          const targetRect = targetElement.getBoundingClientRect();
+          const ancestorRect = ancestor.getBoundingClientRect();
+      
+          const isInVerticalView = 
+            targetRect.top >= ancestorRect.top && targetRect.top + targetRect.height <= ancestorRect.top + ancestorRect.height;
+          const isInHorizontalView = 
+            targetRect.left >= ancestorRect.left && targetRect.left + targetRect.width <= ancestorRect.left + ancestorRect.width;
+
+          // Scroll the ancestor if the target is not fully in view
+          if (!isInVerticalView || !isInHorizontalView) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'end' });
+            isScrolled = true;
+          }
+      
           break;
         }
         
