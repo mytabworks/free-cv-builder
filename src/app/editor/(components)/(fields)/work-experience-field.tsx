@@ -161,13 +161,18 @@ export function CVWorkExperienceField() {
 				<SortableContext items={workExperiences.map(exp => exp.id)} strategy={verticalListSortingStrategy}>
 					{workExperiences.map((exp, index) => (
 						<SortableItem 
-							key={exp.id} 
+							key={exp.id} 	
 							id={exp.id} 
 							className="flex items-center"
 						>
 							<Card className="group-[:has([data-state='open']):hover]:opacity-30 group-[:has([data-state='open']):focus-within]:opacity-30 hover:!opacity-100 focus-within:!opacity-100 focus-within:border-neutral-500 hover:border-neutral-500 mb-4 w-full">
-								<CardContent>
-									<Accordion.Root type="single" defaultValue={exp.keyPoints.length === 0 ? exp.id : undefined} collapsible className="w-full">
+								<CardContent className="relative">
+									<div 
+										className="absolute inset-0" 
+										onPointerDown={preventDragConflict}
+										onTouchStart={preventDragConflict}
+									/>
+									<Accordion.Root type="single" defaultValue={exp.keyPoints.length === 0 ? exp.id : undefined} collapsible className="w-full relative">
 										<Accordion.Item value={exp.id} className="w-full">
 											<Accordion.Trigger className="group/accordion w-full hover:no-underline" onClick={(e) => (e.target as HTMLElement)?.closest('button')?.blur()}>
 												<div className="flex items-center">
