@@ -1,5 +1,5 @@
 export const defaultCVData = {
-  "name": "",
+  "name": "John Doe",
   "currentTitle": "Software Engineer",
   "email": "john.doe@example.com",
   "phone": "+1234567890",

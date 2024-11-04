@@ -135,6 +135,7 @@ export function CVQuestionAI() {
               className="w-full"
               variant="secondary"
               onClick={handleSkip}
+              disabled={requestChat.isPending}
             >
               Skip
             </Button>
