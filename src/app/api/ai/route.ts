@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { defaultCVData } from "@/constants/default-cv-data";
 
 export async function POST(request: Request) {
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
             data: response.data.choices[0]?.message?.content
         })
     } catch (error) {
-        console.error(error?.response?.data)
+        console.error((error as AxiosError)?.response?.data)
         return new Response(`Error fetching response: ${(error as Error).message}`, {
             status: 500,
         })
