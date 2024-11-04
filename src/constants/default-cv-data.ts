@@ -1,5 +1,5 @@
 export const defaultCVData = {
-  "name": "John Doe",
+  "name": "",
   "currentTitle": "Software Engineer",
   "email": "john.doe@example.com",
   "phone": "+1234567890",
@@ -51,7 +51,6 @@ export const defaultCVData = {
       "keyPoints": [
         { "id": "1", "text": "Bachelor of Science in Information Technology, TSU" },
         { "id": "2", "text": "Certification in Full Stack Development, Coding Academy, 2019" },
-        { "id": "3", "text": "Advanced JavaScript Training, Online Course, 2021" }
       ]
     },
     {
@@ -86,7 +85,7 @@ export const defaultCVData = {
       "endDate": "2019-12-31",
       "currentRole": false,
       "showMonth": true,
-      "jobTitle": "Software Developer",
+      "jobTitle": "Mid-level Job Title",
       "companyName": "Web Innovations LLC",
       "keyPoints": [
         { "id": "1", "text": "Developed responsive web designs." },
@@ -101,7 +100,7 @@ export const defaultCVData = {
       "endDate": "2018-04-30",
       "currentRole": false,
       "showMonth": true,
-      "jobTitle": "Junior Developer",
+      "jobTitle": "Junior-level Job Title",
       "companyName": "StartUp Hub",
       "keyPoints": [
         { "id": "1", "text": "Assisted in the development of e-commerce platforms." },
@@ -132,37 +131,3 @@ export const defaultCVData = {
   "skillRatingTrackColor": '#dce1e5',
   "displaySecondarySection": true,
 }
-
-  //   name: '',
-  //   currentTitle: '',
-  //   email: '',
-  //   phone: '',
-  //   address: '',
-  //   website: '',
-  //   linkedin: '',
-  //   summary: '',
-  //   skills: [],
-  //   otherSections: [],
-  //   workExperiences: [],
-  //   education: [],
-  //   photo: null,
-  //   sectionOrder: ['skills', 'workExperiences', 'education'],
-  //   font: 'Arial',
-  //   themeColor: '#10b981',
-  //   template: 'classic',
-  //   showRatings: true,
-  //   skillSplit: false,
-  //   skillRatingBlock: false,
-  //   skillRatingHeight: 8,
-  //   skillRatingRadius: 5,
-  //   skillRatingTrackColor: '#f7fafc',
-  //   textColor: '#5f5f62',
-  //   textSize: 13,
-  //   primaryTextColor: '#5f5f62',
-  //   secondaryTextColor: '#5f5f62',
-  //   secondaryBGColor: '#f0f4f8',
-  //   primaryBGColor: '#ffffff',
-  //   photoRadius: 50,
-  //   photoSize: 75,
-  //   reverse: false
-  // "displaySecondarySection": true,

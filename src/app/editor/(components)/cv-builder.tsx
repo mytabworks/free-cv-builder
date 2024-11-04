@@ -17,6 +17,17 @@ import { CVTemplateSelection } from "./cv-template-selection";
 import { TutorialGuide } from "@/components/tutorial-guide";
 import { tutorialSteps, tutorialStepsMobile } from "@/constants/tutorial-steps";
 import { isMobile } from "@/lib/is-mobile";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CVQuestionAI } from "./cv-question-ai";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    }
+  },
+})
 
 export function CVBuilder() {
   const [tutorialActive, setTutorialActive] = useState(() => {
@@ -76,6 +87,16 @@ export function CVBuilder() {
       <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>
         <CVTemplateSelection />
       </CVBuilderContext.Provider>
+    )
+  }
+
+  if(!data.name) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>
+          <CVQuestionAI />
+        </CVBuilderContext.Provider>
+      </QueryClientProvider>
     )
   }
 
