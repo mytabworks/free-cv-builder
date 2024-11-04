@@ -4,7 +4,7 @@ import { useCVBuilder } from "./cv-builder-context";
 export function CVTemplateSelection() {
   const { setData } = useCVBuilder();
 
-  const handleTemplateSelection = (templateId: string): React.MouseEventHandler<HTMLButtonElement> => () => {
+  const handleTemplateSelection = (templateId: string): React.MouseEventHandler<HTMLElement> => () => {
     setData(prev => ({ ...prev, template: templateId }));
   };
 
@@ -17,7 +17,8 @@ export function CVTemplateSelection() {
           {templateWithImages.map((template) => (
             <div
               key={template.id}
-              className="relative group overflow-hidden rounded-sm shadow-md hover:shadow-lg transition duration-300 bg-white"
+              className="cursor-pointer relative group overflow-hidden rounded-sm shadow-md hover:shadow-lg transition duration-300 bg-white"
+              onClick={handleTemplateSelection(template.id)}
             >
               <img
                 src={template.imageUrl}
