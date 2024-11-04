@@ -21,10 +21,10 @@ export function CVFormPanel() {
 					CV Settings
 				</TabsTrigger>
 			</TabsList>
-			<TabsContent value="cv-info" className="h-[calc(100vh-132px)] sm:h-[calc(100vh-160px)]">
+			<TabsContent value="cv-info" className="h-[calc(100dvh-132px)] sm:h-[calc(100dvh-160px)]">
 				<CVInformationForm />
 			</TabsContent>
-			<TabsContent value="cv-settings" className="h-[calc(100vh-132px)] sm:h-[calc(100vh-160px)]">
+			<TabsContent value="cv-settings" className="h-[calc(100dvh-132px)] sm:h-[calc(100dvh-160px)]">
 				<CVSettingsForm />
 			</TabsContent>
 		</Tabs>
