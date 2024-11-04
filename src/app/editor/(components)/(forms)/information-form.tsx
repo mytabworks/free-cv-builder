@@ -19,21 +19,35 @@ export function CVInformationForm() {
 			reader.onloadend = () => {
 				const img = new window.Image();
 				img.onload = () => {
-					const targetWidth = 500; // Desired width
-					const targetHeight = img.naturalHeight / img.naturalWidth * 500; // Desired height
-	
-					// Create a canvas and set its dimensions
+					const targetSize = 500; // Desired square width and height
+
+					// Create a canvas and set its dimensions to square
 					const canvas = document.createElement("canvas");
-					canvas.width = targetWidth;
-					canvas.height = targetHeight;
+					canvas.width = targetSize;
+					canvas.height = targetSize;
 					const ctx = canvas.getContext("2d");
-					
+
 					if (ctx) {
-						// Draw the image to the canvas
-						ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
-						// Get the data URL of the resized image
-						const resizedDataUrl = canvas.toDataURL("image/png", 1); // Set quality as needed
-						setData(prev => ({ ...prev, photo: resizedDataUrl }));
+						// Determine the shorter dimension and center-crop the image
+						const shorterSide = Math.min(img.naturalWidth, img.naturalHeight);
+						const sourceX = (img.naturalWidth - shorterSide) / 2;
+						const sourceY = (img.naturalHeight - shorterSide) / 2;
+						
+						// Draw the centered square section to the canvas
+						ctx.drawImage(
+							img,
+							sourceX,
+							sourceY,
+							shorterSide, // width of the source area
+							shorterSide, // height of the source area
+							0,
+							0,
+							targetSize,
+							targetSize
+						);
+						// Get the data URL of the cropped image
+						const croppedDataUrl = canvas.toDataURL("image/png", 1); // Set quality as needed
+						setData(prev => ({ ...prev, photo: croppedDataUrl }));
 					}
 				};
 				img.src = reader.result as string;
