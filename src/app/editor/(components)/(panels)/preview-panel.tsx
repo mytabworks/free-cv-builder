@@ -13,22 +13,19 @@ export function CVPreviewPanel() {
 	const ref = useRef<HTMLIFrameElement>(null);
 
 	const handleDownload = () => {
-		if(isIOSMobile()) {
-			alert("iOS Devices is not supported yet, please use a desktop browser Chrome/Edge/Firefox/Opera or android devices with updated Chrome/Edge")
-			return alert("You can download your CV-data to a JSON file, and then upload the data file to use it in desktop/android browser Chrome/Edge")
-		}
-
 		if(isAppBrowser()) {
 			return alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
+		}
+		
+		if(isIOSMobile() || isSafari()) {
+			alert("Please consider using other Desktop browser like Chrome/Edge/Firefox/Opera for better output");
+			;(ref.current?.contentWindow as unknown as { savePdf: (name: string, format: 'a4' | 'letter') => void })
+				?.savePdf(data.name!.replaceAll(' ', '-').toLowerCase() + '-cv', 'a4');
+			return;
 		}
 
 		if(isMobile()) {
 			alert("Note! In the next pop-up, please set Paper Size to (A4 / ISO A4), and change Printer to (Save as PDF)")
-		}
-
-		if(isSafari()) {
-			alert("Please consider using a other desktop browser like Chrome/Edge/Firefox/Opera for better output")
-			alert("You can download your CV-data to a JSON file, and then upload the data file to use it in other desktop browser like Chrome/Edge/Firefox/Opera")
 		}
 
 		ref.current?.contentWindow?.print();

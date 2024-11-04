@@ -133,6 +133,28 @@
 				}
 			}
 		}
+
+		.html2pdf {
+			.page {
+				margin-bottom: 0 !important;
+				box-shadow: none;
+				visibility: visible !important;
+
+				&::after,
+				&::before {
+					visibility: visible;
+				}
+
+				* {
+					visibility: visible !important;
+					/* Show only the specific area */
+				}
+
+				&:last-child {
+					margin-top: -1px !important;
+				}
+			}
+		}
 	</style>
   <style>
     /* General page layout */
@@ -439,6 +461,22 @@
 	<noscript>
 		<h1>JavaScript is required to render the pages</h1>
 	</noscript>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+	<script>
+		function savePdf(name, format = 'a4') {
+			const element = document.getElementById("container");
+			element.classList.add("html2pdf");
+			const opt = {
+				margin:       0,
+				filename:     `${name}.pdf`,
+				image:        { type: 'png', quality: 1 },
+				html2canvas:  { scale: 3 },
+				jsPDF:        { unit: 'mm', format, orientation: 'portrait' }
+			};
+
+			window.html2pdf().from(element).set(opt).save().then(() => element.classList.remove("html2pdf"));
+		}
+	</script>
 </body>
 
 </html>
