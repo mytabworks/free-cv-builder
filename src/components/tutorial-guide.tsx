@@ -117,7 +117,11 @@ export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
             : posTop < popoverHeight 
               ? targetTopWithTargetHeight 
               : posTop - popoverHeight,
-          left: targetLeftCenterWithPopover < 0 ? 0 : targetLeftCenterWithPopover + popoverWidth > window.innerWidth ? window.innerWidth - popoverWidth : targetLeftCenterWithPopover,
+          left: targetLeftCenterWithPopover < 0 
+            ? 15 
+            : targetLeftCenterWithPopover + popoverWidth > window.innerWidth 
+              ? Math.max((window.innerWidth - popoverWidth) - 15, 15) 
+              : Math.max(targetLeftCenterWithPopover, 15),
         });
       }
 
@@ -170,7 +174,7 @@ export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
         <Popover.Portal>
           <Popover.Content
             ref={popoverRef}
-            className={classNames("sm:w-96 w-screen z-50 bg-white p-4 rounded-lg shadow-lg border border-gray-200 transition-[top,left] duration-300 ease-in-out", {
+            className={classNames("sm:w-96 w-[calc(100vw-30px)] z-50 bg-white p-4 rounded-lg shadow-lg border border-gray-200 transition-[top,left] duration-300 ease-in-out", {
               "opacity-0": firstRender,
               "opacity-100": !firstRender,
             })}
@@ -206,7 +210,7 @@ export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
                   onClick={nextStep}
                   disabled={step.interactionRequired}
                 >
-                  {currentStep === steps.length - 1 ? 'Done' : 'Next'}
+                  {currentStep === steps.length - 1 ? 'Done' : step.interactionRequired ? '(Click highlighted)' : 'Next'}
                 </Button>
               </div>
             </div>
