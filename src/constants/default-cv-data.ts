@@ -73,10 +73,10 @@ export const defaultCVData = {
       "jobTitle": "Senior Software Engineer",
       "companyName": "Tech Solutions Inc.",
       "keyPoints": [
-        { "id": "1", "text": "Led a team of developers in creating web applications." },
-        { "id": "2", "text": "Improved application performance by 30%." },
-        { "id": "3", "text": "Implemented CI/CD pipelines for faster deployment." },
-        { "id": "4", "text": "Mentored junior developers and conducted code reviews." }
+        { "id": "1", "text": "Led a team in executing key projects." },
+        { "id": "2", "text": "Improved overall team performance by 30%." },
+        { "id": "3", "text": "Streamlined workflows and processes for faster delivery." },
+        { "id": "4", "text": "Mentored junior staff and conducted performance reviews." }
       ]
     },
     {
@@ -88,10 +88,10 @@ export const defaultCVData = {
       "jobTitle": "Mid-level Job Title",
       "companyName": "Web Innovations LLC",
       "keyPoints": [
-        { "id": "1", "text": "Developed responsive web designs." },
-        { "id": "2", "text": "Collaborated with designers and stakeholders." },
-        { "id": "3", "text": "Optimized SQL queries for better performance." },
-        { "id": "4", "text": "Participated in Agile methodology for project management." }
+        { "id": "1", "text": "Designed and implemented process improvements." },
+        { "id": "2", "text": "Collaborated with cross-functional teams to meet objectives." },
+        { "id": "3", "text": "Optimized performance metrics for better results." },
+        { "id": "4", "text": "Contributed to the successful execution of projects under Agile methodology." }
       ]
     },
     {
@@ -103,9 +103,9 @@ export const defaultCVData = {
       "jobTitle": "Junior-level Job Title",
       "companyName": "StartUp Hub",
       "keyPoints": [
-        { "id": "1", "text": "Assisted in the development of e-commerce platforms." },
-        { "id": "2", "text": "Fixed bugs and implemented new features." },
-        { "id": "3", "text": "Engaged in client meetings to gather requirements." }
+        { "id": "1", "text": "Assisted in developing new initiatives for clients." },
+        { "id": "2", "text": "Resolved issues and implemented improvements." },
+        { "id": "3", "text": "Participated in client meetings to understand needs and gather feedback." }
       ]
     }
   ],

@@ -28,7 +28,27 @@ export function CVQuestionAI() {
       const parsed = JSON.parse(extractChat(data) || `{ name: ${formData.jobTitle}, currentTitle: ${formData.jobTitle} }`)
       console.log(parsed)
       if(parsed.toString() === '[object Object]') {
-        return  setData(prev => ({ ...prev, ...parsed, workExperiences: [...(parsed.workExperiences || []), ...prev.workExperiences.slice(0)] }));
+        return setData(prev => ({ 
+          ...prev, 
+          ...parsed, 
+          workExperiences: [
+            ...(parsed.workExperiences || []), 
+            ...prev.workExperiences.slice(0).map((experience, index) => ({ 
+              ...experience,
+              jobTitle: `${index === 0 ? 'Senior' : index === 0 ? 'Mid' : 'Junior'} ${formData.jobTitle}`,
+              companyName: `${formData.jobTitle} - Company ${index + 1}`,
+            }))
+          ],
+          otherSections: prev.otherSections.map((section, index) => ({ 
+            ...section,
+            keyPoints: section.keyPoints.map((point, pointIndex) => ({ 
+              ...point,
+              text: section.title === "Education" 
+                ? `${pointIndex === 0 ? "Master" : "Bachelor"} of Science in ${formData.jobTitle}` 
+                : `Certified ${formData.jobTitle}, 202${pointIndex}` ,
+            }))
+          })),
+        }));
       }
       setData(prev => ({ ...prev, name: formData.fullName, currentTitle: formData.jobTitle, summary: formData.summary }));
     },
