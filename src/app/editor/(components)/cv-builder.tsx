@@ -147,7 +147,7 @@ export function CVBuilder() {
         {/* Right side - Preview */}
         {panel.showRight && (
           <div 
-            className={classNames("max-md:fixed max-md:inset-0 max-md:h-screen max-md:!w-full max-md:bg-emerald-100 py-3  md:py-6", null, panel.showLeft ? 'md:w-[50%]' : '')} 
+            className={classNames("max-md:fixed max-md:z-10 max-md:inset-0 max-md:h-screen max-md:!w-full max-md:bg-emerald-100 py-3  md:py-6", null, panel.showLeft ? 'md:w-[50%]' : '')} 
             style={{ width: panel.showLeft ? `${100 - panel.width}%` : '100%' }}
           >
             <header className="max-md:!flex justify-between hidden px-3 mb-5">
