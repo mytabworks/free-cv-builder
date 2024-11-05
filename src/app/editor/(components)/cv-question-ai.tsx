@@ -35,7 +35,7 @@ export function CVQuestionAI() {
             ...(parsed.workExperiences || []), 
             ...prev.workExperiences.slice(0).map((experience, index) => ({ 
               ...experience,
-              jobTitle: `${index === 0 ? 'Senior' : index === 0 ? 'Mid' : 'Junior'} ${formData.jobTitle}`,
+              jobTitle: `${index === 0 ? 'Senior' : index === 1 ? 'Mid' : 'Junior'} ${formData.jobTitle}`,
               companyName: `${formData.jobTitle} - Company ${index + 1}`,
             }))
           ],
