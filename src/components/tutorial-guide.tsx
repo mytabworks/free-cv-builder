@@ -174,7 +174,7 @@ export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
         <Popover.Portal>
           <Popover.Content
             ref={popoverRef}
-            className={classNames("sm:w-96 w-[calc(100vw-30px)] z-50 bg-white p-4 rounded-lg shadow-lg border border-gray-200 transition-[top,left] duration-300 ease-in-out", {
+            className={classNames("sm:w-96 w-[calc(100vw-30px)] z-50 bg-white p-4 rounded-lg shadow-2xl border border-gray-200 transition-[top,left] duration-300 ease-in-out", {
               "opacity-0": firstRender,
               "opacity-100": !firstRender,
             })}
