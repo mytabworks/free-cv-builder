@@ -44,19 +44,19 @@ export const templateWithImages = [
     imageUrl: "/images/flatdesign.jpg",
   },
   { id: "modern", title: "Modern", imageUrl: "/images/modern.jpg" },
-  { id: "creative", title: "Creative", imageUrl: "/images/creative.jpg" },
+  { id: "cyberpunk", title: "Cyberpunk", imageUrl: "/images/cyberpunk.jpg" },
   {
     id: "professional",
     title: "Professional",
     imageUrl: "/images/professional.jpg",
   },
   { id: "minimalist", title: "Minimalist", imageUrl: "/images/minimalist.jpg" },
-  { id: "cyberpunk", title: "Cyberpunk", imageUrl: "/images/cyberpunk.jpg" },
   {
     id: "neumorphism",
     title: "Neumorphic",
     imageUrl: "/images/neumorphism.jpg",
   },
   { id: "classic", title: "Classic", imageUrl: "/images/classic.jpg" },
+  { id: "creative", title: "Creative", imageUrl: "/images/creative.jpg" },
   { id: "customize", title: "Modern V2", imageUrl: "/images/customize.jpg" },
 ]

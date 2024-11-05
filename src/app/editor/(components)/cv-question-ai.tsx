@@ -85,7 +85,7 @@ export function CVQuestionAI() {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8  bg-gradient-to-r from-emerald-100 to-teal-400">
       <h1 className="text-3xl font-bold text-center mb-3 mx-3">Could you share a bit about yourself?</h1>
       <p className="text-center mb-5 mx-3">You need to fill in all the fields, to help us get a better idea of who you are.</p>
       <div className="flex items-center justify-center">

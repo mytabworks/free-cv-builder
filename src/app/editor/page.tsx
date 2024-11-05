@@ -7,7 +7,7 @@ const CVBuilderNoSSR = dynamic(() => Promise.resolve(CVBuilder), {
 
 export default function Editor() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-emerald-100 to-emerald-300">
+    <div className="min-h-screen bg-gradient-to-r from-emerald-100 to-teal-500">
       <CVBuilderNoSSR />
     </div>
   );

@@ -44,15 +44,15 @@ export const metadata: Metadata = {
 export default function LandingPage() {
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-emerald-100 to-emerald-300">
+    <div className="min-h-screen bg-gradient-to-r from-emerald-100 to-teal-400">
       <header className="fixed top-0 left-0 right-0 z-10 flex justify-between items-center py-5 bg-white shadow-md">
         <div className="container mx-auto flex justify-between items-center px-4">
           <Link to="/">
             <Image src="/free-cv-builder-logo.png" height={40} width={196} alt="Free CV Builder Logo" className="h-8 md:h-10 w-auto" />
           </Link>
           <nav className="hidden md:flex items-center">
-            <a href="#features" className="text-sm md:text-lg font-semibold text-emerald-500 hover:text-emerald-700 mx-2 md:mx-4">Features</a>
-            <a href="#how-it-works" className="text-sm md:text-lg font-semibold text-emerald-500 hover:text-emerald-700 mx-2 md:mx-4">How it Works</a>
+            <a href="#features" className="text-sm md:text-lg font-semibold text-teal-600 hover:text-teal-700 mx-2 md:mx-4">Features</a>
+            <a href="#how-it-works" className="text-sm md:text-lg font-semibold text-teal-600 hover:text-teal-700 mx-2 md:mx-4">How it Works</a>
             <a
               href={buymeacoffee}
               target="_blank"
@@ -67,8 +67,8 @@ export default function LandingPage() {
       <main className="mt-8 md:mt-12">
         {/* Hero Section */}
         <section className="text-center px-4 md:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Build your Professional CV in Minutes</h2>
-          <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Build your Professional CV in Minutes</h2>
+          <p className="text-base md:text-lg text-gray-800 mb-6 md:mb-8">
             Our Free CV builder helps you create a stunning, customizable, job-ready resume in just a few clicks.
           </p>
           <Link
@@ -80,7 +80,7 @@ export default function LandingPage() {
         </section>
 
         {/* Privacy Emphasis Section */}
-        <section id="features" className="mt-12 md:mt-16 py-8 md:py-10 bg-white bg-opacity-70">
+        <section id="features" className="mt-12 md:mt-16 py-8 md:py-10 bg-white bg-opacity-80">
           <div className="container mx-auto px-4 md:px-8">
             <div className="text-center">
               <div className="flex justify-center mb-4">
@@ -90,7 +90,7 @@ export default function LandingPage() {
               <p className="text-base md:text-lg text-gray-600 mb-4 md:mb-6">
                 We do not store your personal information or CV data. No sign-up is required. Your data stays on your device and is never saved on our servers.
               </p>
-              <p className="text-sm md:text-lg font-semibold text-emerald-600">
+              <p className="text-sm md:text-lg font-semibold text-teal-600">
                 Build your CV privately, securely, and with full control.
               </p>
             </div>
@@ -103,22 +103,22 @@ export default function LandingPage() {
             <h3 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-8">How It Works</h3>
             <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-3">
               <div className="p-4 md:p-6 bg-white rounded-lg shadow-md">
-                <span className="text-3xl md:text-4xl text-emerald-600 font-bold">1</span>
-                <h4 className="text-lg md:text-xl font-semibold text-emerald-600 mt-4">Select a Template</h4>
+                <span className="text-3xl md:text-4xl text-teal-600 font-bold">1</span>
+                <h4 className="text-lg md:text-xl font-semibold text-teal-600 mt-4">Select a Template</h4>
                 <p className="text-sm md:text-base text-gray-600 mt-2">
                   Choose from a variety of professional and customizable CV templates.
                 </p>
               </div>
               <div className="p-4 md:p-6 bg-white rounded-lg shadow-md">
-                <span className="text-3xl md:text-4xl text-emerald-600 font-bold">2</span>
-                <h4 className="text-lg md:text-xl font-semibold text-emerald-600 mt-4">Add Your Information</h4>
+                <span className="text-3xl md:text-4xl text-teal-600 font-bold">2</span>
+                <h4 className="text-lg md:text-xl font-semibold text-teal-600 mt-4">Add Your Information</h4>
                 <p className="text-sm md:text-base text-gray-600 mt-2">
                   Fill in your details, including work experience, skills, and education, quickly and easily.
                 </p>
               </div>
               <div className="p-4 md:p-6 bg-white rounded-lg shadow-md">
-                <span className="text-3xl md:text-4xl text-emerald-600 font-bold">3</span>
-                <h4 className="text-lg md:text-xl font-semibold text-emerald-600 mt-4">Download Your CV</h4>
+                <span className="text-3xl md:text-4xl text-teal-600 font-bold">3</span>
+                <h4 className="text-lg md:text-xl font-semibold text-teal-600 mt-4">Download Your CV</h4>
                 <p className="text-sm md:text-base text-gray-600 mt-2">
                   Instantly download your CV as a PDF and use it for your next job application. Your data is never saved on our servers.
                 </p>
@@ -128,7 +128,7 @@ export default function LandingPage() {
         </section>
 
         {/* Final Call to Action */}
-        <section className="text-center bg-emerald-600 py-8 md:py-12">
+        <section className="text-center bg-teal-600 py-8 md:py-12">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fadeIn">
             Enjoyed using the Free CV Builder?
           </h3>
@@ -140,7 +140,7 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
-      <footer className="py-4 bg-emerald-800 text-white text-center">
+      <footer className="py-4 bg-teal-800 text-white text-center">
         <p>© {new Date().getFullYear()} mytabworks. All rights reserved.</p>
       </footer>
     </div>
