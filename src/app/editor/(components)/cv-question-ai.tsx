@@ -28,7 +28,7 @@ export function CVQuestionAI() {
       const parsed = JSON.parse(extractChat(data) || `{ name: ${formData.jobTitle}, currentTitle: ${formData.jobTitle} }`)
       console.log(parsed)
       if(parsed.toString() === '[object Object]') {
-        return  setData(prev => ({ ...prev, ...parsed, workExperiences: [...(parsed.workExperiences || []), ...prev.workExperiences.slice(1)] }));
+        return  setData(prev => ({ ...prev, ...parsed, workExperiences: [...(parsed.workExperiences || []), ...prev.workExperiences.slice(0)] }));
       }
       setData(prev => ({ ...prev, name: formData.fullName, currentTitle: formData.jobTitle, summary: formData.summary }));
     },

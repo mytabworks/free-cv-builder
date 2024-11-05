@@ -13,7 +13,7 @@ export async function POST(request: Request) {
                 messages: [
                     {
                         "role": "system",
-                        "content": `My name is ${full_name} and here is my brief bio:\n${prompt}\n\n elaborate the summary and fill in this json object (according the bio and job title) and return the modified object as string: \n${JSON.stringify({ name: full_name, currentTitle: defaultCVData.currentTitle, summary: defaultCVData.summary, skills: defaultCVData.skills, workExperiences: defaultCVData.workExperiences.slice(0, 1), otherSections: defaultCVData.otherSections }, null, 2)}`,
+                        "content": `My name is ${full_name} and here is my brief bio:\n${prompt}\n\n elaborate the summary and fill in this json object (according the bio and job title) and return the modified object as string: \n${JSON.stringify({ name: full_name, currentTitle: defaultCVData.currentTitle, summary: defaultCVData.summary, skills: defaultCVData.skills }, null, 2)}`,
                     },
                 ],
                 max_tokens: 1000, // Adjust based on your needs
