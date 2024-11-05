@@ -39,7 +39,7 @@ export function CVQuestionAI() {
               companyName: `${formData.jobTitle} - Company ${index + 1}`,
             }))
           ],
-          otherSections: prev.otherSections.map((section, index) => ({ 
+          otherSections: prev.otherSections.map((section) => ({ 
             ...section,
             keyPoints: section.keyPoints.map((point, pointIndex) => ({ 
               ...point,
