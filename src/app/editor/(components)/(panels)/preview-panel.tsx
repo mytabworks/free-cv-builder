@@ -5,6 +5,7 @@ import { DownloadIcon } from "lucide-react";
 import { PageData, PageRenderer } from "@/lib/page-renderer";
 import { isAppBrowser, isIOSMobile, isMobile, isSafari } from "@/lib/is-mobile";
 import { buymeacoffee } from "@/constants/variables";
+import { gtag } from "@/lib/g-tag";
 
 export function CVPreviewPanel() {
 	const { data } = useCVBuilder()
@@ -14,14 +15,16 @@ export function CVPreviewPanel() {
 
 	const handleDownload = () => {
 		if(isAppBrowser()) {
-			;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_download', {
+			gtag?.('event', 'engage_download', {
+				'active_user': data.name,
 				'device_type': 'social-media',
 			});
 			return alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
 		}
 		
 		if(isIOSMobile() || isSafari()) {
-			;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_download', {
+			gtag?.('event', 'engage_download', {
+				'active_user': data.name,
 				'device_type': 'iOS/Safari',
 			});
 			alert("Please consider using other Desktop browser like Chrome/Edge/Firefox/Opera for better output");
@@ -31,12 +34,14 @@ export function CVPreviewPanel() {
 		}
 
 		if(isMobile()) {
-			;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_download', {
+			gtag?.('event', 'engage_download', {
+				'active_user': data.name,
 				'device_type': 'android',
 			});
 			alert("Note! In the next pop-up, please set Paper Size to (A4 / ISO A4), and change Printer to (Save as PDF)")
 		} else {
-			;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_download', {
+			gtag?.('event', 'engage_download', {
+				'active_user': data.name,
 				'device_type': 'desktop',
 			});
 		}

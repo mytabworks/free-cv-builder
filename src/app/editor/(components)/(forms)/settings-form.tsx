@@ -12,6 +12,7 @@ import { LayoutSelectionField } from "../(fields)/layout-selection-field"
 import { DownloadIcon, Import } from "lucide-react"
 import { templates } from "@/constants/templates"
 import { fonts } from "@/constants/fonts"
+import { gtag } from "@/lib/g-tag"
 
 export function CVSettingsForm() {
 	const { data, setData } = useCVBuilder()
@@ -30,7 +31,12 @@ export function CVSettingsForm() {
     setData(prev => ({ ...prev, [name]: value }))
   }
 
-	const handleExport = () => downloadData(data, `${data.name.toLowerCase().replaceAll(" ", "-")}-cv-data.json`)
+	const handleExport = () => {
+		downloadData(data, `${data.name.toLowerCase().replaceAll(" ", "-")}-cv-data.json`)
+		gtag?.('event', 'engage_export', {
+			'active_user': data.name,
+		});
+	}
 
   return (
     <ScrollArea className="h-full">
@@ -41,6 +47,9 @@ export function CVSettingsForm() {
 							className="flex flex-wrap @md:flex-nowrap gap-3 items-center" 
 							onSubmit={(e) => {
 								e.preventDefault()
+								gtag?.('event', 'engage_import', {
+									'active_user': data.name,
+								});
 								const input = (e.target as HTMLFormElement)?.[0] as HTMLInputElement
 								const file = input?.files?.[0]
 								

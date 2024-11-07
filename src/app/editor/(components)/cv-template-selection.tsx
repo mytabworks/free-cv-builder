@@ -1,5 +1,6 @@
 import { templateWithImages } from "@/constants/templates";
 import { useCVBuilder } from "./cv-builder-context";
+import { gtag } from "@/lib/g-tag";
 
 export function CVTemplateSelection() {
   const { setData } = useCVBuilder();
@@ -7,7 +8,7 @@ export function CVTemplateSelection() {
   const handleTemplateSelection = (templateId: string): React.MouseEventHandler<HTMLElement> => (event) => {
     event.stopPropagation()
     setData(prev => ({ ...prev, template: templateId }));
-    ;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_select_template', {
+    gtag?.('event', 'engage_select_template', {
       'template': templateId,
     });
   };

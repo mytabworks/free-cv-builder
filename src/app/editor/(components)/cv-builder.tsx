@@ -19,6 +19,7 @@ import { tutorialSteps, tutorialStepsMobile } from "@/constants/tutorial-steps";
 import { isMobile } from "@/lib/is-mobile";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CVQuestionAI } from "./cv-question-ai";
+import { gtag } from "@/lib/g-tag";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -74,6 +75,20 @@ export function CVBuilder() {
     setDirty(true)
   }, [data])
 
+  useEffectMounted(() => {
+    if(dirty) {
+      const cleanup = setTimeout(() => {
+        gtag?.('event', 'engage_data_update', {
+          'active_user': data.name,
+        });
+      }, 3000)
+
+      return () => {
+        clearTimeout(cleanup)
+      }
+    }
+  }, [data])
+
   useEffect(() => {
     if(data.name) {
       document.title = data.name!.replaceAll(' ', '-').toLowerCase() + '-cv'
@@ -106,13 +121,13 @@ export function CVBuilder() {
         active={tutorialActive} 
         onFinish={() => {
           setTutorialActive(false)
-          ;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_tutorial', {
+          gtag?.('event', 'engage_tutorial', {
             'finish_type': 'done',
           });
         }}
         onSkipped={() => {
           setTutorialActive(false)
-          ;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_tutorial', {
+          gtag?.('event', 'engage_tutorial', {
             'finish_type': 'skipped',
           });
         }}

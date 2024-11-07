@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
+import { gtag } from "@/lib/g-tag";
 
 export function CVQuestionAI() {
   const { setData } = useCVBuilder();
@@ -73,7 +74,7 @@ export function CVQuestionAI() {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    ;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_question', {
+    gtag?.('event', 'engage_question', {
       'ai-engager': formData.fullName + " - " + formData.jobTitle,
     });
 
@@ -84,7 +85,7 @@ export function CVQuestionAI() {
   };
 
   const handleSkip = () => {
-    ;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_question', {
+    gtag?.('event', 'engage_question', {
       'ai-engager': 'skipped',
     });
     setData(prev => ({...prev, name: "John Doe"}))
