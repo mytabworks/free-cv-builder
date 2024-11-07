@@ -11,9 +11,10 @@ interface TutorialGuideProps {
     interactionRequired?: boolean;
   }>;
   onFinish: () => void;
+  onSkipped?: () => void;
 }
 
-export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
+export function TutorialGuide({ active, steps, onFinish, onSkipped }: TutorialGuideProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [popoverPosition, setPopoverPosition] = useState({ top: window.innerHeight / 2, left: window.innerWidth / 2 });
   const [firstRender, setFirstRender] = useState(true);
@@ -199,9 +200,9 @@ export function TutorialGuide({ active, steps, onFinish }: TutorialGuideProps) {
                 Prev
               </Button>
               <div className="flex gap-2">
-                {currentStep !== steps.length - 1 && (
+                {(!!onSkipped && currentStep !== steps.length - 1) && (
                   <Button 
-                    onClick={onFinish} 
+                    onClick={onSkipped} 
                   >
                     Skip
                   </Button>

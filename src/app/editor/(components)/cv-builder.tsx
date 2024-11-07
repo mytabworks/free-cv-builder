@@ -104,7 +104,18 @@ export function CVBuilder() {
     <CVBuilderContext.Provider value={{ data, setData, panel, setPanel }}>
       <TutorialGuide
         active={tutorialActive} 
-        onFinish={() => setTutorialActive(false)}
+        onFinish={() => {
+          setTutorialActive(false)
+          ;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_tutorial', {
+            'finish_type': 'done',
+          });
+        }}
+        onSkipped={() => {
+          setTutorialActive(false)
+          ;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_tutorial', {
+            'finish_type': 'skipped',
+          });
+        }}
         steps={steps} 
       />
       <div 

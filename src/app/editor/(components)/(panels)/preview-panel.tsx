@@ -14,10 +14,16 @@ export function CVPreviewPanel() {
 
 	const handleDownload = () => {
 		if(isAppBrowser()) {
+			;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_download', {
+				'device_type': 'social-media',
+			});
 			return alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
 		}
 		
 		if(isIOSMobile() || isSafari()) {
+			;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_download', {
+				'device_type': 'iOS/Safari',
+			});
 			alert("Please consider using other Desktop browser like Chrome/Edge/Firefox/Opera for better output");
 			;(ref.current?.contentWindow as unknown as { savePdf: (name: string, format: 'a4' | 'letter') => void })
 				?.savePdf(data.name!.replaceAll(' ', '-').toLowerCase() + '-cv', 'a4');
@@ -25,7 +31,14 @@ export function CVPreviewPanel() {
 		}
 
 		if(isMobile()) {
+			;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_download', {
+				'device_type': 'android',
+			});
 			alert("Note! In the next pop-up, please set Paper Size to (A4 / ISO A4), and change Printer to (Save as PDF)")
+		} else {
+			;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_download', {
+				'device_type': 'desktop',
+			});
 		}
 
 		ref.current?.contentWindow?.print();
