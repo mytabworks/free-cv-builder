@@ -17,7 +17,7 @@ export function Link({to, ...props}: LinkProps) {
         e.preventDefault()
 
         if(isAppBrowser()) {
-          return alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
+          return window.open(window.location.href, "_system");
         }
         
         router.push(to)
