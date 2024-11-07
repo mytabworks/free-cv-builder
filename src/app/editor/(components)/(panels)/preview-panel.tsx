@@ -20,8 +20,6 @@ export function CVPreviewPanel() {
 				'device_type': 'social-media',
 			});
 			alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
-			;(ref.current?.contentWindow as unknown as { savePdf: (name: string, format: 'a4' | 'letter') => void })
-			?.savePdf(data.name!.replaceAll(' ', '-').toLowerCase() + '-cv', 'a4');
 			return;
 		}
 		

@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
+import { Loader2, TriangleAlert } from "lucide-react";
 import { gtag } from "@/lib/g-tag";
+import { ModalConfirm } from "@/components/ui/modal";
+import { isAppBrowser } from "@/lib/is-mobile";
 
 export function CVQuestionAI() {
   const { setData } = useCVBuilder();
@@ -91,10 +93,22 @@ export function CVQuestionAI() {
     setData(prev => ({...prev, name: "John Doe"}))
   }
 
+  const [warning, setWarning] = useState<boolean>(isAppBrowser());
+
   return (
     <div className="min-h-screen py-8  bg-gradient-to-r from-emerald-100 to-teal-400">
       <h1 className="text-3xl font-bold text-center mb-3 mx-3">Could you share a bit about yourself?</h1>
       <p className="text-center mb-5 mx-3">You need to fill in all the fields, to help us get a better idea of who you are.</p>
+      <ModalConfirm
+        show={warning}
+        title={(<div className="flex justify-center text-yellow-600"><TriangleAlert className="mr-1" /> PLEASE READ!</div>)}
+        message={<p className="text-center">You should open this link in a standard browser like Chrome or Edge. CV is not downloading properly in social media browsers.</p>}
+        onConfirm={() => {
+          setWarning(false)
+        }}
+        confirm="I Understand"
+        actionBlock
+      />
       <div className="flex items-center justify-center">
         <div className="w-full max-w-lg bg-white rounded-lg shadow-lg px-4 py-5 sm:p-8 mx-3">
           <form className="space-y-4" onSubmit={handleSubmit}>
