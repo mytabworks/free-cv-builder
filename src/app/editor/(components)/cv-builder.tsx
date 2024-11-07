@@ -106,13 +106,13 @@ export function CVBuilder() {
         active={tutorialActive} 
         onFinish={() => {
           setTutorialActive(false)
-          ;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_tutorial', {
+          ;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_tutorial', {
             'finish_type': 'done',
           });
         }}
         onSkipped={() => {
           setTutorialActive(false)
-          ;(window as unknown as { gtag: Function }).gtag?.('event', 'engage_tutorial', {
+          ;(window as unknown as { gtag: (type: string, name: string, params: Record<string, string>) => void; }).gtag?.('event', 'engage_tutorial', {
             'finish_type': 'skipped',
           });
         }}
