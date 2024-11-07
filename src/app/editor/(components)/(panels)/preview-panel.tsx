@@ -19,7 +19,10 @@ export function CVPreviewPanel() {
 				'active_user': data.name,
 				'device_type': 'social-media',
 			});
-			return alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
+			alert("Please open this link in a standard browser like Chrome or Edge. It may not work properly in social media browsers.")
+			;(ref.current?.contentWindow as unknown as { savePdf: (name: string, format: 'a4' | 'letter') => void })
+			?.savePdf(data.name!.replaceAll(' ', '-').toLowerCase() + '-cv', 'a4');
+			return;
 		}
 		
 		if(isIOSMobile() || isSafari()) {

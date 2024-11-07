@@ -81,7 +81,7 @@ export function CVBuilder() {
         gtag?.('event', 'engage_data_update', {
           'active_user': data.name,
         });
-      }, 3000)
+      }, 30000)
 
       return () => {
         clearTimeout(cleanup)

@@ -1,6 +1,5 @@
 "use client";
 
-import { isAppBrowser } from "@/lib/is-mobile";
 import { useRouter } from "next/navigation";
 
 interface LinkProps extends Omit<React.HTMLProps<HTMLAnchorElement>, "href"> {
@@ -15,10 +14,6 @@ export function Link({to, ...props}: LinkProps) {
       href={to}
       onClick={(e) => {
         e.preventDefault()
-
-        if(isAppBrowser()) {
-          return window.open(window.location.origin + to, "_system");
-        }
         
         router.push(to)
       }}
