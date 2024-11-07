@@ -17,7 +17,7 @@ export function Link({to, ...props}: LinkProps) {
         e.preventDefault()
 
         if(isAppBrowser()) {
-          return window.open(window.location.href, "_system");
+          return window.open(window.location.origin + to, "_system");
         }
         
         router.push(to)
