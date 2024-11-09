@@ -77,7 +77,7 @@ export function CVQuestionAI() {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     gtag?.('event', 'engage_question', {
-      'ai-engager': formData.fullName + " - " + formData.jobTitle,
+      'ai_engager': formData.fullName + " - " + formData.jobTitle,
     });
 
     requestChat.mutate({
