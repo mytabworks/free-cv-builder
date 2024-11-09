@@ -88,7 +88,7 @@ export function CVQuestionAI() {
 
   const handleSkip = () => {
     gtag?.('event', 'engage_question', {
-      'ai-engager': 'skipped',
+      'ai_engager': 'skipped',
     });
     setData(prev => ({...prev, name: "John Doe"}))
   }

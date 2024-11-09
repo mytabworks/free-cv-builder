@@ -147,16 +147,29 @@ export function TutorialGuide({ active, steps, onFinish, onSkipped }: TutorialGu
   }, [active, currentStep]);
 
   const interactionRegistration = () => {
+    const overlayElement = overlayRef.current;
     const targetElement = document.querySelector<HTMLElement>(`[data-tutorial-target="${step.target}"]`);
-    if (!targetElement) return;
+    if (!targetElement || !overlayElement) return;
+    
+    const handleHighlight = () => {
+      targetElement.style.zIndex = "10000";
+      targetElement.style.outline = "5px solid red";
+    }
+    
     const handler = () => {
       nextStep();
+      targetElement.style.zIndex = "";
+      targetElement.style.outline = "";
     }
 
-    targetElement.addEventListener('click', handler)
+    targetElement.addEventListener('click', handler, { once: true })
+    overlayElement.addEventListener('transitionend', handleHighlight, { once: true })
 
     return () => {
       targetElement.removeEventListener('click', handler)
+      overlayElement.removeEventListener('transitionend', handleHighlight)
+      targetElement.style.zIndex = "";
+      targetElement.style.outline = "";
     }
   }
 
