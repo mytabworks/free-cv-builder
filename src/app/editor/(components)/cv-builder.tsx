@@ -79,7 +79,7 @@ export function CVBuilder() {
     if(dirty) {
       const cleanup = setTimeout(() => {
         gtag?.('event', 'engage_data_update', {
-          'active_user': data.name,
+          'user': data.name,
         });
       }, 30000)
 
@@ -122,13 +122,13 @@ export function CVBuilder() {
         onFinish={() => {
           setTutorialActive(false)
           gtag?.('event', 'engage_tutorial', {
-            'finish_type': 'done',
+            'finished': 'done',
           });
         }}
         onSkipped={() => {
           setTutorialActive(false)
           gtag?.('event', 'engage_tutorial', {
-            'finish_type': 'skipped',
+            'finished': 'skipped',
           });
         }}
         steps={steps} 

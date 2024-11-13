@@ -77,7 +77,7 @@ export function CVQuestionAI() {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     gtag?.('event', 'engage_question', {
-      'ai_engager': formData.fullName + " - " + formData.jobTitle,
+      'engager': formData.fullName + " - " + formData.jobTitle,
     });
 
     requestChat.mutate({
@@ -88,7 +88,7 @@ export function CVQuestionAI() {
 
   const handleSkip = () => {
     gtag?.('event', 'engage_question', {
-      'ai_engager': 'skipped',
+      'engager': 'skipped',
     });
     setData(prev => ({...prev, name: "John Doe"}))
   }
