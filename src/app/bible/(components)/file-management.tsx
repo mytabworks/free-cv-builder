@@ -9,7 +9,7 @@ export function FileManagement() {
   ]);
 
   return (
-    <div className="p-6 min-h-screen container mx-auto">
+    <div className="min-h-screen container mx-auto">
       <h1 className="text-2xl font-bold mb-4">Bible Recovery Tagalog Version</h1>
       <div className="bg-white rounded-lg shadow p-4">
         {files.map((file) => (
@@ -17,7 +17,7 @@ export function FileManagement() {
             key={file.version}
             className="flex items-center justify-between border-b py-3"
           >
-            <span className="text-gray-800 font-bold">v{file.version} - {file.name}</span>
+            <span className="text-gray-800 font-bold pr-1">{file.name} - v{file.version}</span>
             <a
               href={file.url}
               download={file.name}
