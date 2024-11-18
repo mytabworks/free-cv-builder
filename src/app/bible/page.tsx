@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FileManagement } from "./(components)/file-management";
 
 export const metadata: Metadata = {
-  title: "Free CV Builder | Create CV Online for Free",
+  title: "Bible Download | Free CV Builder | Create CV Online for Free",
   description: "Build your professional CV online for free. No sign-up required. Fast, easy, and secure CV builder with customizable templates.",
   keywords: "Free CV Builder, online CV builder, no sign-up CV builder, free resume builder, create CV for free, free CV maker, free resume maker",
   robots: "index, follow",
@@ -63,7 +63,7 @@ export default function LandingPage() {
       <div className="h-[72px]" />
       <main className="mt-8 md:mt-12">
         {/* Hero Section */}
-        <section className="text-center px-4 md:px-8">
+        <section className="text-center py-5 px-4 md:px-8">
           <FileManagement />
         </section>
       </main>

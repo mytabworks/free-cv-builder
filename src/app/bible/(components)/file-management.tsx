@@ -5,12 +5,12 @@ import React, { useState } from "react";
 
 export function FileManagement() {
   const [files] = useState([
-    { version: '1.0.0', name: "Biblia-Pagbabawi.apk", url: "/apk/v1.apk" },
+    { version: '1.0.0', name: "Biblia-Pagbabawi.apk", url: "/apk/biblia-tagalog-v1.apk" },
   ]);
 
   return (
-    <div className="min-h-screen container mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Bible Recovery Tagalog Version</h1>
+    <div className="container mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Bible Recovery Tagalog</h1>
       <div className="bg-white rounded-lg shadow p-4">
         {files.map((file) => (
           <div
