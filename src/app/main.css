@@ -17,3 +17,20 @@ body {
     --radius: 0.5rem;
   }
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+    /* You can adjust this based on your desired margins */
+  }
+
+  body {
+    padding: 0 !important;
+    margin: 0 !important;
+
+    *:not(iframe) {
+      display: none !important;
+    }
+  } 
+}

@@ -337,7 +337,7 @@ export class PageRenderer {
 
   private renderIntro(pageElement: HTMLElement, data: PageData): void {
     this.DOM.title = data.name!.replaceAll(' ', '-').toLowerCase() + '-cv'
-    const renderGeneric = (element: HTMLElement, data: PageData) => {
+    const renderGeneric = (element: HTMLElement) => {
       if (data.name) this.createElement('h2', 'primary-content-intro', data.name, element);
       if (data.title) this.createElement('h2', 'primary-content-title', data.title, element);
       if (data.email) {
@@ -398,7 +398,7 @@ export class PageRenderer {
 
       const widerContent = this.createElement('div', 'wider-content', null, singleContainer);
 
-      renderGeneric(widerContent, data);
+      renderGeneric(widerContent);
 
       if (data.summary) {
         this.createElement('h5', 'primary-content-summary', 'SUMMARY', pageElement);
@@ -410,7 +410,7 @@ export class PageRenderer {
     const primaryContent = pageElement.querySelector('.primary-content') as HTMLElement;
     if (!primaryContent) return;
 
-    renderGeneric(primaryContent, data);
+    renderGeneric(primaryContent);
 
     if (data.summary) {
       this.createElement('h5', 'primary-content-summary', 'SUMMARY', primaryContent);
@@ -423,6 +423,19 @@ export class PageRenderer {
     if (data.photo) {
       const photoElement = this.createElement('img', 'photo', null, secondaryContent) as HTMLImageElement;
       photoElement.src = data.photo;
+    } else {
+      const intro = pageElement.querySelector<HTMLElement>('.primary-content-intro')
+      const title = pageElement.querySelector<HTMLElement>('.primary-content-title')
+      
+      if(intro) {
+        secondaryContent.appendChild(intro)
+        intro.style.margin = '10px 0 10px'
+      }
+
+      if(title) {
+        secondaryContent.appendChild(title)
+        title.style.marginBottom = '30px'
+      }
     }
     
   }
