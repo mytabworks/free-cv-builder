@@ -6,6 +6,7 @@ import React, { useState } from "react";
 export function FileManagement() {
   const [files] = useState([
     { version: '1.0.0', name: "Biblia-Pagbabawi.apk", url: "/apk/biblia-tagalog-v1.apk" },
+    { version: '2.0.0', name: "Biblia-Pagbabawi.apk", url: "/apk/biblia-tagalog-v2.apk" },
   ]);
 
   return (
